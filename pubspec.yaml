@@ -62,6 +62,14 @@ dependencies:
   local_hero: ^0.2.0
   dropdown_button2: ^1.9.2
   intl: ^0.18.0
+  google_sign_in: ^5.4.2
+  any_link_preview: ^2.0.9
+  readmore: ^2.2.0
+  timeago: ^3.3.0
+  firebase_core: ^2.14.0
+  firebase_storage: ^11.2.4
+  cloud_firestore: ^4.8.2
+  firebase_auth: ^4.6.3
 
 dev_dependencies:
   flutter_launcher_icons: ^0.12.0

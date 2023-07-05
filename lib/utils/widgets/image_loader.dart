@@ -44,7 +44,7 @@ class ImageLoader extends StatelessWidget {
             .animate(onPlay: (controller) => controller.repeat())
             .shimmer(duration: 1200.ms),
         errorWidget: (context, url, error) => Container(
-          color: Pallete.darkBlueGrey.withOpacity(0.1),
+          color: Pallete.greey.withOpacity(0.1),
           child: Center(
             child: Icon(
               Icons.error,
