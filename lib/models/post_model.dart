@@ -3,172 +3,137 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-class Post {
-  final String id;
-  final String title;
+class PostModel {
+  final String? id;
   final String? link;
   final String? imageUrl;
-  final String? description;
-  final String communityName;
-  final String communityProfilePic;
-  final List<String> upvotes;
-  final List<String> downvotes;
-  final int commentCount;
-  final String username;
-  final String uid;
-  final String type;
-  final DateTime createdAt;
-  final List<String> awards;
-  final List<String> bookmarkedBy;
-  const Post({
+  final String? textContent;
+  final int? commentCount;
+  final String? userUid;
+  final DateTime? createdAt;
+  final List<String>? repostedBy;
+  final List<String>? bookmarkedBy;
+  final List<String>? repliedTo;
+  const PostModel({
     required this.id,
-    required this.title,
     this.link,
     this.imageUrl,
-    this.description,
-    required this.communityName,
-    required this.communityProfilePic,
-    required this.upvotes,
-    required this.downvotes,
-    required this.commentCount,
-    required this.username,
-    required this.uid,
-    required this.type,
-    required this.createdAt,
-    required this.awards,
-    required this.bookmarkedBy,
+    this.textContent,
+    this.commentCount,
+    this.userUid,
+    this.createdAt,
+    this.repostedBy,
+    this.bookmarkedBy,
+    this.repliedTo,
   });
 
-  Post copyWith({
+  PostModel copyWith({
     String? id,
-    String? title,
     String? link,
     String? imageUrl,
-    String? description,
-    String? communityName,
-    String? communityProfilePic,
-    List<String>? upvotes,
-    List<String>? downvotes,
+    String? textContent,
     int? commentCount,
-    String? username,
-    String? uid,
-    String? type,
+    String? userUid,
     DateTime? createdAt,
-    List<String>? awards,
+    List<String>? repostedBy,
     List<String>? bookmarkedBy,
+    List<String>? repliedTo,
   }) {
-    return Post(
+    return PostModel(
       id: id ?? this.id,
-      title: title ?? this.title,
       link: link ?? this.link,
       imageUrl: imageUrl ?? this.imageUrl,
-      description: description ?? this.description,
-      communityName: communityName ?? this.communityName,
-      communityProfilePic: communityProfilePic ?? this.communityProfilePic,
-      upvotes: upvotes ?? this.upvotes,
-      downvotes: downvotes ?? this.downvotes,
+      textContent: textContent ?? this.textContent,
       commentCount: commentCount ?? this.commentCount,
-      username: username ?? this.username,
-      uid: uid ?? this.uid,
-      type: type ?? this.type,
+      userUid: userUid ?? this.userUid,
       createdAt: createdAt ?? this.createdAt,
-      awards: awards ?? this.awards,
+      repostedBy: repostedBy ?? this.repostedBy,
       bookmarkedBy: bookmarkedBy ?? this.bookmarkedBy,
+      repliedTo: repliedTo ?? this.repliedTo,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'title': title,
       'link': link,
       'imageUrl': imageUrl,
-      'description': description,
-      'communityName': communityName,
-      'communityProfilePic': communityProfilePic,
-      'upvotes': upvotes,
-      'downvotes': downvotes,
+      'textContent': textContent,
       'commentCount': commentCount,
-      'username': username,
-      'uid': uid,
-      'type': type,
-      'createdAt': createdAt.millisecondsSinceEpoch,
-      'awards': awards,
+      'userUid': userUid,
+      'createdAt': createdAt?.millisecondsSinceEpoch,
+      'repostedBy': repostedBy,
       'bookmarkedBy': bookmarkedBy,
+      'repliedTo': repliedTo,
     };
   }
 
-  factory Post.fromMap(Map<String, dynamic> map) {
-    return Post(
-      id: (map["id"] ?? '') as String,
-      title: (map["title"] ?? '') as String,
-      link: map['link'] != null ? map["link"] ?? '' : null,
-      imageUrl: map['imageUrl'] != null ? map["imageUrl"] ?? '' : null,
-      description: map['description'] != null ? map["description"] ?? '' : null,
-      communityName: (map["communityName"] ?? '') as String,
-      communityProfilePic: (map["communityProfilePic"] ?? '') as String,
-      upvotes: List<String>.from(map['upvotes']),
-      downvotes: List<String>.from(map['downvotes']),
-      commentCount: (map["commentCount"] ?? 0) as int,
-      username: (map["username"] ?? '') as String,
-      uid: (map["uid"] ?? '') as String,
-      type: (map["type"] ?? '') as String,
-      createdAt: DateTime.fromMillisecondsSinceEpoch((map["createdAt"]??0) as int),
-      awards: List<String>.from(map['awards']),
-      bookmarkedBy: List<String>.from(map['bookmarkedBy']),
+  factory PostModel.fromMap(Map<String, dynamic> map) {
+    return PostModel(
+      id: map['id'] ?? '',
+      link: map['link'] ?? '',
+      imageUrl: map['imageUrl'] ?? '',
+      textContent: map['textContent'] ?? '',
+      commentCount: map['commentCount'] ?? 0,
+      userUid: map['userUid'] ?? '',
+      createdAt: map['createdAt'] != null
+          ? DateTime.fromMillisecondsSinceEpoch((map["createdAt"] ?? 0))
+          : null,
+      repostedBy: map['repostedBy'] != null
+          ? List<String>.from(
+              ((map['repostedBy']) as List<String>),
+            )
+          : null,
+      bookmarkedBy: map['bookmarkedBy'] != null
+          ? List<String>.from(
+              ((map['bookmarkedBy']) as List<String>),
+            )
+          : null,
+      repliedTo: map['repliedTo'] != null
+          ? List<String>.from(
+              ((map['repliedTo']) as List<String>),
+            )
+          : null,
     );
   }
 
   @override
   String toString() {
-    return 'Post(id: $id, title: $title, link: $link, imageUrl: $imageUrl, description: $description, communityName: $communityName, communityProfilePic: $communityProfilePic, upvotes: $upvotes, downvotes: $downvotes, commentCount: $commentCount, username: $username, uid: $uid, type: $type, createdAt: $createdAt, awards: $awards, bookmarkedBy: $bookmarkedBy)';
+    return 'Post(id: $id, link: $link, imageUrl: $imageUrl, textContent: $textContent, commentCount: $commentCount, userUid: $userUid, createdAt: $createdAt, repostedBy: $repostedBy, bookmarkedBy: $bookmarkedBy, repliedTo: $repliedTo)';
   }
 
   @override
-  bool operator ==(covariant Post other) {
+  bool operator ==(covariant PostModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.id == id &&
-      other.title == title &&
-      other.link == link &&
-      other.imageUrl == imageUrl &&
-      other.description == description &&
-      other.communityName == communityName &&
-      other.communityProfilePic == communityProfilePic &&
-      listEquals(other.upvotes, upvotes) &&
-      listEquals(other.downvotes, downvotes) &&
-      other.commentCount == commentCount &&
-      other.username == username &&
-      other.uid == uid &&
-      other.type == type &&
-      other.createdAt == createdAt &&
-      listEquals(other.awards, awards) &&
-      listEquals(other.bookmarkedBy, bookmarkedBy);
+
+    return other.id == id &&
+        other.link == link &&
+        other.imageUrl == imageUrl &&
+        other.textContent == textContent &&
+        other.commentCount == commentCount &&
+        other.userUid == userUid &&
+        other.createdAt == createdAt &&
+        listEquals(other.repostedBy, repostedBy) &&
+        listEquals(other.bookmarkedBy, bookmarkedBy) &&
+        listEquals(other.repliedTo, repliedTo);
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      title.hashCode ^
-      link.hashCode ^
-      imageUrl.hashCode ^
-      description.hashCode ^
-      communityName.hashCode ^
-      communityProfilePic.hashCode ^
-      upvotes.hashCode ^
-      downvotes.hashCode ^
-      commentCount.hashCode ^
-      username.hashCode ^
-      uid.hashCode ^
-      type.hashCode ^
-      createdAt.hashCode ^
-      awards.hashCode ^
-      bookmarkedBy.hashCode;
+        link.hashCode ^
+        imageUrl.hashCode ^
+        textContent.hashCode ^
+        commentCount.hashCode ^
+        userUid.hashCode ^
+        createdAt.hashCode ^
+        repostedBy.hashCode ^
+        bookmarkedBy.hashCode ^
+        repliedTo.hashCode;
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Post.fromJson(String source) =>
-      Post.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory PostModel.fromJson(String source) =>
+      PostModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }

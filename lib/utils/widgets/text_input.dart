@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:stream/shared/app_texts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -293,7 +294,7 @@ class TextInputWidget2 extends StatelessWidget {
   }
 }
 
-class CoinSwitchTextInput extends StatelessWidget {
+class NewTextInput extends ConsumerWidget {
   final TextEditingController controller;
   final bool obscuretext;
   final FormFieldValidator<String>? validator;
@@ -316,7 +317,7 @@ class CoinSwitchTextInput extends StatelessWidget {
   final Widget? prefixIcon;
   final String? suffixText;
   final String? prefixText;
-  const CoinSwitchTextInput({
+  const NewTextInput({
     Key? key,
     required this.controller,
     this.obscuretext = false,
@@ -343,9 +344,10 @@ class CoinSwitchTextInput extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SizedBox(
       height: 40.h,
+      width: 250,
       child: TextFormField(
         // textAlign: TextAlign.center,
         maxLines: maxLines,

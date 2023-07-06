@@ -7,12 +7,11 @@ import 'package:stream/core/type_defs.dart';
 import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/specific_size_text_exrension.dart';
 
-void showSnackBar(BuildContext context, String text) {
+void showSnackBar({required BuildContext context, required String text}) {
   ScaffoldMessenger.of(context)
     ..hideCurrentSnackBar()
     ..showSnackBar(
       SnackBar(
-        backgroundColor: Pallete.orange,
         duration: const Duration(milliseconds: 2000),
         content: text.txt16(
           fontWeight: FontWeight.w500,

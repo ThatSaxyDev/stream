@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stream/features/base_nav/views/base_nav_view.dart';
+import 'package:stream/features/posts/widgets/create_post_bottom_sheet.dart';
 import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/app_constants.dart';
 import 'package:stream/utils/app_extensions.dart';
@@ -18,7 +19,7 @@ class NavBarWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentTheme = ref.watch(themeNotifierProvider);
+    ThemeData currentTheme = ref.watch(themeNotifierProvider);
     int indexFromController = ref.watch(baseNavControllerProvider);
     if (nav.index > 2) {
       indexFromController = indexFromController + 1;
@@ -59,15 +60,9 @@ class NavBarWidget extends ConsumerWidget {
             enableDrag: true,
             backgroundColor: Colors.transparent,
             context: context,
-            builder: (context) => Wrap(
+            builder: (context) => const Wrap(
               children: [
-                Container(
-                  height: 300.h,
-                  width: width(context),
-                  decoration: BoxDecoration(
-                      color: currentTheme.backgroundColor,
-                      borderRadius: BorderRadius.circular(20)),
-                ),
+                CreatePostBottomSheet(),
               ],
             ),
           );

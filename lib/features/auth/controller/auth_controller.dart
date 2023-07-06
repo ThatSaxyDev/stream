@@ -50,10 +50,10 @@ class AuthController extends StateNotifier<bool> {
     user.fold(
       (Failure l) {
         log(l.message);
-        showSnackBar(context, l.message);
+        showSnackBar(context: context, text: l.message);
       },
       (UserModel userModel) {
-        showSnackBar(context, 'fine');
+        showSnackBar(context: context, text: 'fine');
         goTo(context, const Scaffold());
         _ref.read(userProvider.notifier).update((state) => userModel);
       },

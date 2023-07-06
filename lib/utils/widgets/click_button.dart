@@ -53,7 +53,7 @@ class _ClickButtonState extends ConsumerState<ClickButton> {
             }
           },
           child: SizedBox(
-            height: 70.h,
+            height: widget.height ?? 70.h,
             width: widget.width ?? double.infinity,
             child: Stack(
               children: [
@@ -62,17 +62,26 @@ class _ClickButtonState extends ConsumerState<ClickButton> {
                       ? Alignment.bottomCenter
                       : Alignment.topCenter,
                   child: Container(
-                    height: 68.h,
+                    height: widget.height == null ? 68.h : (widget.height! - 2),
                     width: widget.width ?? double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12.r),
-                      color: currentTheme.drawerTheme.backgroundColor,
+                      color: widget.isActive == true
+                          ? currentTheme.drawerTheme.backgroundColor
+                          : currentTheme.drawerTheme.backgroundColor!
+                              .withOpacity(0.3),
                       border: Border.all(
-                        color: currentTheme.textTheme.bodyMedium!.color!,
+                        color: widget.isActive == true
+                            ? currentTheme.textTheme.bodyMedium!.color!
+                            : currentTheme.textTheme.bodyMedium!.color!
+                                .withOpacity(0.3),
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: currentTheme.textTheme.bodyMedium!.color!,
+                          color: widget.isActive == true
+                              ? currentTheme.textTheme.bodyMedium!.color!
+                              : currentTheme.textTheme.bodyMedium!.color!
+                                  .withOpacity(0),
                           offset: clicked.value == true
                               ? const Offset(0, 0)
                               : Offset(0, 5.h),
@@ -84,8 +93,12 @@ class _ClickButtonState extends ConsumerState<ClickButton> {
                           ? Text(
                               widget.text!,
                               style: TextStyle(
+                                color: widget.isActive == true
+                                    ? currentTheme.textTheme.bodyMedium!.color!
+                                    : currentTheme.textTheme.bodyMedium!.color!
+                                        .withOpacity(0.3),
                                 fontSize: 14.sp,
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.w600,
                               ),
                             )
                           : widget.child,

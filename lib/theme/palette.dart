@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:stream/shared/app_texts.dart';
 
 final themeNotifierProvider =
     StateNotifierProvider<ThemeNotifier, ThemeData>((ref) {
@@ -79,6 +80,9 @@ class Pallete {
 
   // Themes
   static var darkModeAppTheme = ThemeData.dark().copyWith(
+    textTheme: ThemeData.dark().textTheme.apply(
+          fontFamily: AppTexts.appFont,
+        ),
     scaffoldBackgroundColor: blackColor,
     cardColor: greyColor,
     appBarTheme: const AppBarTheme(
@@ -97,10 +101,9 @@ class Pallete {
   );
 
   static var lightModeAppTheme = ThemeData.light().copyWith(
-    // textTheme: GoogleFonts.spaceGroteskTextTheme(),
-    // textTheme: ThemeData.light().textTheme.apply(
-    //       fontFamily: 'Sk-Modernist',
-    //     ),
+    textTheme: ThemeData.light().textTheme.apply(
+          fontFamily: AppTexts.appFont,
+        ),
     scaffoldBackgroundColor: whiteColor,
     cardColor: greyColor,
     appBarTheme: const AppBarTheme(
