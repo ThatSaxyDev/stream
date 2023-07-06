@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stream/features/auth/controller/auth_controller.dart';
 import 'package:stream/features/home/widgets/post_card.dart';
 import 'package:stream/features/posts/controllers/post_controller.dart';
+import 'package:stream/features/posts/widgets/feed_reply_post_card.dart';
 import 'package:stream/models/post_model.dart';
 import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/app_constants.dart';
 import 'package:stream/utils/app_extensions.dart';
-
 
 class HomeFeedView extends ConsumerWidget {
   const HomeFeedView({super.key});
@@ -24,7 +25,9 @@ class HomeFeedView extends ConsumerWidget {
           children: [
             //! header
             60.sbH,
-            'Usetream'.txt(),
+            'Usetream'.txt().tap(onTap: () {
+              ref.read(authControllerProvider.notifier).logOut();
+            }),
             20.sbH,
 
             userPostsStream.when(
@@ -46,6 +49,9 @@ class HomeFeedView extends ConsumerWidget {
                     posts.length,
                     (index) {
                       PostModel post = posts[index];
+                      if (post.replyingPostId!.isNotEmpty) {
+                        return FeedReplyPostCard(post: post);
+                      }
                       return PostCard(post: post);
                     },
                   ),

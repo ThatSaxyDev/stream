@@ -8,7 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stream/features/auth/controller/auth_controller.dart';
+import 'package:stream/features/base_nav/views/base_nav_view.dart';
 import 'package:stream/features/posts/controllers/post_controller.dart';
+import 'package:stream/features/posts/widgets/create_post_bottom_sheet.dart';
+import 'package:stream/features/posts/widgets/reply_post_bottom_sheet.dart';
 import 'package:stream/models/post_model.dart';
 import 'package:stream/models/user_model.dart';
 import 'package:stream/theme/palette.dart';
@@ -28,19 +31,22 @@ class PostCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    UserModel? userr = ref.watch(userProvider);
+    int indexFromController = ref.watch(baseNavControllerProvider);
     ThemeData currentTheme = ref.watch(themeNotifierProvider);
     UserModel? user;
+
     ref.watch(getUserProvider(post.userUid!)).whenData((value) => user = value);
     if (user == null) {
       return const SizedBox.shrink();
     }
     return Container(
       width: width(context),
-      padding: EdgeInsets.symmetric(horizontal: 17.w, vertical: 13.h),
+      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 13.h),
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            width: 0.5,
+            width: 1,
             color: currentTheme.textTheme.bodyMedium!.color!.withOpacity(0.1),
           ),
         ),
@@ -48,9 +54,21 @@ class PostCard extends ConsumerWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CircleAvatar(
-            radius: 15.w,
-            backgroundImage: NetworkImage(user!.profilePic!),
+          Column(
+            children: [
+              CircleAvatar(
+                radius: 15.w,
+                backgroundImage: NetworkImage(user!.profilePic!),
+              ).tap(onTap: () {
+                if (post.userUid == userr!.uid && indexFromController != 3) {
+                  moveToPage(
+                    context: context,
+                    ref: ref,
+                    index: 3,
+                  );
+                }
+              }),
+            ],
           ),
           10.sbW,
           Column(
@@ -63,7 +81,7 @@ class PostCard extends ConsumerWidget {
                         size: 14.sp,
                         fontWeight: FontWeight.w600,
                       ),
-                  (width(context) * 0.4).sbW,
+                  (width(context) * 0.36).sbW,
                   //! time, menu
                   timeago.format(post.createdAt!, locale: 'en_short').txt(
                         size: 12.sp,
@@ -228,7 +246,7 @@ class PostCard extends ConsumerWidget {
                     if (post.repostedBy!.isNotEmpty)
                       Padding(
                         padding: EdgeInsets.only(right: 5.w),
-                        child: post.likedBy!.length.toString().txt(),
+                        child: post.repostedBy!.length.toString().txt(),
                       ),
 
                     //! like
@@ -259,13 +277,25 @@ class PostCard extends ConsumerWidget {
                       padding: EdgeInsets.zero,
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
-                      onPressed: () {},
+                      onPressed: () {
+                        showModalBottomSheet(
+                          isScrollControlled: true,
+                          enableDrag: false,
+                          backgroundColor: Colors.transparent,
+                          context: context,
+                          builder: (context) => Wrap(
+                            children: [
+                              ReplyPostBottomSheet(post: post),
+                            ],
+                          ),
+                        );
+                      },
                       icon: const Icon(PhosphorIcons.chatCentered),
                     ),
                     if (post.repliedTo!.isNotEmpty)
                       Padding(
                         padding: EdgeInsets.only(right: 5.w),
-                        child: post.likedBy!.length.toString().txt(),
+                        child: post.repliedTo!.length.toString().txt(),
                       ),
                   ],
                 ),

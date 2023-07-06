@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 
 class PostModel {
   final String? id;
+  final String? replyingPostId;
   final String? link;
   final String? imageUrl;
   final String? textContent;
@@ -17,6 +18,7 @@ class PostModel {
   final List<dynamic>? likedBy;
   const PostModel({
     required this.id,
+    this.replyingPostId,
     this.link,
     this.imageUrl,
     this.textContent,
@@ -31,6 +33,7 @@ class PostModel {
 
   PostModel copyWith({
     String? id,
+    String? replyingPostId,
     String? link,
     String? imageUrl,
     String? textContent,
@@ -44,6 +47,7 @@ class PostModel {
   }) {
     return PostModel(
       id: id ?? this.id,
+      replyingPostId: replyingPostId ?? this.replyingPostId,
       link: link ?? this.link,
       imageUrl: imageUrl ?? this.imageUrl,
       textContent: textContent ?? this.textContent,
@@ -60,6 +64,7 @@ class PostModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
+      'replyingPostId': replyingPostId,
       'link': link,
       'imageUrl': imageUrl,
       'textContent': textContent,
@@ -76,6 +81,7 @@ class PostModel {
   factory PostModel.fromMap(Map<String, dynamic> map) {
     return PostModel(
       id: map['id'] ?? '',
+      replyingPostId: map['replyingPostId'] ?? '',
       link: map['link'] ?? '',
       imageUrl: map['imageUrl'] ?? '',
       textContent: map['textContent'] ?? '',
@@ -93,7 +99,7 @@ class PostModel {
 
   @override
   String toString() {
-    return 'PostModel(id: $id, link: $link, imageUrl: $imageUrl, textContent: $textContent, commentCount: $commentCount, userUid: $userUid, createdAt: $createdAt, repostedBy: $repostedBy, bookmarkedBy: $bookmarkedBy, repliedTo: $repliedTo, likedBy: $likedBy)';
+    return 'PostModel(id: $id, replyingPostId: $replyingPostId, link: $link, imageUrl: $imageUrl, textContent: $textContent, commentCount: $commentCount, userUid: $userUid, createdAt: $createdAt, repostedBy: $repostedBy, bookmarkedBy: $bookmarkedBy, repliedTo: $repliedTo, likedBy: $likedBy)';
   }
 
   @override
@@ -101,6 +107,7 @@ class PostModel {
     if (identical(this, other)) return true;
 
     return other.id == id &&
+        other.replyingPostId == replyingPostId &&
         other.link == link &&
         other.imageUrl == imageUrl &&
         other.textContent == textContent &&
@@ -116,6 +123,7 @@ class PostModel {
   @override
   int get hashCode {
     return id.hashCode ^
+        replyingPostId.hashCode ^
         link.hashCode ^
         imageUrl.hashCode ^
         textContent.hashCode ^

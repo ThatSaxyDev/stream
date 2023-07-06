@@ -15,3 +15,9 @@ final userPostProvider = StreamProvider.autoDispose((ref) {
   final postController = ref.watch(postControllerProvider.notifier);
   return postController.fetchUserPosts();
 });
+
+final getPostByIdProvider = StreamProvider.family((ref, String postID) {
+  final postController = ref.watch(postControllerProvider.notifier);
+
+  return postController.getPostById(postID: postID);
+});

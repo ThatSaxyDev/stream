@@ -32,6 +32,29 @@ class PostRepository {
     }
   }
 
+  //! reply a post
+  FutureVoid replyPost({
+    required PostModel repliedPost,
+    required PostModel post,
+  }) async {
+    try {
+      _posts.doc(repliedPost.id).update({
+        'repliedTo': FieldValue.arrayUnion([post.id]),
+      });
+      return right(_posts.doc(post.id).set(post.toMap()));
+    } on FirebaseException catch (e) {
+      throw e.message!;
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
+
+  //! get a post by ID
+  Stream<PostModel> getPostById({required String postID}) {
+    return _posts.doc(postID).snapshots().map(
+        (event) => PostModel.fromMap(event.data() as Map<String, dynamic>));
+  }
+
   //! delete post
   FutureVoid deletePost({
     required PostModel post,
