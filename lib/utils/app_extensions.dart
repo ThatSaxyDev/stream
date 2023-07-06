@@ -75,8 +75,9 @@ extension ImagePath on String {
   String get gif => 'lib/assets/images/$this.gif';
 }
 
-extension VectorPath on String {
-  String get svg => 'lib/assets/vectors/$this.svg';
+extension IconPath on String {
+  String get iconPng => 'lib/assets/icons/$this.png';
+  String get iconSvg => 'lib/assets/icons/$this.svg';
 }
 
 extension NumExtensions on int {

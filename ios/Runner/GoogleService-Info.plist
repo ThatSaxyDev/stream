@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>405204862515-1bcu79fd8ssr6svb8ubofj57vvtic2b6.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.405204862515-1bcu79fd8ssr6svb8ubofj57vvtic2b6</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAW6xOrvgvanX0uGX0B3gTmkQCTS3ty53s</string>
+	<key>GCM_SENDER_ID</key>
+	<string>405204862515</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>app.kiishidart.stream</string>
+	<key>PROJECT_ID</key>
+	<string>stream-eaa99</string>
+	<key>STORAGE_BUCKET</key>
+	<string>stream-eaa99.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:405204862515:ios:df2c5db8c4d32512fdc546</string>
+</dict>
+</plist>

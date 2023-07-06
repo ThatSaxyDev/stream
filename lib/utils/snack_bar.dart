@@ -3,9 +3,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stream/core/type_defs.dart';
 import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/specific_size_text_exrension.dart';
-import 'package:stream/utils/type_defs.dart';
 
 void showSnackBar(BuildContext context, String text) {
   ScaffoldMessenger.of(context)

@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "405204862515",
+    "project_id": "stream-eaa99",
+    "storage_bucket": "stream-eaa99.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:405204862515:android:bbb321587d7b3ab2fdc546",
+        "android_client_info": {
+          "package_name": "app.kiishidart.stream"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "405204862515-sanfe9j2n7hdelq6m9ruiejs72gt1cv1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.kiishidart.stream",
+            "certificate_hash": "ca26560740d0472113c1786109bcc24c617f24b8"
+          }
+        },
+        {
+          "client_id": "405204862515-5r0ghp9sf6pob1v4lqpacudv9beqqju3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXI9vukd5QdhAKPpzPt5PaP172T1jyMD8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "405204862515-0lfg9u69q6f6vvt4kcp99267mgpk5tp9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "405204862515-1bcu79fd8ssr6svb8ubofj57vvtic2b6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "app.kiishidart.stream"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

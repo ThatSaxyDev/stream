@@ -23,7 +23,7 @@ class MyIcon extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: SvgPicture.asset(
-        icon.svg,
+        icon.iconSvg,
         // ignore: deprecated_member_use
         color: color,
         height: height ?? 24.h,
@@ -46,7 +46,7 @@ class BackIcon extends StatelessWidget {
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       child: SvgPicture.asset(
-        'back'.svg,
+        'back'.iconSvg,
         height: 24.h,
       ),
     );
