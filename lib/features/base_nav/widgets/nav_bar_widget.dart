@@ -1,0 +1,85 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first, deprecated_member_use
+
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:stream/features/base_nav/views/base_nav_view.dart';
+import 'package:stream/theme/palette.dart';
+import 'package:stream/utils/app_constants.dart';
+import 'package:stream/utils/app_extensions.dart';
+
+class NavBarWidget extends ConsumerWidget {
+  final Nav nav;
+  const NavBarWidget({
+    Key? key,
+    required this.nav,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentTheme = ref.watch(themeNotifierProvider);
+    int indexFromController = ref.watch(baseNavControllerProvider);
+    if (nav.index > 2) {
+      indexFromController = indexFromController + 1;
+    }
+    return SizedBox(
+      width: 50.w,
+      child: Column(
+        children: [
+          //! ICON
+          Icon(
+            switch (indexFromController == nav.index && nav.index != 2) {
+              true => nav.selectedIcon,
+              false => nav.icon,
+            },
+            color: switch (indexFromController == nav.index && nav.index != 2) {
+              true => currentTheme.textTheme.bodyMedium!.color,
+              false =>
+                currentTheme.textTheme.bodyMedium!.color!.withOpacity(0.3),
+            },
+          ),
+
+          // //! SPACER
+          // 8.4.sbH,
+        ],
+      ),
+    ).tap(
+      onTap: () {
+        if (nav.index < 2) {
+          moveToPage(
+            context: context,
+            ref: ref,
+            index: nav.index,
+          );
+        }
+        if (nav.index == 2) {
+          showModalBottomSheet(
+            isScrollControlled: true,
+            enableDrag: true,
+            backgroundColor: Colors.transparent,
+            context: context,
+            builder: (context) => Wrap(
+              children: [
+                Container(
+                  height: 300.h,
+                  width: width(context),
+                  decoration: BoxDecoration(
+                      color: currentTheme.backgroundColor,
+                      borderRadius: BorderRadius.circular(20)),
+                ),
+              ],
+            ),
+          );
+        }
+        if (nav.index > 2) {
+          moveToPage(
+            context: context,
+            ref: ref,
+            index: nav.index - 1,
+          );
+        }
+      },
+    );
+  }
+}

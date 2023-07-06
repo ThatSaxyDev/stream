@@ -59,7 +59,7 @@ extension StyledTextExtension on String {
       maxLines: maxLines,
       style: TextStyle(
         fontSize: size ?? 14.sp,
-        color: color ?? Pallete.textBlack,
+        color: color,
         fontWeight: fontWeight,
         fontFamily: fontFamily,
         fontStyle: fontStyle,
