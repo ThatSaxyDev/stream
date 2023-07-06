@@ -12,6 +12,7 @@ import 'package:stream/features/base_nav/views/base_nav_view.dart';
 import 'package:stream/features/posts/controllers/post_controller.dart';
 import 'package:stream/features/posts/widgets/create_post_bottom_sheet.dart';
 import 'package:stream/features/posts/widgets/reply_post_bottom_sheet.dart';
+import 'package:stream/features/posts/widgets/repost_quote_bottom_sheet.dart';
 import 'package:stream/models/post_model.dart';
 import 'package:stream/models/user_model.dart';
 import 'package:stream/theme/palette.dart';
@@ -40,6 +41,7 @@ class PostCard extends ConsumerWidget {
     if (user == null) {
       return const SizedBox.shrink();
     }
+
     return Container(
       width: width(context),
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 13.h),
@@ -240,8 +242,27 @@ class PostCard extends ConsumerWidget {
                       padding: EdgeInsets.zero,
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
-                      onPressed: () {},
-                      icon: const Icon(PhosphorIcons.repeat),
+                      onPressed: () {
+                        showModalBottomSheet(
+                          isScrollControlled: true,
+                          enableDrag: true,
+                          backgroundColor: Colors.transparent,
+                          context: context,
+                          builder: (context) => Wrap(
+                            children: [
+                              RepostQuoteBottomSheet(
+                                post: post,
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                      icon: Icon(
+                        PhosphorIcons.repeat,
+                        color: post.repostedBy!.contains(userr!.uid)
+                            ? Pallete.activegreen
+                            : currentTheme.textTheme.bodyMedium!.color,
+                      ),
                     ),
                     if (post.repostedBy!.isNotEmpty)
                       Padding(
@@ -259,7 +280,7 @@ class PostCard extends ConsumerWidget {
                             .read(postControllerProvider.notifier)
                             .likePost(post: post);
                       },
-                      icon: post.likedBy!.contains(user!.uid)
+                      icon: post.likedBy!.contains(userr.uid)
                           ? const Icon(
                               PhosphorIcons.heartFill,
                               color: Pallete.thickRed,

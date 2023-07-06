@@ -22,9 +22,9 @@ import 'package:stream/utils/widgets/click_button.dart';
 import 'package:stream/utils/widgets/image_loader.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-class ReplyPostCard extends ConsumerWidget {
+class QuotingPostCard extends ConsumerWidget {
   final PostModel post;
-  const ReplyPostCard({
+  const QuotingPostCard({
     super.key,
     required this.post,
   });
@@ -38,64 +38,57 @@ class ReplyPostCard extends ConsumerWidget {
     if (user == null) {
       return const SizedBox.shrink();
     }
-    return SizedBox(
-      width: width(context),
-      child: Row(
+    return Container(
+      padding: EdgeInsets.all(10.w),
+      decoration: BoxDecoration(
+        border: Border.all(
+            color: currentTheme.textTheme.bodyMedium!.color!.withOpacity(0.3),
+            width: 0.5),
+        borderRadius: BorderRadius.circular(10.r),
+      ),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            children: [
-              CircleAvatar(
-                radius: 15.w,
-                backgroundImage: NetworkImage(user!.profilePic!),
-              ),
-              20.sbH,
-              Container(
-                width: 0.5,
-                height: 40.h,
-                color: currentTheme.textTheme.bodyMedium!.color!,
-                // height: double.maxFinite,
-              ),
-            ],
-          ),
-          10.sbW,
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Row(
             children: [
               Row(
                 children: [
+                  CircleAvatar(
+                    radius: 7.w,
+                    backgroundImage: NetworkImage(user!.profilePic!),
+                  ),
+                  7.sbW,
                   //! user name
                   '@${user!.name!}'.toLowerCase().txt(
-                        size: 14.sp,
+                        size: 12.sp,
                         fontWeight: FontWeight.w600,
                       ),
                 ],
               ),
-
-              //! content
-              if (post.textContent!.isNotEmpty) ...[
-                2.sbH,
-                SizedBox(
-                  width: width(context) * 0.8,
-                  child: SelectableText(
-                    post.textContent!,
-                    style:
-                        TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
-                  ),
-                ),
-              ],
-
-              //! image
-              if (post.imageUrl!.isNotEmpty) ...[
-                10.sbH,
-                ImageLoader(
-                  height: 120.h,
-                  width: 110.w,
-                  imageUrl: post.imageUrl!,
-                ),
-              ],
             ],
           ),
+
+          //! content
+          if (post.textContent!.isNotEmpty) ...[
+            10.sbH,
+            SizedBox(
+              width: width(context) * 0.7,
+              child: SelectableText(
+                post.textContent!,
+                style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500),
+              ),
+            ),
+          ],
+
+          //! image
+          if (post.imageUrl!.isNotEmpty) ...[
+            10.sbH,
+            ImageLoader(
+              height: 120.h,
+              width: 110.w,
+              imageUrl: post.imageUrl!,
+            ),
+          ],
         ],
       ),
     );

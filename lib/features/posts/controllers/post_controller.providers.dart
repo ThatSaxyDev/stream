@@ -1,5 +1,6 @@
 part of 'post_controller.dart';
 
+//! the provider for the post controller
 StateNotifierProvider<PostController, bool> postControllerProvider =
     StateNotifierProvider<PostController, bool>((ref) {
   final postRepository = ref.watch(postRepositoryProvider);
@@ -11,13 +12,29 @@ StateNotifierProvider<PostController, bool> postControllerProvider =
   );
 });
 
+//! provider for users posts and following
 final userPostProvider = StreamProvider.autoDispose((ref) {
   final postController = ref.watch(postControllerProvider.notifier);
   return postController.fetchUserPosts();
 });
 
-final getPostByIdProvider = StreamProvider.family((ref, String postID) {
+//! provider to get a post by ID
+final getPostByIdProvider =
+    StreamProvider.autoDispose.family((ref, String postID) {
   final postController = ref.watch(postControllerProvider.notifier);
 
   return postController.getPostById(postID: postID);
+});
+
+//! provider to get all reposts by user
+final fetchRepostsPostsFromUserProvider = StreamProvider.autoDispose((ref) {
+  final postController = ref.watch(postControllerProvider.notifier);
+  return postController.fetchRepostsPostsFromUser();
+});
+
+//! provider to get all reposts by user and following
+final fetchRepostsFromFollowingAndUserProvider =
+    StreamProvider.autoDispose((ref) {
+  final postController = ref.watch(postControllerProvider.notifier);
+  return postController.fetchRepostsPostsFromFollowingAndUser();
 });

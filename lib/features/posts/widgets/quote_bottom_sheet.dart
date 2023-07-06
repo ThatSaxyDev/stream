@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stream/features/auth/controller/auth_controller.dart';
 import 'package:stream/features/posts/controllers/post_controller.dart';
+import 'package:stream/features/posts/widgets/quoting_post_card.dart';
 import 'package:stream/features/posts/widgets/reply_post_card.dart';
 import 'package:stream/models/post_model.dart';
 import 'package:stream/models/user_model.dart';
@@ -21,19 +22,19 @@ import 'package:image_picker/image_picker.dart';
 import 'package:stream/utils/snack_bar.dart';
 import 'package:stream/utils/widgets/click_button.dart';
 
-class ReplyPostBottomSheet extends ConsumerStatefulWidget {
+class QuotePostBottomSheet extends ConsumerStatefulWidget {
   final PostModel post;
-  const ReplyPostBottomSheet({
+  const QuotePostBottomSheet({
     super.key,
     required this.post,
   });
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
-      _ReplyPostBottomSheetState();
+      _QuotePostBottomSheetState();
 }
 
-class _ReplyPostBottomSheetState extends ConsumerState<ReplyPostBottomSheet> {
+class _QuotePostBottomSheetState extends ConsumerState<QuotePostBottomSheet> {
   final TextEditingController _textController = TextEditingController();
   final ValueNotifier<bool> isButtonActive = ValueNotifier(false);
   File? image;
@@ -62,23 +63,23 @@ class _ReplyPostBottomSheetState extends ConsumerState<ReplyPostBottomSheet> {
   }
 
   //! to create post
-  void replyPost() {
+  void quotePost() {
     if (_textController.text.isEmpty &&
         isButtonActive.value == true &&
         image != null) {
-      ref.read(postControllerProvider.notifier).replyPost(
-            repliedPost: widget.post,
+      ref.read(postControllerProvider.notifier).quoteAPost(
+            post: widget.post,
             context: context,
             textContent: '',
             image: image,
           );
     }
     if (_textController.text.isNotEmpty && isButtonActive.value == true) {
-      ref.read(postControllerProvider.notifier).replyPost(
+      ref.read(postControllerProvider.notifier).quoteAPost(
+            post: widget.post,
             context: context,
             textContent: _textController.text.trim(),
             image: image,
-            repliedPost: widget.post,
           );
     }
   }
@@ -126,7 +127,7 @@ class _ReplyPostBottomSheetState extends ConsumerState<ReplyPostBottomSheet> {
                 ).tap(
                   onTap: () => goBack(context),
                 ),
-                'Reply'
+                'Quote'
                     .txt(
                       size: 16.sp,
                       fontWeight: FontWeight.w600,
@@ -148,7 +149,7 @@ class _ReplyPostBottomSheetState extends ConsumerState<ReplyPostBottomSheet> {
                             isText: true,
                             text: 'Post',
                             isActive: isButtonActive.value,
-                            onTap: () => replyPost(),
+                            onTap: () => quotePost(),
                           );
                         }),
               ],
@@ -162,9 +163,6 @@ class _ReplyPostBottomSheetState extends ConsumerState<ReplyPostBottomSheet> {
                     parent: BouncingScrollPhysics()),
                 child: Column(
                   children: [
-                    ReplyPostCard(post: widget.post),
-                    24.sbH,
-
                     //! image, text field
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -203,8 +201,8 @@ class _ReplyPostBottomSheetState extends ConsumerState<ReplyPostBottomSheet> {
                                 controller: _textController,
                                 maxLength: 280,
                                 decoration: InputDecoration(
-                                  hintText: 'Reply to @${userr!.name!}'
-                                      .toCapitalized(),
+                                  hintText:
+                                      'What do you think?'.toCapitalized(),
                                   hintStyle: TextStyle(
                                     fontSize: 15.sp,
                                   ),
@@ -244,15 +242,22 @@ class _ReplyPostBottomSheetState extends ConsumerState<ReplyPostBottomSheet> {
 
                                       //! remove image
                                       IconButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              image = null;
-                                              isButtonActive.value = false;
-                                            });
-                                          },
-                                          icon: const Icon(PhosphorIcons.x)),
+                                        onPressed: () {
+                                          setState(() {
+                                            image = null;
+                                            isButtonActive.value = false;
+                                          });
+                                        },
+                                        icon: const Icon(PhosphorIcons.x),
+                                      ),
                                     ],
                                   ),
+                            20.sbH,
+
+                            //! post
+                            QuotingPostCard(
+                              post: widget.post,
+                            ),
                           ],
                         )
                       ],

@@ -135,21 +135,24 @@ class _CreatePostBottomSheetState extends ConsumerState<CreatePostBottomSheet> {
                         }),
               ],
             ),
-            24.sbH,
+            10.sbH,
 
             //! image, text field
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CircleAvatar(
-                  radius: 15.w,
+                  radius: 17.w,
                   backgroundImage: NetworkImage(user.profilePic!),
                 ),
-                15.sbW,
+                10.sbW,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    user.name!.txt(),
+                    '@${user.name!}'.toLowerCase().txt(
+                          size: 16.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
                     SizedBox(
                       width: 250.w,
                       child: TextField(
@@ -180,9 +183,11 @@ class _CreatePostBottomSheetState extends ConsumerState<CreatePostBottomSheet> {
                       ),
                     ),
                     image == null
-                        ? IconButton(
-                            onPressed: () => takePhoto(ImageSource.gallery),
-                            icon: const Icon(PhosphorIcons.paperclipBold),
+                        ? Padding(
+                            padding: EdgeInsets.only(right: 8.w),
+                            child: const Icon(PhosphorIcons.paperclipBold),
+                          ).tap(
+                            onTap: () => takePhoto(ImageSource.gallery),
                           )
                         : Row(
                             crossAxisAlignment: CrossAxisAlignment.start,

@@ -5,7 +5,9 @@ import 'package:stream/features/auth/controller/auth_controller.dart';
 import 'package:stream/features/home/widgets/post_card.dart';
 import 'package:stream/features/posts/controllers/post_controller.dart';
 import 'package:stream/features/posts/widgets/feed_reply_post_card.dart';
+import 'package:stream/features/posts/widgets/repost_card.dart';
 import 'package:stream/models/post_model.dart';
+import 'package:stream/models/repost_model.dart';
 import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/app_constants.dart';
 import 'package:stream/utils/app_extensions.dart';
@@ -15,7 +17,19 @@ class HomeFeedView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    List<RepostModel>? reposts;
     AsyncValue<List<PostModel>> userPostsStream = ref.watch(userPostProvider);
+    AsyncValue<List<RepostModel>> rePostsStream =
+        ref.watch(fetchRepostsFromFollowingAndUserProvider);
+    rePostsStream.when(
+      data: (data) {
+        reposts = data;
+      },
+      error: (error, stackTrace) {
+        error.toString().log();
+      },
+      loading: () {},
+    );
     ThemeData currentTheme = ref.watch(themeNotifierProvider);
     return SizedBox(
       height: height(context),
@@ -29,6 +43,23 @@ class HomeFeedView extends ConsumerWidget {
               ref.read(authControllerProvider.notifier).logOut();
             }),
             20.sbH,
+
+            if (reposts != null)
+              ...List.generate(reposts!.length, (index) {
+                PostModel? post;
+                ref
+                    .watch(getPostByIdProvider(reposts![index].postId!))
+                    .whenData((value) => post = value);
+
+                if (post != null) {
+                  return RepostPostCard(
+                    repost: reposts![index],
+                    post: post!,
+                  );
+                } else {
+                  return const SizedBox.shrink();
+                }
+              }),
 
             userPostsStream.when(
               data: (List<PostModel> posts) {

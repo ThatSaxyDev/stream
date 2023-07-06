@@ -9,6 +9,8 @@ import 'package:stream/core/providers/storage_repository_provider.dart';
 import 'package:stream/features/auth/controller/auth_controller.dart';
 import 'package:stream/features/posts/repositories/post_repository.dart';
 import 'package:stream/models/post_model.dart';
+import 'package:stream/models/quote_nodel.dart';
+import 'package:stream/models/repost_model.dart';
 import 'package:stream/models/user_model.dart';
 import 'package:stream/utils/failure.dart';
 import 'package:stream/utils/nav.dart';
@@ -67,6 +69,57 @@ class PostController extends StateNotifier<bool> {
     );
 
     Either<Failure, void> res = await _postRepository.createPost(post: post);
+
+    state = false;
+    res.fold(
+      (l) => showSnackBar(context: context, text: l.message),
+      (r) {
+        // showSnackBar(context: context, text: 'Posted Successfully!');
+        Routemaster.of(context).pop();
+      },
+    );
+  }
+
+  // quote post
+  void quoteAPost({
+    required PostModel post,
+    required BuildContext context,
+    required String textContent,
+    required File? image,
+    Uint8List? file,
+  }) async {
+    state = true;
+    String quoteId = const Uuid().v1();
+    UserModel user = _ref.read(userProvider)!;
+    String photo = '';
+    if (image != null) {
+      Either<Failure, String> res = await _storageRepository.storeFile(
+        path: 'posts/ids',
+        id: user.uid!,
+        file: image,
+        webFile: file,
+      );
+      res.fold(
+        (l) => showSnackBar(context: context, text: l.message),
+        (r) => photo = r,
+      );
+    }
+
+    final QuoteModel qoutePost = QuoteModel(
+      postId: post.id,
+      id: quoteId,
+      textContent: textContent,
+      commentCount: 0,
+      bookmarkedBy: [],
+      repliedTo: [],
+      repostedBy: [],
+      userUid: user.uid,
+      imageUrl: photo,
+      createdAt: DateTime.now(),
+    );
+
+    Either<Failure, void> res =
+        await _postRepository.quoteAPost(quotePost: qoutePost);
 
     state = false;
     res.fold(
@@ -137,6 +190,19 @@ class PostController extends StateNotifier<bool> {
     );
   }
 
+  //! repost
+  void rePost({
+    required BuildContext context,
+    required PostModel post,
+  }) async {
+    UserModel user = _ref.read(userProvider)!;
+    final res = await _postRepository.rePost(post: post, user: user);
+    res.fold(
+      (l) => showSnackBar(context: context, text: l.message),
+      (r) {},
+    );
+  }
+
   //! delete post
   void deletePost({
     required PostModel post,
@@ -153,10 +219,22 @@ class PostController extends StateNotifier<bool> {
   //! fetch posts
   Stream<List<PostModel>> fetchUserPosts() {
     UserModel user = _ref.read(userProvider)!;
-    // if (communities.isNotEmpty) {
+
     return _postRepository.fetchPostsFromFollowingAndUser(user: user);
-    // }
-    // return Stream.value([]);
+  }
+
+  //! get reposts from user only
+  Stream<List<RepostModel>> fetchRepostsPostsFromUser() {
+    UserModel user = _ref.read(userProvider)!;
+
+    return _postRepository.fetchRepostsPostsFromUser(user: user);
+  }
+
+  //! get reposts from user and following
+  Stream<List<RepostModel>> fetchRepostsPostsFromFollowingAndUser() {
+    UserModel user = _ref.read(userProvider)!;
+
+    return _postRepository.fetchRepostsPostsFromFollowingAndUser(user: user);
   }
 
   //! like a post
