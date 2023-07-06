@@ -2,11 +2,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:stream/theme/palette.dart';
 
-class ImageLoader extends StatelessWidget {
+class ImageLoader extends ConsumerWidget {
   final String imageUrl;
   final double? height;
   final double? width;
@@ -18,7 +19,7 @@ class ImageLoader extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8.r),
       child: CachedNetworkImage(

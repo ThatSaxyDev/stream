@@ -1,22 +1,28 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-class UserModel {
-  final String uid;
-  final String name;
-  final String email;
-  final String profilePic;
-  final String banner;
+import 'package:flutter/foundation.dart';
 
-  final bool isVerified;
+class UserModel {
+  final String? uid;
+  final String? name;
+  final String? email;
+  final String? profilePic;
+  final String? banner;
+
+  final bool? isVerified;
+  final List<dynamic>? followers;
+  final List<dynamic>? following;
 
   const UserModel({
-    required this.uid,
-    required this.name,
-    required this.email,
-    required this.profilePic,
-    required this.banner,
-    required this.isVerified,
+    this.uid,
+    this.name,
+    this.email,
+    this.profilePic,
+    this.banner,
+    this.isVerified,
+    this.followers,
+    this.following,
   });
 
   UserModel copyWith({
@@ -26,6 +32,8 @@ class UserModel {
     String? profilePic,
     String? banner,
     bool? isVerified,
+    List<dynamic>? followers,
+    List<dynamic>? following,
   }) {
     return UserModel(
       uid: uid ?? this.uid,
@@ -34,6 +42,8 @@ class UserModel {
       profilePic: profilePic ?? this.profilePic,
       banner: banner ?? this.banner,
       isVerified: isVerified ?? this.isVerified,
+      followers: followers ?? this.followers,
+      following: following ?? this.following,
     );
   }
 
@@ -45,17 +55,21 @@ class UserModel {
       'profilePic': profilePic,
       'banner': banner,
       'isVerified': isVerified,
+      'followers': followers,
+      'following': following,
     };
   }
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
-      uid: (map["uid"] ?? '') as String,
-      name: (map["name"] ?? '') as String,
-      email: (map["email"] ?? '') as String,
-      profilePic: (map["profilePic"] ?? '') as String,
-      banner: (map["banner"] ?? '') as String,
-      isVerified: (map["isVerified"] ?? false) as bool,
+      uid: map["uid"] ?? '',
+      name: map["name"] ?? '',
+      email: map["email"] ?? '',
+      profilePic: map["profilePic"] ?? '',
+      banner: map["banner"] ?? '',
+      isVerified: map["isVerified"] ?? false,
+      followers: map['followers'] ?? [],
+      following: map['following'] ?? [],
     );
   }
 
@@ -66,7 +80,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(uid: $uid, name: $name, email: $email, profilePic: $profilePic, banner: $banner, isVerified: $isVerified)';
+    return 'UserModel(uid: $uid, name: $name, email: $email, profilePic: $profilePic, banner: $banner, isVerified: $isVerified, followers: $followers, following: $following)';
   }
 
   @override
@@ -78,7 +92,9 @@ class UserModel {
         other.email == email &&
         other.profilePic == profilePic &&
         other.banner == banner &&
-        other.isVerified == isVerified;
+        other.isVerified == isVerified &&
+        listEquals(other.followers, followers) &&
+        listEquals(other.following, following);
   }
 
   @override
@@ -88,6 +104,8 @@ class UserModel {
         email.hashCode ^
         profilePic.hashCode ^
         banner.hashCode ^
-        isVerified.hashCode;
+        isVerified.hashCode ^
+        followers.hashCode ^
+        following.hashCode;
   }
 }

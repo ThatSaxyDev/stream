@@ -10,3 +10,8 @@ StateNotifierProvider<PostController, bool> postControllerProvider =
     ref: ref,
   );
 });
+
+final userPostProvider = StreamProvider.autoDispose((ref) {
+  final postController = ref.watch(postControllerProvider.notifier);
+  return postController.fetchUserPosts();
+});

@@ -11,9 +11,9 @@ class PostModel {
   final int? commentCount;
   final String? userUid;
   final DateTime? createdAt;
-  final List<String>? repostedBy;
-  final List<String>? bookmarkedBy;
-  final List<String>? repliedTo;
+  final List<dynamic>? repostedBy;
+  final List<dynamic>? bookmarkedBy;
+  final List<dynamic>? repliedTo;
   const PostModel({
     required this.id,
     this.link,
@@ -35,9 +35,9 @@ class PostModel {
     int? commentCount,
     String? userUid,
     DateTime? createdAt,
-    List<String>? repostedBy,
-    List<String>? bookmarkedBy,
-    List<String>? repliedTo,
+    List<dynamic>? repostedBy,
+    List<dynamic>? bookmarkedBy,
+    List<dynamic>? repliedTo,
   }) {
     return PostModel(
       id: id ?? this.id,
@@ -79,21 +79,9 @@ class PostModel {
       createdAt: map['createdAt'] != null
           ? DateTime.fromMillisecondsSinceEpoch((map["createdAt"] ?? 0))
           : null,
-      repostedBy: map['repostedBy'] != null
-          ? List<String>.from(
-              ((map['repostedBy']) as List<String>),
-            )
-          : null,
-      bookmarkedBy: map['bookmarkedBy'] != null
-          ? List<String>.from(
-              ((map['bookmarkedBy']) as List<String>),
-            )
-          : null,
-      repliedTo: map['repliedTo'] != null
-          ? List<String>.from(
-              ((map['repliedTo']) as List<String>),
-            )
-          : null,
+      repostedBy: map['repostedBy'] ?? [],
+      bookmarkedBy: map['bookmarkedBy'] ?? [],
+      repliedTo: map['repliedTo'] ?? [],
     );
   }
 

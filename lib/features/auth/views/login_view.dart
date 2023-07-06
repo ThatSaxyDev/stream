@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,7 +18,7 @@ class LoginView extends ConsumerWidget {
     final isLoading = ref.watch(authControllerProvider);
     final currentTheme = ref.watch(themeNotifierProvider);
     return Scaffold(
-      backgroundColor: currentTheme.colorScheme.background,
+      backgroundColor: currentTheme.backgroundColor,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 30.w),
         child: isLoading

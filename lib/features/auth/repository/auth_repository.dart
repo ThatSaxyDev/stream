@@ -69,6 +69,8 @@ class AuthRepository {
           banner: Constants.bannerDefault,
           isVerified: false,
           email: userCredential.user!.email!,
+          followers: [],
+          following: [],
         );
         await _users.doc(userCredential.user!.uid).set(userModel.toMap());
       } else {

@@ -41,9 +41,10 @@ class _CreatePostBottomSheetState extends ConsumerState<CreatePostBottomSheet> {
 
       final imageTemp = File(image.path);
 
-      // setState(() {
-      //   this.image = imageTemp;
-      // });
+      setState(() {
+        this.image = imageTemp;
+        isButtonActive.value = true;
+      });
       setState(() => this.image = imageTemp);
     } on PlatformException catch (e) {
       'Failed to pick images: $e'.log();
@@ -56,6 +57,15 @@ class _CreatePostBottomSheetState extends ConsumerState<CreatePostBottomSheet> {
 
   //! to create post
   void createPost() {
+    if (_textController.text.isEmpty &&
+        isButtonActive.value == true &&
+        image != null) {
+      ref.read(postControllerProvider.notifier).createPost(
+            context: context,
+            textContent: '',
+            image: image,
+          );
+    }
     if (_textController.text.isNotEmpty && isButtonActive.value == true) {
       ref.read(postControllerProvider.notifier).createPost(
             context: context,
@@ -133,13 +143,13 @@ class _CreatePostBottomSheetState extends ConsumerState<CreatePostBottomSheet> {
               children: [
                 CircleAvatar(
                   radius: 15.w,
-                  backgroundImage: NetworkImage(user.profilePic),
+                  backgroundImage: NetworkImage(user.profilePic!),
                 ),
                 15.sbW,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    user.name.txt(),
+                    user.name!.txt(),
                     SizedBox(
                       width: 250.w,
                       child: TextField(
@@ -159,7 +169,7 @@ class _CreatePostBottomSheetState extends ConsumerState<CreatePostBottomSheet> {
                         ),
                         cursorColor: currentTheme.textTheme.bodyMedium!.color!,
                         controller: _textController,
-                        // maxLines: 10,
+                        maxLength: 280,
                         decoration: InputDecoration(
                           hintText: 'What\'s up?',
                           hintStyle: TextStyle(
@@ -195,7 +205,12 @@ class _CreatePostBottomSheetState extends ConsumerState<CreatePostBottomSheet> {
 
                               //! remove image
                               IconButton(
-                                  onPressed: () => setState(() => image = null),
+                                  onPressed: () {
+                                    setState(() {
+                                      image = null;
+                                      isButtonActive.value = false;
+                                    });
+                                  },
                                   icon: const Icon(PhosphorIcons.x)),
                             ],
                           ),

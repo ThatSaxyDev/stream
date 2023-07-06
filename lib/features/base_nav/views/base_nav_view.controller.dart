@@ -27,9 +27,7 @@ void moveToPage({
 
 //! List of pages
 List<Widget> pages = [
-  Center(
-    child: 'Home'.txt(),
-  ),
+  const HomeFeedView(),
   Center(
     child: 'search'.txt(),
   ),

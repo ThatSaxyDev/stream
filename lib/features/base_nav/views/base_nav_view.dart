@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stream/features/base_nav/widgets/nav_bar_widget.dart';
+import 'package:stream/features/home/views/home_feed_view.dart';
 import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/app_constants.dart';
 import 'package:stream/utils/app_extensions.dart';
@@ -17,8 +18,9 @@ class BaseNavWrapper extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     int indexFromController = ref.watch(baseNavControllerProvider);
-    final currentTheme = ref.watch(themeNotifierProvider);
+    ThemeData currentTheme = ref.watch(themeNotifierProvider);
     return Scaffold(
+      backgroundColor: currentTheme.backgroundColor,
       // pages
       body: pages[indexFromController],
 

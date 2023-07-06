@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:stream/utils/keyboard_utils.dart';
 import 'package:routemaster/routemaster.dart';
 
-// void goBack(BuildContext context) {
-//   killKeyboard(context);
-//   Navigator.of(context).pop();
-// }
+void goBackk(BuildContext context) {
+  // killKeyboard(context);
+  Navigator.of(context).pop();
+}
 
 void goBack(BuildContext context) {
   killKeyboard(context);

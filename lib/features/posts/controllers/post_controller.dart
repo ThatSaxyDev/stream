@@ -11,6 +11,7 @@ import 'package:stream/features/posts/repositories/post_repository.dart';
 import 'package:stream/models/post_model.dart';
 import 'package:stream/models/user_model.dart';
 import 'package:stream/utils/failure.dart';
+import 'package:stream/utils/nav.dart';
 import 'package:stream/utils/snack_bar.dart';
 import 'package:uuid/uuid.dart';
 
@@ -43,7 +44,7 @@ class PostController extends StateNotifier<bool> {
     if (image != null) {
       Either<Failure, String> res = await _storageRepository.storeFile(
         path: 'posts/ids',
-        id: user.uid,
+        id: user.uid!,
         file: image,
         webFile: file,
       );
@@ -75,5 +76,27 @@ class PostController extends StateNotifier<bool> {
         Routemaster.of(context).pop();
       },
     );
+  }
+
+  //! delete post
+  void deletePost({
+    required PostModel post,
+    required BuildContext context,
+  }) async {
+    final res = await _postRepository.deletePost(post: post);
+
+    res.fold(
+      (l) => null,
+      (r) => goBack(context),
+    );
+  }
+
+  //! fetch posts
+  Stream<List<PostModel>> fetchUserPosts() {
+    UserModel user = _ref.read(userProvider)!;
+    // if (communities.isNotEmpty) {
+    return _postRepository.fetchPostsFromFollowingAndUser(user: user);
+    // }
+    // return Stream.value([]);
   }
 }

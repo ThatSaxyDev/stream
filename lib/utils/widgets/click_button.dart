@@ -72,14 +72,14 @@ class _ClickButtonState extends ConsumerState<ClickButton> {
                               .withOpacity(0.3),
                       border: Border.all(
                         color: widget.isActive == true
-                            ? currentTheme.textTheme.bodyMedium!.color!
+                            ? currentTheme.textTheme.bodyMedium!.color!.withOpacity(0.8)
                             : currentTheme.textTheme.bodyMedium!.color!
                                 .withOpacity(0.3),
                       ),
                       boxShadow: [
                         BoxShadow(
                           color: widget.isActive == true
-                              ? currentTheme.textTheme.bodyMedium!.color!
+                              ? currentTheme.textTheme.bodyMedium!.color!.withOpacity(0.8)
                               : currentTheme.textTheme.bodyMedium!.color!
                                   .withOpacity(0),
                           offset: clicked.value == true
