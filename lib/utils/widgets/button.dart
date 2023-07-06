@@ -149,7 +149,6 @@ class GButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentTheme = ref.watch(themeNotifierProvider);
     return ClickButton(
       onTap: () => signInWithGoogle(context: context, ref: ref),
       child: Row(

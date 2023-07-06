@@ -3,12 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stream/features/auth/controller/auth_controller.dart';
-import 'package:stream/shared/app_grafiks.dart';
 import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/app_extensions.dart';
 import 'package:stream/utils/loader.dart';
 import 'package:stream/utils/widgets/button.dart';
-import 'package:stream/utils/widgets/myicon.dart';
 
 class LoginView extends ConsumerWidget {
   const LoginView({super.key});
@@ -18,7 +16,7 @@ class LoginView extends ConsumerWidget {
     final isLoading = ref.watch(authControllerProvider);
     final currentTheme = ref.watch(themeNotifierProvider);
     return Scaffold(
-      backgroundColor: currentTheme.backgroundColor,
+      backgroundColor: currentTheme.colorScheme.background,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 30.w),
         child: isLoading

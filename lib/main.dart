@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:stream/features/auth/controller/auth_controller.dart';
-import 'package:stream/features/auth/views/login_view.dart';
 import 'package:stream/firebase_options.dart';
 import 'package:stream/models/user_model.dart';
 import 'package:stream/router.dart';
