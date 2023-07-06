@@ -7,6 +7,7 @@ class PostModel {
   final String? id;
   final String? replyingPostId;
   final String? link;
+  final String? quotingPostId;
   final String? imageUrl;
   final String? textContent;
   final int? commentCount;
@@ -20,6 +21,7 @@ class PostModel {
     required this.id,
     this.replyingPostId,
     this.link,
+    this.quotingPostId,
     this.imageUrl,
     this.textContent,
     this.commentCount,
@@ -35,6 +37,7 @@ class PostModel {
     String? id,
     String? replyingPostId,
     String? link,
+    String? quotingPostId,
     String? imageUrl,
     String? textContent,
     int? commentCount,
@@ -49,6 +52,7 @@ class PostModel {
       id: id ?? this.id,
       replyingPostId: replyingPostId ?? this.replyingPostId,
       link: link ?? this.link,
+      quotingPostId: quotingPostId ?? this.quotingPostId,
       imageUrl: imageUrl ?? this.imageUrl,
       textContent: textContent ?? this.textContent,
       commentCount: commentCount ?? this.commentCount,
@@ -65,6 +69,7 @@ class PostModel {
     return <String, dynamic>{
       'id': id,
       'replyingPostId': replyingPostId,
+      'quotingPostId': quotingPostId,
       'link': link,
       'imageUrl': imageUrl,
       'textContent': textContent,
@@ -82,6 +87,7 @@ class PostModel {
     return PostModel(
       id: map['id'] ?? '',
       replyingPostId: map['replyingPostId'] ?? '',
+      quotingPostId: map['quotingPostId'] ?? '',
       link: map['link'] ?? '',
       imageUrl: map['imageUrl'] ?? '',
       textContent: map['textContent'] ?? '',
@@ -99,7 +105,7 @@ class PostModel {
 
   @override
   String toString() {
-    return 'PostModel(id: $id, replyingPostId: $replyingPostId, link: $link, imageUrl: $imageUrl, textContent: $textContent, commentCount: $commentCount, userUid: $userUid, createdAt: $createdAt, repostedBy: $repostedBy, bookmarkedBy: $bookmarkedBy, repliedTo: $repliedTo, likedBy: $likedBy)';
+    return 'PostModel(id: $id, replyingPostId: $replyingPostId, link: $link, quotingPostId: $quotingPostId, imageUrl: $imageUrl, textContent: $textContent, commentCount: $commentCount, userUid: $userUid, createdAt: $createdAt, repostedBy: $repostedBy, bookmarkedBy: $bookmarkedBy, repliedTo: $repliedTo, likedBy: $likedBy)';
   }
 
   @override
@@ -109,6 +115,7 @@ class PostModel {
     return other.id == id &&
         other.replyingPostId == replyingPostId &&
         other.link == link &&
+        other.quotingPostId == quotingPostId &&
         other.imageUrl == imageUrl &&
         other.textContent == textContent &&
         other.commentCount == commentCount &&
@@ -125,6 +132,7 @@ class PostModel {
     return id.hashCode ^
         replyingPostId.hashCode ^
         link.hashCode ^
+        quotingPostId.hashCode ^
         imageUrl.hashCode ^
         textContent.hashCode ^
         commentCount.hashCode ^

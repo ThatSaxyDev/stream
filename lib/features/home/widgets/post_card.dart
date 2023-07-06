@@ -1,8 +1,5 @@
 // ignore_for_file: deprecated_member_use
 
-import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,7 +7,6 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stream/features/auth/controller/auth_controller.dart';
 import 'package:stream/features/base_nav/views/base_nav_view.dart';
 import 'package:stream/features/posts/controllers/post_controller.dart';
-import 'package:stream/features/posts/widgets/create_post_bottom_sheet.dart';
 import 'package:stream/features/posts/widgets/reply_post_bottom_sheet.dart';
 import 'package:stream/features/posts/widgets/repost_quote_bottom_sheet.dart';
 import 'package:stream/models/post_model.dart';
@@ -19,7 +15,6 @@ import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/app_constants.dart';
 import 'package:stream/utils/app_extensions.dart';
 import 'package:stream/utils/nav.dart';
-import 'package:stream/utils/widgets/click_button.dart';
 import 'package:stream/utils/widgets/image_loader.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -83,7 +78,19 @@ class PostCard extends ConsumerWidget {
                         size: 14.sp,
                         fontWeight: FontWeight.w600,
                       ),
-                  (width(context) * 0.36).sbW,
+                  user!.isVerified! == true
+                      ? Row(
+                          children: [
+                            7.sbW,
+                            Icon(
+                              PhosphorIcons.cloudCheckFill,
+                              size: 17.sp,
+                              color: Colors.blue,
+                            ),
+                            (width(context) * 0.33).sbW,
+                          ],
+                        )
+                      : (width(context) * 0.36).sbW,
                   //! time, menu
                   timeago.format(post.createdAt!, locale: 'en_short').txt(
                         size: 12.sp,

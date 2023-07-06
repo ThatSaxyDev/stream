@@ -1,8 +1,5 @@
 // ignore_for_file: deprecated_member_use
 
-import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,15 +7,14 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stream/features/auth/controller/auth_controller.dart';
 import 'package:stream/features/base_nav/views/base_nav_view.dart';
 import 'package:stream/features/posts/controllers/post_controller.dart';
-import 'package:stream/features/posts/widgets/create_post_bottom_sheet.dart';
 import 'package:stream/features/posts/widgets/reply_post_bottom_sheet.dart';
+import 'package:stream/features/posts/widgets/repost_quote_bottom_sheet.dart';
 import 'package:stream/models/post_model.dart';
 import 'package:stream/models/user_model.dart';
 import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/app_constants.dart';
 import 'package:stream/utils/app_extensions.dart';
 import 'package:stream/utils/nav.dart';
-import 'package:stream/utils/widgets/click_button.dart';
 import 'package:stream/utils/widgets/image_loader.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -273,8 +269,27 @@ class FeedReplyPostCard extends ConsumerWidget {
                           padding: EdgeInsets.zero,
                           splashColor: Colors.transparent,
                           highlightColor: Colors.transparent,
-                          onPressed: () {},
-                          icon: const Icon(PhosphorIcons.repeat),
+                          onPressed: () {
+                            showModalBottomSheet(
+                              isScrollControlled: true,
+                              enableDrag: true,
+                              backgroundColor: Colors.transparent,
+                              context: context,
+                              builder: (context) => Wrap(
+                                children: [
+                                  RepostQuoteBottomSheet(
+                                    post: repliedPost!,
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                          icon: Icon(
+                            PhosphorIcons.repeat,
+                            color: repliedPost!.repostedBy!.contains(userr!.uid)
+                                ? Pallete.activegreen
+                                : currentTheme.textTheme.bodyMedium!.color,
+                          ),
                         ),
                         if (repliedPost!.repostedBy!.isNotEmpty)
                           Padding(
@@ -294,13 +309,12 @@ class FeedReplyPostCard extends ConsumerWidget {
                                 .read(postControllerProvider.notifier)
                                 .likePost(post: repliedPost!);
                           },
-                          icon:
-                              repliedPost!.likedBy!.contains(replyingUser!.uid)
-                                  ? const Icon(
-                                      PhosphorIcons.heartFill,
-                                      color: Pallete.thickRed,
-                                    )
-                                  : const Icon(PhosphorIcons.heart),
+                          icon: repliedPost!.likedBy!.contains(userr.uid)
+                              ? const Icon(
+                                  PhosphorIcons.heartFill,
+                                  color: Pallete.thickRed,
+                                )
+                              : const Icon(PhosphorIcons.heart),
                         ),
                         if (repliedPost!.likedBy!.isNotEmpty)
                           Padding(
@@ -322,7 +336,7 @@ class FeedReplyPostCard extends ConsumerWidget {
                               context: context,
                               builder: (context) => Wrap(
                                 children: [
-                                  ReplyPostBottomSheet(post: post),
+                                  ReplyPostBottomSheet(post: repliedPost!),
                                 ],
                               ),
                             );
@@ -548,8 +562,27 @@ class FeedReplyPostCard extends ConsumerWidget {
                           padding: EdgeInsets.zero,
                           splashColor: Colors.transparent,
                           highlightColor: Colors.transparent,
-                          onPressed: () {},
-                          icon: const Icon(PhosphorIcons.repeat),
+                          onPressed: () {
+                            showModalBottomSheet(
+                              isScrollControlled: true,
+                              enableDrag: true,
+                              backgroundColor: Colors.transparent,
+                              context: context,
+                              builder: (context) => Wrap(
+                                children: [
+                                  RepostQuoteBottomSheet(
+                                    post: post,
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                          icon: Icon(
+                            PhosphorIcons.repeat,
+                            color: post.repostedBy!.contains(userr.uid)
+                                ? Pallete.activegreen
+                                : currentTheme.textTheme.bodyMedium!.color,
+                          ),
                         ),
                         if (post.repostedBy!.isNotEmpty)
                           Padding(
@@ -567,7 +600,7 @@ class FeedReplyPostCard extends ConsumerWidget {
                                 .read(postControllerProvider.notifier)
                                 .likePost(post: post);
                           },
-                          icon: post.likedBy!.contains(replyingUser!.uid)
+                          icon: post.likedBy!.contains(userr.uid)
                               ? const Icon(
                                   PhosphorIcons.heartFill,
                                   color: Pallete.thickRed,

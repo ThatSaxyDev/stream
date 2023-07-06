@@ -10,7 +10,6 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stream/features/auth/controller/auth_controller.dart';
 import 'package:stream/features/posts/controllers/post_controller.dart';
 import 'package:stream/features/posts/widgets/quoting_post_card.dart';
-import 'package:stream/features/posts/widgets/reply_post_card.dart';
 import 'package:stream/models/post_model.dart';
 import 'package:stream/models/user_model.dart';
 import 'package:stream/theme/palette.dart';
@@ -62,21 +61,21 @@ class _QuotePostBottomSheetState extends ConsumerState<QuotePostBottomSheet> {
     }
   }
 
-  //! to create post
+  //! to quote post
   void quotePost() {
     if (_textController.text.isEmpty &&
         isButtonActive.value == true &&
         image != null) {
-      ref.read(postControllerProvider.notifier).quoteAPost(
-            post: widget.post,
+      ref.read(postControllerProvider.notifier).quoteAPost2(
+            quotedPost: widget.post,
             context: context,
             textContent: '',
             image: image,
           );
     }
     if (_textController.text.isNotEmpty && isButtonActive.value == true) {
-      ref.read(postControllerProvider.notifier).quoteAPost(
-            post: widget.post,
+      ref.read(postControllerProvider.notifier).quoteAPost2(
+            quotedPost: widget.post,
             context: context,
             textContent: _textController.text.trim(),
             image: image,

@@ -1,7 +1,6 @@
 //! THIS FILE CONTAINS HOPEFULLY, ALL EXTENSIONS USED IN THE APP.
 import "dart:developer" as dev_tools show log;
 import "dart:io";
-import "package:stream/theme/palette.dart";
 import "package:flutter/material.dart";
 import "package:flutter_animate/flutter_animate.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";

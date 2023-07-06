@@ -19,18 +19,17 @@ final userPostProvider = StreamProvider.autoDispose((ref) {
 });
 
 //! provider to get a post by ID
-final getPostByIdProvider =
-    StreamProvider.autoDispose.family((ref, String postID) {
+final getPostByIdProvider = StreamProvider.family((ref, String postID) {
   final postController = ref.watch(postControllerProvider.notifier);
 
   return postController.getPostById(postID: postID);
 });
 
-//! provider to get all reposts by user
-final fetchRepostsPostsFromUserProvider = StreamProvider.autoDispose((ref) {
-  final postController = ref.watch(postControllerProvider.notifier);
-  return postController.fetchRepostsPostsFromUser();
-});
+// //! provider to get all reposts by user
+// final fetchRepostsPostsFromUserProvider = StreamProvider((ref) {
+//   final postController = ref.watch(postControllerProvider.notifier);
+//   return postController.fetchRepostsPostsFromUser();
+// });
 
 //! provider to get all reposts by user and following
 final fetchRepostsFromFollowingAndUserProvider =

@@ -81,6 +81,61 @@ class PostController extends StateNotifier<bool> {
   }
 
   // quote post
+  void quoteAPost2({
+    required BuildContext context,
+    required String textContent,
+    required File? image,
+    required PostModel quotedPost,
+    Uint8List? file,
+  }) async {
+    state = true;
+    String postId = const Uuid().v1();
+    UserModel user = _ref.read(userProvider)!;
+    String photo = '';
+    if (image != null) {
+      Either<Failure, String> res = await _storageRepository.storeFile(
+        path: 'posts/ids',
+        id: user.uid!,
+        file: image,
+        webFile: file,
+      );
+      res.fold(
+        (l) => showSnackBar(context: context, text: l.message),
+        (r) => photo = r,
+      );
+    }
+
+    final PostModel post = PostModel(
+      id: postId,
+      textContent: textContent,
+      commentCount: 0,
+      bookmarkedBy: [],
+      repliedTo: [],
+      likedBy: [],
+      replyingPostId: '',
+      quotingPostId: quotedPost.id,
+      repostedBy: [],
+      userUid: user.uid,
+      imageUrl: photo,
+      createdAt: DateTime.now(),
+    );
+
+    Either<Failure, void> res = await _postRepository.quoteAPost2(
+      post: post,
+      quotedPost: quotedPost,
+    );
+
+    state = false;
+    res.fold(
+      (l) => showSnackBar(context: context, text: l.message),
+      (r) {
+        // showSnackBar(context: context, text: 'Posted Successfully!');
+        Routemaster.of(context).pop();
+      },
+    );
+  }
+
+  // quote post
   void quoteAPost({
     required PostModel post,
     required BuildContext context,

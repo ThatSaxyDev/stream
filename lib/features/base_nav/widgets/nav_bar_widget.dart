@@ -3,11 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stream/features/base_nav/views/base_nav_view.dart';
 import 'package:stream/features/posts/widgets/create_post_bottom_sheet.dart';
 import 'package:stream/theme/palette.dart';
-import 'package:stream/utils/app_constants.dart';
 import 'package:stream/utils/app_extensions.dart';
 
 class NavBarWidget extends ConsumerWidget {

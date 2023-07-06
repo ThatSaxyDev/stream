@@ -95,6 +95,20 @@ class PostRepository {
     }
   }
 
+  //! quote a post 2
+  FutureVoid quoteAPost2({
+    required PostModel quotedPost,
+    required PostModel post,
+  }) async {
+    try {
+      return right(_posts.doc(post.id).set(post.toMap()));
+    } on FirebaseException catch (e) {
+      throw e.message!;
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
+
   //! quote a  post
   FutureVoid quoteAPost({
     required QuoteModel quotePost,
@@ -109,6 +123,19 @@ class PostRepository {
   }
 
   //! get quotes for user
+  Stream<List<PostModel>> fetchQuotesFromFollowingAndUser({
+    required UserModel user,
+  }) {
+    return _posts
+        .orderBy('createdAt', descending: true)
+        .where('userUid', whereIn: [...user.following!, user.uid])
+        .snapshots()
+        .map((event) => event.docs
+            .map(
+              (e) => PostModel.fromMap(e.data() as Map<String, dynamic>),
+            )
+            .toList());
+  }
 
   //! get a post by ID
   Stream<PostModel> getPostById({required String postID}) {

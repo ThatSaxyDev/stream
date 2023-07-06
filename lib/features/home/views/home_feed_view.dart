@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream/features/auth/controller/auth_controller.dart';
 import 'package:stream/features/home/widgets/post_card.dart';
 import 'package:stream/features/posts/controllers/post_controller.dart';
+import 'package:stream/features/posts/widgets/feed_quote_card.dart';
 import 'package:stream/features/posts/widgets/feed_reply_post_card.dart';
 import 'package:stream/features/posts/widgets/repost_card.dart';
 import 'package:stream/models/post_model.dart';
@@ -82,6 +83,9 @@ class HomeFeedView extends ConsumerWidget {
                       PostModel post = posts[index];
                       if (post.replyingPostId!.isNotEmpty) {
                         return FeedReplyPostCard(post: post);
+                      } 
+                      else if (post.quotingPostId!.isNotEmpty) {
+                        return FeedQuotePostCard(post: post);
                       }
                       return PostCard(post: post);
                     },

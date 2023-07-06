@@ -1,26 +1,16 @@
 // ignore_for_file: deprecated_member_use
 
-import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stream/features/auth/controller/auth_controller.dart';
-import 'package:stream/features/base_nav/views/base_nav_view.dart';
-import 'package:stream/features/posts/controllers/post_controller.dart';
-import 'package:stream/features/posts/widgets/create_post_bottom_sheet.dart';
-import 'package:stream/features/posts/widgets/reply_post_bottom_sheet.dart';
 import 'package:stream/models/post_model.dart';
 import 'package:stream/models/user_model.dart';
 import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/app_constants.dart';
 import 'package:stream/utils/app_extensions.dart';
-import 'package:stream/utils/nav.dart';
-import 'package:stream/utils/widgets/click_button.dart';
 import 'package:stream/utils/widgets/image_loader.dart';
-import 'package:timeago/timeago.dart' as timeago;
 
 class QuotingPostCard extends ConsumerWidget {
   final PostModel post;
