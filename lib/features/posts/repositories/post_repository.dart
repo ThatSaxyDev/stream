@@ -20,7 +20,9 @@ class PostRepository {
       _firestore.collection(FirebaseConstants.postsCollection);
 
   //! add a new post
-  FutureVoid createPost({required PostModel post}) async {
+  FutureVoid createPost({
+    required PostModel post,
+  }) async {
     try {
       return right(_posts.doc(post.id).set(post.toMap()));
     } on FirebaseException catch (e) {
@@ -31,7 +33,9 @@ class PostRepository {
   }
 
   //! delete post
-  FutureVoid deletePost({required PostModel post}) async {
+  FutureVoid deletePost({
+    required PostModel post,
+  }) async {
     try {
       return right(_posts.doc(post.id).delete());
     } on FirebaseException catch (e) {
@@ -42,7 +46,9 @@ class PostRepository {
   }
 
   //! get posts that a user can see
-  Stream<List<PostModel>> fetchPostsForUser({required UserModel user}) {
+  Stream<List<PostModel>> fetchPostsForUser({
+    required UserModel user,
+  }) {
     return _posts
         .orderBy('createdAt', descending: true)
         .where('userUid', isEqualTo: user.uid)
@@ -55,8 +61,9 @@ class PostRepository {
   }
 
   //! ====>>>>
-  Stream<List<PostModel>> fetchPostsFromFollowingAndUser(
-      {required UserModel user}) {
+  Stream<List<PostModel>> fetchPostsFromFollowingAndUser({
+    required UserModel user,
+  }) {
     return _posts
         .orderBy('createdAt', descending: true)
         .where('userUid', whereIn: [...user.following!, user.uid])
@@ -66,5 +73,21 @@ class PostRepository {
               (e) => PostModel.fromMap(e.data() as Map<String, dynamic>),
             )
             .toList());
+  }
+
+  // like a post
+  void likePost({
+    required PostModel post,
+    required UserModel user,
+  }) async {
+    if (post.likedBy!.contains(user.uid)) {
+      _posts.doc(post.id).update({
+        'likedBy': FieldValue.arrayRemove([user.uid]),
+      });
+    } else {
+      _posts.doc(post.id).update({
+        'likedBy': FieldValue.arrayUnion([user.uid]),
+      });
+    }
   }
 }

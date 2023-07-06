@@ -72,6 +72,7 @@ class PostCard extends ConsumerWidget {
                   7.sbW,
                   const Icon(PhosphorIcons.dotsThreeBold).tap(
                     onTap: () {
+                      //! delete post
                       showModalBottomSheet(
                         isScrollControlled: true,
                         enableDrag: true,
@@ -216,18 +217,56 @@ class PostCard extends ConsumerWidget {
                 width: width(context) * 0.75,
                 child: Row(
                   children: [
+                    //! repost
                     IconButton(
+                      padding: EdgeInsets.zero,
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
                       onPressed: () {},
-                      icon: Icon(PhosphorIcons.repeat),
+                      icon: const Icon(PhosphorIcons.repeat),
                     ),
+                    if (post.repostedBy!.isNotEmpty)
+                      Padding(
+                        padding: EdgeInsets.only(right: 5.w),
+                        child: post.likedBy!.length.toString().txt(),
+                      ),
+
+                    //! like
                     IconButton(
-                      onPressed: () {},
-                      icon: Icon(PhosphorIcons.heart),
+                      padding: EdgeInsets.zero,
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onPressed: () {
+                        ref
+                            .read(postControllerProvider.notifier)
+                            .likePost(post: post);
+                      },
+                      icon: post.likedBy!.contains(user!.uid)
+                          ? const Icon(
+                              PhosphorIcons.heartFill,
+                              color: Pallete.thickRed,
+                            )
+                          : const Icon(PhosphorIcons.heart),
                     ),
+                    if (post.likedBy!.isNotEmpty)
+                      Padding(
+                        padding: EdgeInsets.only(right: 5.w),
+                        child: post.likedBy!.length.toString().txt(),
+                      ),
+
+                    //! reply
                     IconButton(
+                      padding: EdgeInsets.zero,
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
                       onPressed: () {},
-                      icon: Icon(PhosphorIcons.chatCentered),
+                      icon: const Icon(PhosphorIcons.chatCentered),
                     ),
+                    if (post.repliedTo!.isNotEmpty)
+                      Padding(
+                        padding: EdgeInsets.only(right: 5.w),
+                        child: post.likedBy!.length.toString().txt(),
+                      ),
                   ],
                 ),
               )

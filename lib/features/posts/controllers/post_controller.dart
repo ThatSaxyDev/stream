@@ -99,4 +99,10 @@ class PostController extends StateNotifier<bool> {
     // }
     // return Stream.value([]);
   }
+
+  //! like a post
+  void likePost({required PostModel post}) async {
+    UserModel user = _ref.read(userProvider)!;
+    _postRepository.likePost(post: post, user: user);
+  }
 }

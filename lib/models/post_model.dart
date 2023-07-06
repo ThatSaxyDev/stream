@@ -14,6 +14,7 @@ class PostModel {
   final List<dynamic>? repostedBy;
   final List<dynamic>? bookmarkedBy;
   final List<dynamic>? repliedTo;
+  final List<dynamic>? likedBy;
   const PostModel({
     required this.id,
     this.link,
@@ -25,6 +26,7 @@ class PostModel {
     this.repostedBy,
     this.bookmarkedBy,
     this.repliedTo,
+    this.likedBy,
   });
 
   PostModel copyWith({
@@ -38,6 +40,7 @@ class PostModel {
     List<dynamic>? repostedBy,
     List<dynamic>? bookmarkedBy,
     List<dynamic>? repliedTo,
+    List<dynamic>? likedBy,
   }) {
     return PostModel(
       id: id ?? this.id,
@@ -50,6 +53,7 @@ class PostModel {
       repostedBy: repostedBy ?? this.repostedBy,
       bookmarkedBy: bookmarkedBy ?? this.bookmarkedBy,
       repliedTo: repliedTo ?? this.repliedTo,
+      likedBy: likedBy ?? this.likedBy,
     );
   }
 
@@ -65,6 +69,7 @@ class PostModel {
       'repostedBy': repostedBy,
       'bookmarkedBy': bookmarkedBy,
       'repliedTo': repliedTo,
+      'likedBy': likedBy,
     };
   }
 
@@ -82,12 +87,13 @@ class PostModel {
       repostedBy: map['repostedBy'] ?? [],
       bookmarkedBy: map['bookmarkedBy'] ?? [],
       repliedTo: map['repliedTo'] ?? [],
+      likedBy: map['likedBy'] ?? [],
     );
   }
 
   @override
   String toString() {
-    return 'Post(id: $id, link: $link, imageUrl: $imageUrl, textContent: $textContent, commentCount: $commentCount, userUid: $userUid, createdAt: $createdAt, repostedBy: $repostedBy, bookmarkedBy: $bookmarkedBy, repliedTo: $repliedTo)';
+    return 'PostModel(id: $id, link: $link, imageUrl: $imageUrl, textContent: $textContent, commentCount: $commentCount, userUid: $userUid, createdAt: $createdAt, repostedBy: $repostedBy, bookmarkedBy: $bookmarkedBy, repliedTo: $repliedTo, likedBy: $likedBy)';
   }
 
   @override
@@ -103,7 +109,8 @@ class PostModel {
         other.createdAt == createdAt &&
         listEquals(other.repostedBy, repostedBy) &&
         listEquals(other.bookmarkedBy, bookmarkedBy) &&
-        listEquals(other.repliedTo, repliedTo);
+        listEquals(other.repliedTo, repliedTo) &&
+        listEquals(other.likedBy, likedBy);
   }
 
   @override
@@ -117,7 +124,8 @@ class PostModel {
         createdAt.hashCode ^
         repostedBy.hashCode ^
         bookmarkedBy.hashCode ^
-        repliedTo.hashCode;
+        repliedTo.hashCode ^
+        likedBy.hashCode;
   }
 
   String toJson() => json.encode(toMap());
