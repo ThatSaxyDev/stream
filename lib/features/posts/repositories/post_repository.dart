@@ -175,6 +175,7 @@ class PostRepository {
   Stream<List<PostModel>> fetchPostsFromFollowingAndUser({
     required UserModel user,
   }) {
+    user.following!.length.toString();
     return _posts
         .orderBy('createdAt', descending: true)
         .where('userUid', whereIn: [...user.following!, user.uid])

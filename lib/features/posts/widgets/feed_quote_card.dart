@@ -105,11 +105,28 @@ class FeedQuotePostCard extends ConsumerWidget {
                   Row(
                     children: [
                       //! user name
-                      '@${quotingUser!.name!}'.toLowerCase().txt(
-                            size: 14.sp,
-                            fontWeight: FontWeight.w600,
-                          ),
-                      (width(context) * 0.36).sbW,
+                      quotingUser!.isVerified! != true
+                          ? '@${quotingUser!.name!}'.toLowerCase().txt(
+                                size: 14.sp,
+                                fontWeight: FontWeight.w600,
+                              )
+                          : Row(
+                              children: [
+                                '@${quotingUser!.name!}'.toLowerCase().txt(
+                                      size: 14.sp,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                7.sbW,
+                                Icon(
+                                  PhosphorIcons.cloudCheckFill,
+                                  size: 17.sp,
+                                  color: Colors.blue,
+                                ),
+                              ],
+                            ),
+                      quotingUser!.isVerified! != true
+                          ? (width(context) * 0.36).sbW
+                          : (width(context) * 0.33).sbW,
                       //! time, menu
                       timeago.format(post.createdAt!, locale: 'en_short').txt(
                             size: 12.sp,

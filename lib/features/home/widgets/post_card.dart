@@ -74,23 +74,28 @@ class PostCard extends ConsumerWidget {
               Row(
                 children: [
                   //! user name
-                  '@${user!.name!}'.toLowerCase().txt(
-                        size: 14.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
-                  user!.isVerified! == true
-                      ? Row(
+                  user!.isVerified! != true
+                      ? '@${user!.name!}'.toLowerCase().txt(
+                            size: 14.sp,
+                            fontWeight: FontWeight.w600,
+                          )
+                      : Row(
                           children: [
+                            '@${user!.name!}'.toLowerCase().txt(
+                                  size: 14.sp,
+                                  fontWeight: FontWeight.w600,
+                                ),
                             7.sbW,
                             Icon(
                               PhosphorIcons.cloudCheckFill,
                               size: 17.sp,
                               color: Colors.blue,
                             ),
-                            (width(context) * 0.33).sbW,
                           ],
-                        )
-                      : (width(context) * 0.36).sbW,
+                        ),
+                  user!.isVerified! != true
+                      ? (width(context) * 0.36).sbW
+                      : (width(context) * 0.33).sbW,
                   //! time, menu
                   timeago.format(post.createdAt!, locale: 'en_short').txt(
                         size: 12.sp,

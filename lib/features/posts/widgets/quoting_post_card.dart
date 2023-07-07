@@ -1,9 +1,9 @@
 // ignore_for_file: deprecated_member_use
 
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stream/features/auth/controller/auth_controller.dart';
 import 'package:stream/models/post_model.dart';
 import 'package:stream/models/user_model.dart';
@@ -49,10 +49,26 @@ class QuotingPostCard extends ConsumerWidget {
                   ),
                   7.sbW,
                   //! user name
-                  '@${user!.name!}'.toLowerCase().txt(
-                        size: 12.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
+
+                  user!.isVerified! != true
+                      ? '@${user!.name!}'.toLowerCase().txt(
+                            size: 14.sp,
+                            fontWeight: FontWeight.w600,
+                          )
+                      : Row(
+                          children: [
+                            '@${user!.name!}'.toLowerCase().txt(
+                                  size: 14.sp,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                            7.sbW,
+                            Icon(
+                              PhosphorIcons.cloudCheckFill,
+                              size: 14.sp,
+                              color: Colors.blue,
+                            ),
+                          ],
+                        ),
                 ],
               ),
             ],

@@ -13,7 +13,7 @@ StateNotifierProvider<PostController, bool> postControllerProvider =
 });
 
 //! provider for users posts and following
-final userPostProvider = StreamProvider.autoDispose((ref) {
+final userPostProvider = StreamProvider((ref) {
   final postController = ref.watch(postControllerProvider.notifier);
   return postController.fetchUserPosts();
 });
@@ -32,8 +32,7 @@ final getPostByIdProvider = StreamProvider.family((ref, String postID) {
 // });
 
 //! provider to get all reposts by user and following
-final fetchRepostsFromFollowingAndUserProvider =
-    StreamProvider.autoDispose((ref) {
+final fetchRepostsFromFollowingAndUserProvider = StreamProvider((ref) {
   final postController = ref.watch(postControllerProvider.notifier);
   return postController.fetchRepostsPostsFromFollowingAndUser();
 });

@@ -64,6 +64,7 @@ class HomeFeedView extends ConsumerWidget {
 
             userPostsStream.when(
               data: (List<PostModel> posts) {
+                posts.length.toString();
                 if (posts.isEmpty) {
                   return Column(
                     children: [

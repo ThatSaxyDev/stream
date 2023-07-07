@@ -96,11 +96,28 @@ class FeedReplyPostCard extends ConsumerWidget {
                   Row(
                     children: [
                       //! user name
-                      '@${repliedUser!.name!}'.toLowerCase().txt(
-                            size: 14.sp,
-                            fontWeight: FontWeight.w600,
-                          ),
-                      (width(context) * 0.36).sbW,
+                      repliedUser!.isVerified! != true
+                          ? '@${repliedUser!.name!}'.toLowerCase().txt(
+                                size: 14.sp,
+                                fontWeight: FontWeight.w600,
+                              )
+                          : Row(
+                              children: [
+                                '@${repliedUser!.name!}'.toLowerCase().txt(
+                                      size: 14.sp,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                7.sbW,
+                                Icon(
+                                  PhosphorIcons.cloudCheckFill,
+                                  size: 17.sp,
+                                  color: Colors.blue,
+                                ),
+                              ],
+                            ),
+                      repliedUser!.isVerified! != true
+                          ? (width(context) * 0.36).sbW
+                          : (width(context) * 0.33).sbW,
                       //! time, menu
                       timeago
                           .format(repliedPost!.createdAt!, locale: 'en_short')
@@ -395,11 +412,28 @@ class FeedReplyPostCard extends ConsumerWidget {
                   Row(
                     children: [
                       //! user name
-                      '@${replyingUser!.name!}'.toLowerCase().txt(
-                            size: 14.sp,
-                            fontWeight: FontWeight.w600,
-                          ),
-                      (width(context) * 0.36).sbW,
+                      replyingUser!.isVerified! != true
+                          ? '@${replyingUser!.name!}'.toLowerCase().txt(
+                                size: 14.sp,
+                                fontWeight: FontWeight.w600,
+                              )
+                          : Row(
+                              children: [
+                                '@${replyingUser!.name!}'.toLowerCase().txt(
+                                      size: 14.sp,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                7.sbW,
+                                Icon(
+                                  PhosphorIcons.cloudCheckFill,
+                                  size: 17.sp,
+                                  color: Colors.blue,
+                                ),
+                              ],
+                            ),
+                      replyingUser!.isVerified! != true
+                          ? (width(context) * 0.36).sbW
+                          : (width(context) * 0.33).sbW,
                       //! time, menu
                       timeago.format(post.createdAt!, locale: 'en_short').txt(
                             size: 12.sp,
