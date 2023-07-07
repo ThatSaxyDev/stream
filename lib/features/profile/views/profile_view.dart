@@ -11,6 +11,7 @@ import 'package:stream/features/posts/controllers/post_controller.dart';
 import 'package:stream/features/posts/widgets/create_post_bottom_sheet.dart';
 import 'package:stream/features/posts/widgets/feed_quote_card.dart';
 import 'package:stream/features/posts/widgets/feed_reply_post_card.dart';
+import 'package:stream/features/profile/widgets/edit_profile_bottom_sheet.dart';
 import 'package:stream/models/post_model.dart';
 import 'package:stream/models/user_model.dart';
 import 'package:stream/theme/palette.dart';
@@ -64,7 +65,19 @@ class ProfileView extends ConsumerWidget {
                             ),
                             10.sbW,
                             IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  enableDrag: true,
+                                  backgroundColor: Colors.transparent,
+                                  context: context,
+                                  builder: (context) => const Wrap(
+                                    children: [
+                                      EditProfileBottomSheet(),
+                                    ],
+                                  ),
+                                );
+                              },
                               highlightColor: Colors.transparent,
                               splashColor: Colors.transparent,
                               icon: const Icon(PhosphorIcons.eraser),
@@ -81,7 +94,7 @@ class ProfileView extends ConsumerWidget {
                             ),
                             7.sbH,
                             user.isVerified! != true
-                                ? '@${user.name!}'
+                                ? '@${user.username!}'
                                     .replaceAll(' ', '')
                                     .toLowerCase()
                                     .txt(
@@ -90,7 +103,7 @@ class ProfileView extends ConsumerWidget {
                                     )
                                 : Row(
                                     children: [
-                                      '@${user.name!}'
+                                      '@${user.username!}'
                                           .replaceAll(' ', '')
                                           .toLowerCase()
                                           .txt(
@@ -114,7 +127,7 @@ class ProfileView extends ConsumerWidget {
                     SizedBox(
                       width: width(context),
                       child: Text(
-                        'post.textqlksnxc alskxa sxalksx aslkxa slxkasx alskxas post.textqlksnxc alskxa sxalksx aslkxa slxkasx alskxas ',
+                        user.banner!,
                         maxLines: 2,
                         style: TextStyle(
                           fontSize: 14.sp,
@@ -175,7 +188,7 @@ class ProfileView extends ConsumerWidget {
                           size: 14.sp,
                         ),
                         5.sbW,
-                        'kiishi.dev'.txt(
+                        user.link!.txt(
                           size: 14.sp,
                           fontWeight: FontWeight.w400,
                           color: currentTheme.textTheme.bodyMedium!.color!

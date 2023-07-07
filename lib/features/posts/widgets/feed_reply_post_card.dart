@@ -97,13 +97,13 @@ class FeedReplyPostCard extends ConsumerWidget {
                     children: [
                       //! user name
                       repliedUser!.isVerified! != true
-                          ? '@${repliedUser!.name!}'.toLowerCase().txt(
+                          ? '@${repliedUser!.username!}'.toLowerCase().txt(
                                 size: 14.sp,
                                 fontWeight: FontWeight.w600,
                               )
                           : Row(
                               children: [
-                                '@${repliedUser!.name!}'.toLowerCase().txt(
+                                '@${repliedUser!.username!}'.toLowerCase().txt(
                                       size: 14.sp,
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -413,13 +413,13 @@ class FeedReplyPostCard extends ConsumerWidget {
                     children: [
                       //! user name
                       replyingUser!.isVerified! != true
-                          ? '@${replyingUser!.name!}'.toLowerCase().txt(
+                          ? '@${replyingUser!.username!}'.toLowerCase().txt(
                                 size: 14.sp,
                                 fontWeight: FontWeight.w600,
                               )
                           : Row(
                               children: [
-                                '@${replyingUser!.name!}'.toLowerCase().txt(
+                                '@${replyingUser!.username!}'.toLowerCase().txt(
                                       size: 14.sp,
                                       fontWeight: FontWeight.w600,
                                     ),

@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
+
 import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/app_extensions.dart';
-
 
 // class Loader extends StatelessWidget {
 //   const Loader({super.key});
@@ -44,7 +45,11 @@ class Loader extends ConsumerWidget {
 }
 
 class Loadinggg extends StatefulWidget {
-  const Loadinggg({super.key});
+  final double? height;
+  const Loadinggg({
+    Key? key,
+    this.height,
+  }) : super(key: key);
 
   @override
   State<Loadinggg> createState() => _LoadingggState();
@@ -59,8 +64,8 @@ class _LoadingggState extends State<Loadinggg>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 600),
-    )..repeat(reverse: true);
+      duration: const Duration(milliseconds: 1000),
+    )..repeat();
   }
 
   @override
@@ -75,8 +80,13 @@ class _LoadingggState extends State<Loadinggg>
       animation: _animationController,
       builder: (BuildContext context, Widget? child) {
         return Center(
-          child:' AppGrafiks.logoo'.png //! TODO:
-              .mage(h: 50.h + _animationController.value * 30.0),
+          child: RotationTransition(
+            turns: _animationController,
+            child: Icon(
+              PhosphorIcons.placeholder,
+              size: widget.height ?? 30.h,
+            ),
+          ),
         );
       },
     );

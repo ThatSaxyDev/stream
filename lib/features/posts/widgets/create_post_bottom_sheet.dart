@@ -117,10 +117,7 @@ class _CreatePostBottomSheetState extends ConsumerState<CreatePostBottomSheet> {
                       onTap: () => goBack(context),
                     ),
                 isLoading == true
-                    ? SizedBox(
-                        height: 35.h,
-                        child: const Loader(),
-                      )
+                    ? const Loadinggg()
                     : ValueListenableBuilder(
                         valueListenable: isButtonActive,
                         builder: (context, value, child) {
@@ -149,10 +146,25 @@ class _CreatePostBottomSheetState extends ConsumerState<CreatePostBottomSheet> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    '@${user.name!}'.toLowerCase().txt(
-                          size: 16.sp,
-                          fontWeight: FontWeight.w600,
-                        ),
+                    user.isVerified! != true
+                        ? '@${user.username!}'.toLowerCase().txt(
+                              size: 16.sp,
+                              fontWeight: FontWeight.w600,
+                            )
+                        : Row(
+                            children: [
+                              '@${user.username!}'.toLowerCase().txt(
+                                    size: 16.sp,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                              7.sbW,
+                              Icon(
+                                Icons.whatshot_sharp,
+                                size: 17.sp,
+                                color: Colors.blue,
+                              ),
+                            ],
+                          ),
                     SizedBox(
                       width: 250.w,
                       child: TextField(

@@ -51,13 +51,13 @@ class QuotingPostCard extends ConsumerWidget {
                   //! user name
 
                   user!.isVerified! != true
-                      ? '@${user!.name!}'.toLowerCase().txt(
+                      ? '@${user!.username!}'.toLowerCase().txt(
                             size: 14.sp,
                             fontWeight: FontWeight.w600,
                           )
                       : Row(
                           children: [
-                            '@${user!.name!}'.toLowerCase().txt(
+                            '@${user!.username!}'.toLowerCase().txt(
                                   size: 14.sp,
                                   fontWeight: FontWeight.w600,
                                 ),

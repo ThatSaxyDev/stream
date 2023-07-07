@@ -108,7 +108,7 @@ class RepostPostCard extends ConsumerWidget {
                             color: currentTheme.textTheme.bodyMedium!.color!
                                 .withOpacity(0.3),
                           )
-                        : '@${repostingUser!.name!}'.txt(
+                        : '@${repostingUser!.username!}'.txt(
                             color: currentTheme.textTheme.bodyMedium!.color!
                                 .withOpacity(0.3),
                           )
@@ -143,13 +143,13 @@ class RepostPostCard extends ConsumerWidget {
                           children: [
                             //! user name
                             user!.isVerified! != true
-                                ? '@${user!.name!}'.toLowerCase().txt(
+                                ? '@${user!.username!}'.toLowerCase().txt(
                                       size: 14.sp,
                                       fontWeight: FontWeight.w600,
                                     )
                                 : Row(
                                     children: [
-                                      '@${user!.name!}'.toLowerCase().txt(
+                                      '@${user!.username!}'.toLowerCase().txt(
                                             size: 14.sp,
                                             fontWeight: FontWeight.w600,
                                           ),

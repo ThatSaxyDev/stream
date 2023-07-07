@@ -174,10 +174,25 @@ class _QuotePostBottomSheetState extends ConsumerState<QuotePostBottomSheet> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            '@${user.name!}'.toLowerCase().txt(
-                                  size: 16.sp,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                            user.isVerified! != true
+                                ? '@${user.username!}'.toLowerCase().txt(
+                                      size: 16.sp,
+                                      fontWeight: FontWeight.w600,
+                                    )
+                                : Row(
+                                    children: [
+                                      '@${user.username!}'.toLowerCase().txt(
+                                            size: 16.sp,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                      7.sbW,
+                                      Icon(
+                                        Icons.whatshot_sharp,
+                                        size: 17.sp,
+                                        color: Colors.blue,
+                                      ),
+                                    ],
+                                  ),
                             SizedBox(
                               width: 250.w,
                               child: TextField(

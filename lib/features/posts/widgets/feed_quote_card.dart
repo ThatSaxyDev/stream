@@ -107,13 +107,13 @@ class FeedQuotePostCard extends ConsumerWidget {
                     children: [
                       //! user name
                       quotingUser!.isVerified! != true
-                          ? '@${quotingUser!.name!}'.toLowerCase().txt(
+                          ? '@${quotingUser!.username!}'.toLowerCase().txt(
                                 size: 14.sp,
                                 fontWeight: FontWeight.w600,
                               )
                           : Row(
                               children: [
-                                '@${quotingUser!.name!}'.toLowerCase().txt(
+                                '@${quotingUser!.username!}'.toLowerCase().txt(
                                       size: 14.sp,
                                       fontWeight: FontWeight.w600,
                                     ),

@@ -1,6 +1,5 @@
 // ignore_for_file: deprecated_member_use
 
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -55,10 +54,25 @@ class ReplyPostCard extends ConsumerWidget {
               Row(
                 children: [
                   //! user name
-                  '@${user!.name!}'.toLowerCase().txt(
-                        size: 14.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
+                  user!.isVerified! != true
+                      ? '@${user!.username!}'.toLowerCase().txt(
+                            size: 14.sp,
+                            fontWeight: FontWeight.w600,
+                          )
+                      : Row(
+                          children: [
+                            '@${user!.username!}'.toLowerCase().txt(
+                                  size: 14.sp,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                            7.sbW,
+                            Icon(
+                              Icons.whatshot_sharp,
+                              size: 17.sp,
+                              color: Colors.blue,
+                            ),
+                          ],
+                        ),
                 ],
               ),
 
