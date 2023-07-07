@@ -34,9 +34,7 @@ List<Widget> pages = [
   Center(
     child: 'notif'.txt(),
   ),
-  Center(
-    child: 'profile'.txt(),
-  ),
+  const ProfileView(),
 ];
 
 //! nav widget enums

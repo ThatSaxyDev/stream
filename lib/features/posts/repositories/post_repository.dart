@@ -171,6 +171,21 @@ class PostRepository {
             .toList());
   }
 
+  //! get a users liked posts
+  Stream<List<PostModel>> getUsersLikedPosts({
+    required UserModel user,
+  }) {
+    return _posts
+        .orderBy('createdAt', descending: true)
+        .where('likedBy', arrayContains: user.uid)
+        .snapshots()
+        .map((event) => event.docs
+            .map(
+              (e) => PostModel.fromMap(e.data() as Map<String, dynamic>),
+            )
+            .toList());
+  }
+
   //! ====>>>>
   Stream<List<PostModel>> fetchPostsFromFollowingAndUser({
     required UserModel user,

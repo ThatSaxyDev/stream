@@ -278,6 +278,20 @@ class PostController extends StateNotifier<bool> {
     return _postRepository.fetchPostsFromFollowingAndUser(user: user);
   }
 
+  //! fetch posts for user profile
+  Stream<List<PostModel>> fetchPostsForUserProfile() {
+    UserModel user = _ref.read(userProvider)!;
+
+    return _postRepository.fetchPostsForUser(user: user);
+  }
+
+  //! fetch user liked posts
+  Stream<List<PostModel>> getUsersLikedPosts() {
+    UserModel user = _ref.read(userProvider)!;
+
+    return _postRepository.getUsersLikedPosts(user: user);
+  }
+
   //! get reposts from user only
   Stream<List<RepostModel>> fetchRepostsPostsFromUser() {
     UserModel user = _ref.read(userProvider)!;

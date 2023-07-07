@@ -60,6 +60,7 @@ class FeedQuotePostCard extends ConsumerWidget {
           width: width(context),
           padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 13.h),
           decoration: BoxDecoration(
+            color: currentTheme.backgroundColor,
             border: Border(
               bottom: BorderSide(
                 width: 1,
@@ -118,7 +119,7 @@ class FeedQuotePostCard extends ConsumerWidget {
                                     ),
                                 7.sbW,
                                 Icon(
-                                  PhosphorIcons.cloudCheckFill,
+                                  Icons.whatshot_sharp,
                                   size: 17.sp,
                                   color: Colors.blue,
                                 ),

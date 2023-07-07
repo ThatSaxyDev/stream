@@ -1181,6 +1181,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.0"
+  tabbed_sliverlist:
+    dependency: "direct main"
+    description:
+      name: tabbed_sliverlist
+      sha256: "42dd7f9162bbf1a75a8d0d25747d90bdd5ffb7cdc66430621cd2d8a5fb36637e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.0"
   term_glyph:
     dependency: transitive
     description:

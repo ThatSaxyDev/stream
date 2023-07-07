@@ -18,6 +18,18 @@ final userPostProvider = StreamProvider((ref) {
   return postController.fetchUserPosts();
 });
 
+//! provider for user profile posts
+final userProfilePostProvider = StreamProvider((ref) {
+  final postController = ref.watch(postControllerProvider.notifier);
+  return postController.fetchPostsForUserProfile();
+});
+
+//! provider for user liked posts
+final getUsersLikedPostsProvider = StreamProvider.autoDispose((ref) {
+  final postController = ref.watch(postControllerProvider.notifier);
+  return postController.getUsersLikedPosts();
+});
+
 //! provider to get a post by ID
 final getPostByIdProvider = StreamProvider.family((ref, String postID) {
   final postController = ref.watch(postControllerProvider.notifier);

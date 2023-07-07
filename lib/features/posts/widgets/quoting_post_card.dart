@@ -63,7 +63,7 @@ class QuotingPostCard extends ConsumerWidget {
                                 ),
                             7.sbW,
                             Icon(
-                              PhosphorIcons.cloudCheckFill,
+                              Icons.whatshot_sharp,
                               size: 14.sp,
                               color: Colors.blue,
                             ),

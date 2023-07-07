@@ -64,9 +64,10 @@ class AuthRepository {
       if (userCredential.additionalUserInfo!.isNewUser) {
         userModel = UserModel(
           uid: userCredential.user!.uid,
-          name: userCredential.user!.displayName!
+          username: userCredential.user!.displayName!
               .replaceAll(' ', '')
               .toLowerCase(),
+          name: userCredential.user!.displayName ?? '',
           profilePic: userCredential.user!.photoURL ?? Constants.avatarDefault,
           banner: Constants.bannerDefault,
           isVerified: false,

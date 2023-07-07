@@ -1,0 +1,124 @@
+Date : 2023-07-07 02:12:45
+Directory : /Users/user/Documents/Dev/nuprojects/stream/lib
+Total : 70 files,  6398 codes, 657 comments, 574 blanks, all 7629 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Dart     |         69 |      6,385 |        657 |        573 |      7,615 |
+| XML      |          1 |         13 |          0 |          1 |         14 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                       | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                          |         70 |      6,398 |        657 |        574 |      7,629 |
+| . (Files)                                                                                                  |          3 |        141 |         59 |         15 |        215 |
+| assets                                                                                                     |          1 |         13 |          0 |          1 |         14 |
+| assets/icons                                                                                               |          1 |         13 |          0 |          1 |         14 |
+| core                                                                                                       |          7 |        106 |         22 |         24 |        152 |
+| core (Files)                                                                                               |          2 |         21 |          8 |          6 |         35 |
+| core/constants                                                                                             |          2 |         34 |          4 |          7 |         45 |
+| core/enums                                                                                                 |          1 |          4 |         10 |          2 |         16 |
+| core/providers                                                                                             |          2 |         47 |          0 |          9 |         56 |
+| features                                                                                                   |         21 |      3,528 |        271 |        243 |      4,042 |
+| features/auth                                                                                              |          3 |        177 |         16 |         31 |        224 |
+| features/auth/controller                                                                                   |          1 |         57 |          4 |         11 |         72 |
+| features/auth/repository                                                                                   |          1 |         84 |          1 |         15 |        100 |
+| features/auth/views                                                                                        |          1 |         36 |         11 |          5 |         52 |
+| features/base_nav                                                                                          |          3 |        158 |         13 |         20 |        191 |
+| features/base_nav/views                                                                                    |          2 |         88 |          9 |         15 |        112 |
+| features/base_nav/widgets                                                                                  |          1 |         70 |          4 |          5 |         79 |
+| features/home                                                                                              |          2 |        412 |         38 |         18 |        468 |
+| features/home/views                                                                                        |          1 |        117 |          1 |          7 |        125 |
+| features/home/widgets                                                                                      |          1 |        295 |         37 |         11 |        343 |
+| features/posts                                                                                             |         13 |      2,781 |        204 |        174 |      3,159 |
+| features/posts/controllers                                                                                 |          2 |        279 |         23 |         38 |        340 |
+| features/posts/repositories                                                                                |          2 |        207 |         15 |         21 |        243 |
+| features/posts/widgets                                                                                     |          9 |      2,295 |        166 |        115 |      2,576 |
+| models                                                                                                     |          8 |        707 |          6 |         82 |        795 |
+| shared                                                                                                     |          4 |         15 |          5 |          6 |         26 |
+| theme                                                                                                      |          1 |        139 |          7 |         19 |        165 |
+| utils                                                                                                      |         25 |      1,749 |        287 |        184 |      2,220 |
+| utils (Files)                                                                                              |         18 |        845 |        255 |        140 |      1,240 |
+| utils/widgets                                                                                              |          7 |        904 |         32 |         44 |        980 |
++------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                   | language | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| /Users/user/Documents/Dev/nuprojects/stream/lib/assets/icons/google.svg                                    | XML      |         13 |          0 |          1 |         14 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/core/constants/constants.dart                              | Dart     |         24 |          4 |          6 |         34 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/core/constants/firebase_constants.dart                     | Dart     |         10 |          0 |          1 |         11 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/core/enums/enums.dart                                      | Dart     |          4 |         10 |          2 |         16 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/core/providers/firebase_provider.dart                      | Dart     |          9 |          0 |          1 |         10 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/core/providers/storage_repository_provider.dart            | Dart     |         38 |          0 |          8 |         46 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/core/type_defs.dart                                        | Dart     |          6 |          8 |          3 |         17 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/core/utils.dart                                            | Dart     |         15 |          0 |          3 |         18 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/features/auth/controller/auth_controller.dart              | Dart     |         57 |          4 |         11 |         72 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/features/auth/repository/auth_repository.dart              | Dart     |         84 |          1 |         15 |        100 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/features/auth/views/login_view.dart                        | Dart     |         36 |         11 |          5 |         52 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/features/base_nav/views/base_nav_view.controller.dart      | Dart     |         50 |          6 |          9 |         65 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/features/base_nav/views/base_nav_view.dart                 | Dart     |         38 |          3 |          6 |         47 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/features/base_nav/widgets/nav_bar_widget.dart              | Dart     |         70 |          4 |          5 |         79 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/features/home/views/home_feed_view.dart                    | Dart     |        117 |          1 |          7 |        125 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/features/home/widgets/post_card.dart                       | Dart     |        295 |         37 |         11 |        343 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/features/posts/controllers/post_controller.dart            | Dart     |        256 |         14 |         31 |        301 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/features/posts/controllers/post_controller.providers.dart  | Dart     |         23 |          9 |          7 |         39 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/features/posts/repositories/post_repository.dart           | Dart     |        203 |         14 |         19 |        236 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/features/posts/repositories/post_repository.providers.dart | Dart     |          4 |          1 |          2 |          7 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/features/posts/widgets/create_post_bottom_sheet.dart       | Dart     |        211 |          6 |         15 |        232 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/features/posts/widgets/feed_quote_card.dart                | Dart     |        330 |         20 |         12 |        362 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/features/posts/widgets/feed_reply_post_card.dart           | Dart     |        593 |         76 |         18 |        687 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/features/posts/widgets/quote_bottom_sheet.dart             | Dart     |        250 |          7 |         18 |        275 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/features/posts/widgets/quoting_post_card.dart              | Dart     |         91 |          4 |          8 |        103 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/features/posts/widgets/reply_post_bottom_sheet.dart        | Dart     |        247 |          6 |         18 |        271 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/features/posts/widgets/reply_post_card.dart                | Dart     |         81 |          5 |          8 |         94 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/features/posts/widgets/repost_card.dart                    | Dart     |        366 |         39 |         12 |        417 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/features/posts/widgets/repost_quote_bottom_sheet.dart      | Dart     |        126 |          3 |          6 |        135 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/firebase_options.dart                                      | Dart     |         60 |         12 |          5 |         77 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/main.dart                                                  | Dart     |         68 |          0 |          7 |         75 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/models/application_model.dart                              | Dart     |         97 |          1 |         11 |        109 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/models/bookmarks_model.dart                                | Dart     |         45 |          1 |         12 |         58 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/models/comment_model.dart                                  | Dart     |         77 |          0 |          8 |         85 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/models/post_model.dart                                     | Dart     |        139 |          1 |         12 |        152 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/models/quote_nodel.dart                                    | Dart     |        135 |          1 |          9 |        145 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/models/repost_model.dart                                   | Dart     |         29 |          0 |          5 |         34 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/models/user_model.dart                                     | Dart     |         97 |          1 |         14 |        112 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/models/verification_model.dart                             | Dart     |         88 |          1 |         11 |        100 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/router.dart                                                | Dart     |         13 |         47 |          3 |         63 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/shared/app_grafiks.dart                                    | Dart     |          4 |          0 |          1 |          5 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/shared/app_routes.dart                                     | Dart     |          3 |          1 |          0 |          4 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/shared/app_texts.dart                                      | Dart     |          5 |          3 |          3 |         11 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/shared/app_urls.dart                                       | Dart     |          3 |          1 |          2 |          6 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/theme/palette.dart                                         | Dart     |        139 |          7 |         19 |        165 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/utils/app_bar.dart                                         | Dart     |          0 |         58 |          5 |         63 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/utils/app_constants.dart                                   | Dart     |          7 |          0 |          2 |          9 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/utils/app_extensions.dart                                  | Dart     |        218 |         13 |         36 |        267 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/utils/app_multi_value_listenable_builder.dart              | Dart     |         23 |          2 |          4 |         29 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/utils/button.dart                                          | Dart     |        175 |         51 |         15 |        241 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/utils/convert_time.dart                                    | Dart     |          7 |          0 |          1 |          8 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/utils/enums.dart                                           | Dart     |          0 |         93 |         16 |        109 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/utils/error_text.dart                                      | Dart     |         11 |          0 |          2 |         13 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/utils/failure.dart                                         | Dart     |          4 |          0 |          2 |          6 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/utils/keyboard_utils.dart                                  | Dart     |          9 |          0 |          3 |         12 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/utils/loader.dart                                          | Dart     |         97 |         17 |         18 |        132 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/utils/nav.dart                                             | Dart     |         19 |          2 |          4 |         25 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/utils/network_errors.dart                                  | Dart     |         11 |          1 |          2 |         14 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/utils/picker.dart                                          | Dart     |         43 |          3 |          5 |         51 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/utils/regex.dart                                           | Dart     |          6 |          0 |          2 |          8 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/utils/snack_bar.dart                                       | Dart     |         78 |          9 |          9 |         96 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/utils/specific_size_text_exrension.dart                    | Dart     |        110 |          0 |          5 |        115 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/utils/utils.dart                                           | Dart     |         27 |          6 |          9 |         42 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/utils/widgets/button.dart                                  | Dart     |        206 |         23 |         12 |        241 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/utils/widgets/click_button.dart                            | Dart     |        108 |          1 |          7 |        116 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/utils/widgets/image_loader.dart                            | Dart     |         55 |          1 |          4 |         60 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/utils/widgets/loading_overlay.dart                         | Dart     |         18 |          0 |          4 |         22 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/utils/widgets/myicon.dart                                  | Dart     |         47 |          2 |          6 |         55 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/utils/widgets/pin_input_box.dart                           | Dart     |         66 |          1 |          3 |         70 |
+| /Users/user/Documents/Dev/nuprojects/stream/lib/utils/widgets/text_input.dart                              | Dart     |        404 |          4 |          8 |        416 |
+| Total                                                                                                      |          |      6,398 |        657 |        574 |      7,629 |
++------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

@@ -87,7 +87,7 @@ class PostCard extends ConsumerWidget {
                                 ),
                             7.sbW,
                             Icon(
-                              PhosphorIcons.cloudCheckFill,
+                              Icons.whatshot_sharp,
                               size: 17.sp,
                               color: Colors.blue,
                             ),
