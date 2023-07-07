@@ -1,4 +1,7 @@
 class AppRoutes {
-  // home
-  static const String home = '/';
+  // base
+  static const String base = '/';
+
+  //! settings
+  static const String settings = '/settings';
 }

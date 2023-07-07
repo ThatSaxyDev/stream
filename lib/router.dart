@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:stream/features/auth/views/login_view.dart';
 import 'package:stream/features/base_nav/views/base_nav_view.dart';
+import 'package:stream/features/settings/views/settings_view.dart';
+import 'package:stream/shared/app_routes.dart';
 
-final loggedOutRoute =
-    RouteMap(routes: {'/': (_) => const MaterialPage(child: LoginView())});
+final loggedOutRoute = RouteMap(
+    routes: {AppRoutes.base: (_) => const MaterialPage(child: LoginView())});
 
 final loggedInRoute = RouteMap(
   routes: {
-    '/': (_) => const MaterialPage(
+    AppRoutes.base: (_) => const MaterialPage(
           child: BaseNavWrapper(),
         ),
-    // '/community-application': (_) => const MaterialPage(
-    //       child: CommunityApplicationView(),
-    //     ),
+    AppRoutes.settings: (_) => const MaterialPage(
+          child: SettingsView(),
+        ),
     // '/approval-status': (_) => const MaterialPage(
     //       child: AppprovalStatusView(),
     //     ),

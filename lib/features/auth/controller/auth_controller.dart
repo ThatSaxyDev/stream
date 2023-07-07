@@ -43,6 +43,7 @@ class AuthController extends StateNotifier<bool> {
 
   Stream<User?> get authStateChange => _authRepository.authStateChange;
 
+  //! sign in with google
   void signInWithGoogle({required BuildContext context}) async {
     state = true;
     final user = await _authRepository.signInWithGoogle();
@@ -53,17 +54,17 @@ class AuthController extends StateNotifier<bool> {
         showSnackBar(context: context, text: l.message);
       },
       (UserModel userModel) {
-        showSnackBar(context: context, text: 'fine');
-        goTo(context, const Scaffold());
         _ref.read(userProvider.notifier).update((state) => userModel);
       },
     );
   }
 
+  //! get user data
   Stream<UserModel> getUserData({required String uid}) {
     return _authRepository.getUserData(uid);
   }
 
+  //! log out
   void logOut() async {
     _ref.read(userProvider.notifier).update((state) => null);
     _authRepository.logOut();

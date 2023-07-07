@@ -12,13 +12,9 @@ void goBack(BuildContext context) {
   Routemaster.of(context).pop();
 }
 
-//! nav function
-void goTo(BuildContext context, Widget view) {
-  Navigator.of(context).push(
-    MaterialPageRoute(
-      builder: ((context) {
-        return view;
-      }),
-    ),
-  );
+void goTo({
+  required BuildContext context,
+  required String route,
+}) {
+  Routemaster.of(context).push(route);
 }
