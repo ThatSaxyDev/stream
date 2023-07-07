@@ -239,7 +239,6 @@ class PostController extends StateNotifier<bool> {
     res.fold(
       (l) => showSnackBar(context: context, text: l.message),
       (r) {
-        showSnackBar(context: context, text: 'Posted Successfully!');
         Routemaster.of(context).pop();
       },
     );
@@ -283,6 +282,12 @@ class PostController extends StateNotifier<bool> {
     UserModel user = _ref.read(userProvider)!;
 
     return _postRepository.fetchPostsForUser(user: user);
+  }
+
+  //! fetch posts for other user profile
+  Stream<List<PostModel>> fetchPostsForOtherUserProfile(
+      {required String userId}) {
+    return _postRepository.fetchPostsForOtherUser(userId: userId);
   }
 
   //! fetch user liked posts

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:routemaster/routemaster.dart';
 import 'package:stream/features/auth/controller/auth_controller.dart';
 import 'package:stream/features/base_nav/views/base_nav_view.dart';
 import 'package:stream/features/posts/controllers/post_controller.dart';
@@ -60,18 +61,18 @@ class RepostPostCard extends ConsumerWidget {
                     Icon(
                       PhosphorIcons.repeat,
                       color: currentTheme.textTheme.bodyMedium!.color!
-                          .withOpacity(0.3),
+                          .withOpacity(0.4),
                       size: 18.sp,
                     ),
                     10.sbW,
                     repostingUser!.uid! == userr!.uid!
                         ? 'You reposted'.txt(
                             color: currentTheme.textTheme.bodyMedium!.color!
-                                .withOpacity(0.3),
+                                .withOpacity(0.4),
                           )
                         : '@${repostingUser!.name!}'.txt(
                             color: currentTheme.textTheme.bodyMedium!.color!
-                                .withOpacity(0.3),
+                                .withOpacity(0.4),
                           )
                   ],
                 ),
@@ -99,18 +100,18 @@ class RepostPostCard extends ConsumerWidget {
                     Icon(
                       PhosphorIcons.repeat,
                       color: currentTheme.textTheme.bodyMedium!.color!
-                          .withOpacity(0.3),
+                          .withOpacity(0.4),
                       size: 18.sp,
                     ),
                     10.sbW,
                     repostingUser!.uid! == userr!.uid!
                         ? 'You reposted'.txt(
                             color: currentTheme.textTheme.bodyMedium!.color!
-                                .withOpacity(0.3),
+                                .withOpacity(0.4),
                           )
                         : '@${repostingUser!.username!}'.txt(
                             color: currentTheme.textTheme.bodyMedium!.color!
-                                .withOpacity(0.3),
+                                .withOpacity(0.4),
                           )
                   ],
                 ),
@@ -131,6 +132,9 @@ class RepostPostCard extends ConsumerWidget {
                               ref: ref,
                               index: 3,
                             );
+                          } else {
+                            Routemaster.of(context)
+                                .push('/profile/${post.userUid}');
                           }
                         }),
                       ],
@@ -153,9 +157,9 @@ class RepostPostCard extends ConsumerWidget {
                                             size: 14.sp,
                                             fontWeight: FontWeight.w600,
                                           ),
-                                      7.sbW,
+                                      2.sbW,
                                       Icon(
-                                        PhosphorIcons.cloudCheckFill,
+                                        Icons.whatshot_sharp,
                                         size: 17.sp,
                                         color: Colors.blue,
                                       ),

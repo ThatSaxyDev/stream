@@ -13,7 +13,7 @@ StateNotifierProvider<PostController, bool> postControllerProvider =
 });
 
 //! provider for users posts and following
-final userPostProvider = StreamProvider((ref) {
+final userPostProvider = StreamProvider.autoDispose((ref) {
   final postController = ref.watch(postControllerProvider.notifier);
   return postController.fetchUserPosts();
 });
@@ -22,6 +22,13 @@ final userPostProvider = StreamProvider((ref) {
 final userProfilePostProvider = StreamProvider((ref) {
   final postController = ref.watch(postControllerProvider.notifier);
   return postController.fetchPostsForUserProfile();
+});
+
+//! provider for other user profile posts
+final otherUserProfilePostProvider =
+    StreamProvider.family((ref, String userId) {
+  final postController = ref.watch(postControllerProvider.notifier);
+  return postController.fetchPostsForOtherUserProfile(userId: userId);
 });
 
 //! provider for user liked posts

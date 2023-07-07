@@ -35,7 +35,7 @@ class NavBarWidget extends ConsumerWidget {
             color: switch (indexFromController == nav.index && nav.index != 2) {
               true => currentTheme.textTheme.bodyMedium!.color,
               false =>
-                currentTheme.textTheme.bodyMedium!.color!.withOpacity(0.3),
+                currentTheme.textTheme.bodyMedium!.color!.withOpacity(0.4),
             },
           ),
 

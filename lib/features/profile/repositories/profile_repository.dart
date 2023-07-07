@@ -31,4 +31,26 @@ class UserProfileRepository {
       return left(Failure(e.toString()));
     }
   }
+
+  //! follow user
+  void followUser({
+    required UserModel userToFollow,
+    required UserModel ownUser,
+  }) async {
+    if (userToFollow.followers!.contains(ownUser.uid)) {
+      _users.doc(userToFollow.uid).update({
+        'followers': FieldValue.arrayRemove([ownUser.uid]),
+      });
+      _users.doc(ownUser.uid).update({
+        'following': FieldValue.arrayRemove([userToFollow.uid]),
+      });
+    } else {
+      _users.doc(userToFollow.uid).update({
+        'followers': FieldValue.arrayUnion([ownUser.uid]),
+      });
+      _users.doc(ownUser.uid).update({
+        'following': FieldValue.arrayUnion([userToFollow.uid]),
+      });
+    }
+  }
 }

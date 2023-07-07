@@ -171,6 +171,21 @@ class PostRepository {
             .toList());
   }
 
+  //! get posts for other user profile
+  Stream<List<PostModel>> fetchPostsForOtherUser({
+    required String userId,
+  }) {
+    return _posts
+        .orderBy('createdAt', descending: true)
+        .where('userUid', isEqualTo: userId)
+        .snapshots()
+        .map((event) => event.docs
+            .map(
+              (e) => PostModel.fromMap(e.data() as Map<String, dynamic>),
+            )
+            .toList());
+  }
+
   //! get a users liked posts
   Stream<List<PostModel>> getUsersLikedPosts({
     required UserModel user,

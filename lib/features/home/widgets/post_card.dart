@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:routemaster/routemaster.dart';
 import 'package:stream/features/auth/controller/auth_controller.dart';
 import 'package:stream/features/base_nav/views/base_nav_view.dart';
 import 'package:stream/features/posts/controllers/post_controller.dart';
@@ -63,6 +64,8 @@ class PostCard extends ConsumerWidget {
                     ref: ref,
                     index: 3,
                   );
+                } else {
+                  Routemaster.of(context).push('/profile/${post.userUid}');
                 }
               }),
             ],
@@ -85,7 +88,7 @@ class PostCard extends ConsumerWidget {
                                   size: 14.sp,
                                   fontWeight: FontWeight.w600,
                                 ),
-                            7.sbW,
+                            2.sbW,
                             Icon(
                               Icons.whatshot_sharp,
                               size: 17.sp,

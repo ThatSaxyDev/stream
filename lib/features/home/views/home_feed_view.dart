@@ -40,7 +40,7 @@ class HomeFeedView extends ConsumerWidget {
           children: [
             //! header
             60.sbH,
-            'Usetream'.txt().tap(onTap: () {
+            'Usetream'.txt(size: 16.sp).tap(onTap: () {
               ref.read(authControllerProvider.notifier).logOut();
             }),
             20.sbH,
@@ -84,8 +84,7 @@ class HomeFeedView extends ConsumerWidget {
                       PostModel post = posts[index];
                       if (post.replyingPostId!.isNotEmpty) {
                         return FeedReplyPostCard(post: post);
-                      } 
-                      else if (post.quotingPostId!.isNotEmpty) {
+                      } else if (post.quotingPostId!.isNotEmpty) {
                         return FeedQuotePostCard(post: post);
                       }
                       return PostCard(post: post);

@@ -178,7 +178,10 @@ class _EditProfileBottomSheetState
                                 radius: 35.w,
                                 backgroundColor: Colors.black.withOpacity(0.4),
                               ),
-                              const Icon(PhosphorIcons.penBold).alignCenter(),
+                              const Icon(
+                                PhosphorIcons.penBold,
+                                color: Pallete.whiteColor,
+                              ).alignCenter(),
                             ],
                           ),
                         ).tap(

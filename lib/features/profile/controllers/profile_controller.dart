@@ -72,4 +72,11 @@ class UserProfileController extends StateNotifier<bool> {
       },
     );
   }
+
+  //! follow user
+  void followUser({required UserModel userToFollow}) async {
+    UserModel user = _ref.read(userProvider)!;
+    _userProfileRepository.followUser(
+        userToFollow: userToFollow, ownUser: user);
+  }
 }

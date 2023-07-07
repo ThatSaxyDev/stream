@@ -4,7 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:routemaster/routemaster.dart';
 import 'package:stream/features/auth/controller/auth_controller.dart';
+import 'package:stream/features/base_nav/views/base_nav_view.dart';
 import 'package:stream/models/post_model.dart';
 import 'package:stream/models/user_model.dart';
 import 'package:stream/theme/palette.dart';
@@ -21,8 +23,10 @@ class QuotingPostCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    UserModel? userr = ref.watch(userProvider);
     ThemeData currentTheme = ref.watch(themeNotifierProvider);
     UserModel? user;
+    int indexFromController = ref.watch(baseNavControllerProvider);
 
     ref.watch(getUserProvider(post.userUid!)).whenData((value) => user = value);
     if (user == null) {
@@ -46,7 +50,18 @@ class QuotingPostCard extends ConsumerWidget {
                   CircleAvatar(
                     radius: 7.w,
                     backgroundImage: NetworkImage(user!.profilePic!),
-                  ),
+                  ).tap(onTap: () {
+                    if (post.userUid == userr!.uid &&
+                        indexFromController != 3) {
+                      moveToPage(
+                        context: context,
+                        ref: ref,
+                        index: 3,
+                      );
+                    } else {
+                      Routemaster.of(context).push('/profile/${post.userUid}');
+                    }
+                  }),
                   7.sbW,
                   //! user name
 
@@ -61,7 +76,7 @@ class QuotingPostCard extends ConsumerWidget {
                                   size: 14.sp,
                                   fontWeight: FontWeight.w600,
                                 ),
-                            7.sbW,
+                            2.sbW,
                             Icon(
                               Icons.whatshot_sharp,
                               size: 14.sp,

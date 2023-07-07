@@ -69,7 +69,7 @@ class BButton extends StatelessWidget {
   }
 }
 
-class TransparentButton extends StatelessWidget {
+class TransparentButton extends ConsumerWidget {
   final double? height;
   final double? width;
   final double? radius;
@@ -95,7 +95,8 @@ class TransparentButton extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ThemeData currentTheme = ref.watch(themeNotifierProvider);
     return SizedBox(
       height: height ?? 40.h,
       width: width ?? double.infinity,
@@ -121,7 +122,8 @@ class TransparentButton extends StatelessWidget {
               ? Text(
                   text ?? '',
                   style: TextStyle(
-                    color: textColor,
+                    color:
+                        textColor ?? currentTheme.textTheme.bodyMedium!.color,
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w500,
                   ),

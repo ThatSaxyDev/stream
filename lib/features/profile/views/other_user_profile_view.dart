@@ -11,6 +11,7 @@ import 'package:stream/features/posts/controllers/post_controller.dart';
 import 'package:stream/features/posts/widgets/create_post_bottom_sheet.dart';
 import 'package:stream/features/posts/widgets/feed_quote_card.dart';
 import 'package:stream/features/posts/widgets/feed_reply_post_card.dart';
+import 'package:stream/features/profile/controllers/profile_controller.dart';
 import 'package:stream/features/profile/widgets/edit_profile_bottom_sheet.dart';
 import 'package:stream/models/post_model.dart';
 import 'package:stream/models/user_model.dart';
@@ -19,24 +20,34 @@ import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/app_constants.dart';
 import 'package:stream/utils/app_extensions.dart';
 import 'package:stream/utils/nav.dart';
+import 'package:stream/utils/widgets/button.dart';
 import 'package:tabbed_sliverlist/tabbed_sliverlist.dart';
 
-class ProfileView extends ConsumerWidget {
-  const ProfileView({super.key});
+class OtherUserProfileView extends ConsumerWidget {
+  final String userId;
+  const OtherUserProfileView({
+    super.key,
+    required this.userId,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ThemeData currentTheme = ref.watch(themeNotifierProvider);
 
-    UserModel user = ref.watch(userProvider)!;
+    UserModel ownUser = ref.watch(userProvider)!;
     AsyncValue<List<PostModel>> userProfilePostsStream =
-        ref.watch(userProfilePostProvider);
-    AsyncValue<List<PostModel>> userLikedPostsStream =
-        ref.watch(getUsersLikedPostsProvider);
+        ref.watch(otherUserProfilePostProvider(userId));
+
     List<PostModel> userProfilePosts = [];
-    List<PostModel> userLikedPosts = [];
+
     userProfilePostsStream.whenData((value) => userProfilePosts = value);
-    userLikedPostsStream.whenData((value) => userLikedPosts = value);
+
+    UserModel? user;
+
+    ref.watch(getUserProvider(userId)).whenData((value) => user = value);
+    if (user == null) {
+      return const SizedBox.shrink();
+    }
 
     return Scaffold(
       backgroundColor: currentTheme.backgroundColor,
@@ -44,15 +55,14 @@ class ProfileView extends ConsumerWidget {
         tabLength: 3,
         sliverTabBar: SliverTabBar(
             elevation: 0,
-            actions: [
-              IconButton(
-                highlightColor: Colors.transparent,
-                splashColor: Colors.transparent,
-                onPressed: () =>
-                    goTo(context: context, route: AppRoutes.settings),
-                icon: const Icon(PhosphorIcons.listDashes),
-              ),
-            ],
+            // actions: [
+            //   IconButton(
+            //     highlightColor: Colors.transparent,
+            //     splashColor: Colors.transparent,
+            //     onPressed: () {},
+            //     icon: const Icon(PhosphorIcons.listDashes),
+            //   ),
+            // ],
             flexibleSpace: Container(
               padding:
                   EdgeInsets.symmetric(horizontal: 20.w).copyWith(top: 120.h),
@@ -64,44 +74,21 @@ class ProfileView extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         //! image
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 35.w,
-                              backgroundImage: NetworkImage(user.profilePic!),
-                            ),
-                            10.sbW,
-                            IconButton(
-                              onPressed: () {
-                                showModalBottomSheet(
-                                  isScrollControlled: true,
-                                  enableDrag: true,
-                                  backgroundColor: Colors.transparent,
-                                  context: context,
-                                  builder: (context) => const Wrap(
-                                    children: [
-                                      EditProfileBottomSheet(),
-                                    ],
-                                  ),
-                                );
-                              },
-                              highlightColor: Colors.transparent,
-                              splashColor: Colors.transparent,
-                              icon: const Icon(PhosphorIcons.eraser),
-                            )
-                          ],
+                        CircleAvatar(
+                          radius: 35.w,
+                          backgroundImage: NetworkImage(user!.profilePic!),
                         ),
 
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            user.name!.txt(
+                            user!.name!.txt(
                               size: 20.sp,
                               fontWeight: FontWeight.w500,
                             ),
                             7.sbH,
-                            user.isVerified! != true
-                                ? '@${user.username!}'
+                            user!.isVerified! != true
+                                ? '@${user!.username!}'
                                     .replaceAll(' ', '')
                                     .toLowerCase()
                                     .txt(
@@ -110,7 +97,7 @@ class ProfileView extends ConsumerWidget {
                                     )
                                 : Row(
                                     children: [
-                                      '@${user.username!}'
+                                      '@${user!.username!}'
                                           .replaceAll(' ', '')
                                           .toLowerCase()
                                           .txt(
@@ -134,7 +121,7 @@ class ProfileView extends ConsumerWidget {
                     SizedBox(
                       width: width(context),
                       child: Text(
-                        user.banner!,
+                        user!.banner!,
                         maxLines: 2,
                         style: TextStyle(
                           fontSize: 14.sp,
@@ -148,14 +135,14 @@ class ProfileView extends ConsumerWidget {
                     //! folowers , following
                     Row(
                       children: [
-                        user.followers!.length.toString().txt(
+                        user!.followers!.length.toString().txt(
                               size: 15.sp,
                               fontWeight: FontWeight.w700,
                               color: currentTheme.textTheme.bodyMedium!.color!
                                   .withOpacity(0.9),
                             ),
                         3.sbW,
-                        user.followers!.length == 1
+                        user!.followers!.length == 1
                             ? 'follower'.txt(
                                 size: 14.sp,
                                 fontWeight: FontWeight.w400,
@@ -169,14 +156,14 @@ class ProfileView extends ConsumerWidget {
                                     .withOpacity(0.6),
                               ),
                         10.sbW,
-                        user.following!.length.toString().txt(
+                        user!.following!.length.toString().txt(
                               size: 15.sp,
                               fontWeight: FontWeight.w700,
                               color: currentTheme.textTheme.bodyMedium!.color!
                                   .withOpacity(0.9),
                             ),
                         3.sbW,
-                        user.following!.length == 1
+                        user!.following!.length == 1
                             ? 'following'.txt(
                                 size: 14.sp,
                                 fontWeight: FontWeight.w400,
@@ -195,7 +182,7 @@ class ProfileView extends ConsumerWidget {
                           size: 14.sp,
                         ),
                         5.sbW,
-                        user.link!.txt(
+                        user!.link!.txt(
                           size: 14.sp,
                           fontWeight: FontWeight.w400,
                           color: currentTheme.textTheme.bodyMedium!.color!
@@ -203,11 +190,28 @@ class ProfileView extends ConsumerWidget {
                         ),
                       ],
                     ),
+                    15.sbH,
+
+                    //! follow
+                    TransparentButton(
+                      onTap: () {
+                        ref
+                            .read(userProfileControllerProvider.notifier)
+                            .followUser(userToFollow: user!);
+                      },
+                      color: currentTheme.textTheme.bodyMedium!.color!
+                          .withOpacity(0.5),
+                      text: user!.followers!.contains(ownUser.uid)
+                          ? 'Following'
+                          : user!.following!.contains(ownUser.uid)
+                              ? 'Follow back'
+                              : 'Follow',
+                    ),
                   ],
                 ),
               ),
             ),
-            expandedHeight: 270.h,
+            expandedHeight: 320.h,
             tabBar: TabBar(
               indicatorColor: currentTheme.textTheme.bodyMedium!.color,
               labelColor: currentTheme.textTheme.bodyMedium!.color,
@@ -217,9 +221,6 @@ class ProfileView extends ConsumerWidget {
                 ),
                 Tab(
                   text: 'Replies',
-                ),
-                Tab(
-                  text: 'Likes',
                 ),
               ],
             )),
@@ -325,56 +326,6 @@ class ProfileView extends ConsumerWidget {
                       return FeedReplyPostCard(post: post);
                     } else {
                       return const SizedBox.shrink();
-                    }
-                  },
-                ),
-
-          //! likes
-          userLikedPosts.isEmpty
-              ? TabListBuilder(
-                  uniquePageKey: 'page3a',
-                  length: 1,
-                  builder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: EdgeInsets.only(top: 150.h),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                PhosphorIcons.placeholderBold,
-                                size: 60.sp,
-                              ).tap(onTap: () {
-                                moveToPage(
-                                    context: context, ref: ref, index: 0);
-                              }),
-                            ],
-                          ),
-                          20.sbH,
-                          'You have no liked posts'.txt(
-                            size: 16.sp,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                )
-              : TabListBuilder(
-                  uniquePageKey: 'page3b',
-                  length: userLikedPosts.length,
-                  builder: (BuildContext context, int index) {
-                    PostModel post = userLikedPosts[index];
-                    if (userLikedPosts.isEmpty) {
-                      return 'empty'.txt();
-                    }
-                    if (post.replyingPostId!.isNotEmpty) {
-                      return FeedReplyPostCard(post: post);
-                    } else if (post.quotingPostId!.isNotEmpty) {
-                      return FeedQuotePostCard(post: post);
-                    } else {
-                      return PostCard(post: post);
                     }
                   },
                 ),
