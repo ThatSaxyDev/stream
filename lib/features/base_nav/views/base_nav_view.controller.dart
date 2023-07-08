@@ -29,9 +29,7 @@ void moveToPage({
 List<Widget> pages = [
   const HomeFeedView(),
   const SearchView(),
-  Center(
-    child: 'notif'.txt(),
-  ),
+  const NotificationsView(),
   const ProfileView(),
 ];
 

@@ -56,7 +56,6 @@ class SearchUserDelegate extends SearchDelegate {
               itemCount: allUsers.length,
               itemBuilder: (context, index) {
                 UserModel user = allUsers[index];
-                
 
                 if (user.uid == ownUser!.uid) {
                   return const SizedBox.shrink();
