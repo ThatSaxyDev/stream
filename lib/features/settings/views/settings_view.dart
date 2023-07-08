@@ -8,6 +8,7 @@ import 'package:stream/features/auth/controller/auth_controller.dart';
 import 'package:stream/models/user_model.dart';
 import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/app_extensions.dart';
+import 'package:stream/utils/nav.dart';
 
 class SettingsView extends ConsumerWidget {
   const SettingsView({super.key});
@@ -51,6 +52,10 @@ class SettingsView extends ConsumerWidget {
 
             //! log out
             ListTile(
+              onTap: () {
+                goBack(context);
+                ref.read(authControllerProvider.notifier).logOut();
+              },
               leading: const Icon(
                 PhosphorIcons.signOutBold,
                 color: Pallete.thickRed,

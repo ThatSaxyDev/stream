@@ -1,8 +1,11 @@
 // ignore_for_file: deprecated_member_use
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:glass/glass.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stream/features/auth/controller/auth_controller.dart';
 import 'package:stream/theme/palette.dart';
@@ -22,27 +25,37 @@ class LoginView extends ConsumerWidget {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 30.w),
         child: isLoading
-            ? const Loader()
+            ? Loadinggg(
+                height: 40.h,
+              )
             : Column(
                 children: [
                   150.sbH,
-
-                  // Container(
-                  //   padding: 20.padH,
-                  //   decoration: BoxDecoration(
-                  //     borderRadius: BorderRadius.circular(40.r),
-                  //     image: DecorationImage(
-                  //         image: AssetImage('log'.png), fit: BoxFit.cover),
-                  //   ),
-                  //   height: 200.h,
-                  //   width: 200.w,
-                  // ),
-                  Icon(
-                    PhosphorIcons.cookingPot,
-                    size: 200.sp,
+                  Image.asset(
+                    currentTheme == Pallete.lightModeAppTheme
+                        ? 'logolight'.jpg
+                        : 'logodark'.jpg,
+                    height: 100.h,
+                  ),
+                  Transform(
+                    alignment: Alignment.center,
+                    transform: Matrix4.identity()..scale(1.0, -1.0, 1.0),
+                    child: Opacity(
+                      opacity: 0.2,
+                      child: Image.asset(
+                        currentTheme == Pallete.lightModeAppTheme
+                            ? 'logolight'.jpg
+                            : 'logodark'.jpg,
+                        height: 100.h,
+                      ).asGlass(),
+                    ),
                   ),
                   170.sbH,
                   const GButton(),
+                  20.sbH,
+
+                  //! apple
+                  if (Platform.isIOS) const AppleButton()
                 ],
               ),
       ),

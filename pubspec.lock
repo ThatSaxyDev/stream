@@ -808,6 +808,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  neon:
+    dependency: "direct main"
+    description:
+      name: neon
+      sha256: "9cf65613109177a1927f77a4f683fa0251b9694d8726d8787f39b48557f8cd03"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.0"
   octo_image:
     dependency: transitive
     description:

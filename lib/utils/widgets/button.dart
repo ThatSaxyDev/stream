@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:neon/neon.dart';
 
 import 'package:stream/features/auth/controller/auth_controller.dart';
 import 'package:stream/shared/app_grafiks.dart';
@@ -151,45 +152,67 @@ class GButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final currentTheme = ref.watch(themeNotifierProvider);
     return ClickButton(
       onTap: () => signInWithGoogle(context: context, ref: ref),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          60.sbW,
           MyIcon(icon: AppGrafiks.google, height: 20.h),
           15.sbW,
           Text(
             'Continue With Google',
             style: TextStyle(
-              fontSize: 14.sp,
+              fontSize: 16.sp,
               fontWeight: FontWeight.bold,
             ),
           ),
         ],
       ),
     );
-    //  SizedBox(
-    //   height: 50.h,
-    //   // width: width,
-    //   child: ElevatedButton(
-    //     onPressed: () => signInWithGoogle(context, ref),
-    //     style: ElevatedButton.styleFrom(
-    //       shape: RoundedRectangleBorder(
-    //         side: BorderSide(width: 0.5.w),
-    //         borderRadius: BorderRadius.all(
-    //           Radius.circular(35.r),
-    //         ),
-    //       ),
-    //       elevation: 0,
-    //       shadowColor: Colors.transparent,
-    //       backgroundColor: currentTheme.backgroundColor,
-    //       padding: EdgeInsets.symmetric(horizontal: padding),
-    //     ),
-    //     child: Center(
-    //       child: item,
-    //     ),
-    //   ),
-    // );
+  }
+}
+
+class AppleButton extends ConsumerWidget {
+  final bool? isFromLogin;
+  const AppleButton({
+    Key? key,
+    this.isFromLogin,
+  }) : super(key: key);
+
+  void signInWithGoogle(
+      {required BuildContext context, required WidgetRef ref}) {
+    ref
+        .read(authControllerProvider.notifier)
+        .signInWithGoogle(context: context);
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentTheme = ref.watch(themeNotifierProvider);
+    return ClickButton(
+      onTap: () => signInWithGoogle(context: context, ref: ref),
+      child: Row(
+        // mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          60.sbW,
+          Image.asset(
+            'apple'.png,
+            height: 23.h,
+            color: currentTheme.textTheme.bodyMedium!.color,
+          ),
+          15.sbW,
+          Text(
+            'Continue With Apple',
+            style: TextStyle(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 

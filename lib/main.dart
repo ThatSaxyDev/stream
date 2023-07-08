@@ -67,8 +67,15 @@ class _UsetreamAppState extends ConsumerState<UsetreamApp> {
                   );
                 });
               }),
-          error: (error, stactrace) => ErrorText(error: error.toString()),
-          loading: () => const Loader(),
+          error: (error, stactrace) => MaterialApp(
+              home: Scaffold(body: ErrorText(error: error.toString()))),
+          loading: () => const MaterialApp(
+            home: Scaffold(
+              body: Loadinggg(
+                height: 30,
+              ),
+            ),
+          ),
         );
   }
 }
