@@ -79,7 +79,9 @@ class RepostPostCard extends ConsumerWidget {
               ),
               FeedQuotePostCard(post: post),
             ],
-          )
+          ).tap(onTap: () {
+            Routemaster.of(context).push('/post/${post.id}');
+          })
         : Container(
             width: width(context),
             padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 13.h),
@@ -415,6 +417,8 @@ class RepostPostCard extends ConsumerWidget {
                 ),
               ],
             ),
-          );
+          ).tap(onTap: () {
+            Routemaster.of(context).push('/post/${post.id}');
+          });
   }
 }

@@ -377,7 +377,9 @@ class FeedReplyPostCard extends ConsumerWidget {
               ),
             ],
           ),
-        ),
+        ).tap(onTap: () {
+          Routemaster.of(context).push('/post/${repliedPost!.id}');
+        }),
 
         //! replying post below
         Container(
@@ -685,7 +687,9 @@ class FeedReplyPostCard extends ConsumerWidget {
               ),
             ],
           ),
-        ),
+        ).tap(onTap: () {
+          Routemaster.of(context).push('/post/${post.id}');
+        }),
       ],
     );
   }

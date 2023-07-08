@@ -234,7 +234,9 @@ class PostCard extends ConsumerWidget {
                     style:
                         TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
                   ),
-                ),
+                ).tap(onTap: () {
+                  Routemaster.of(context).push('/post/${post.id}');
+                }),
               ],
 
               //! image
@@ -340,6 +342,8 @@ class PostCard extends ConsumerWidget {
           ),
         ],
       ),
-    );
+    ).tap(onTap: () {
+      Routemaster.of(context).push('/post/${post.id}');
+    });
   }
 }

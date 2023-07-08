@@ -264,7 +264,9 @@ class FeedQuotePostCard extends ConsumerWidget {
                   //! post
                   QuotingPostCard(
                     post: quotedPost!,
-                  ),
+                  ).tap(onTap: () {
+                    Routemaster.of(context).push('/post/${quotedPost!.id}');
+                  }),
 
                   SizedBox(
                     width: width(context) * 0.75,
@@ -358,7 +360,9 @@ class FeedQuotePostCard extends ConsumerWidget {
               ),
             ],
           ),
-        ),
+        ).tap(onTap: () {
+          Routemaster.of(context).push('/post/${post.id}');
+        }),
       ],
     );
   }

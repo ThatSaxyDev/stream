@@ -195,12 +195,33 @@ class ProfileView extends ConsumerWidget {
                           size: 14.sp,
                         ),
                         5.sbW,
-                        user.link!.txt(
-                          size: 14.sp,
-                          fontWeight: FontWeight.w400,
-                          color: currentTheme.textTheme.bodyMedium!.color!
-                              .withOpacity(0.6),
-                        ),
+                        user.link!.isNotEmpty
+                            ? user.link!.txt(
+                                size: 14.sp,
+                                fontWeight: FontWeight.w400,
+                                color: currentTheme.textTheme.bodyMedium!.color!
+                                    .withOpacity(0.6),
+                              )
+                            : 'Add link'
+                                .txt(
+                                size: 14.sp,
+                                fontWeight: FontWeight.w400,
+                                color: currentTheme.textTheme.bodyMedium!.color!
+                                    .withOpacity(0.6),
+                              )
+                                .tap(onTap: () {
+                                showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  enableDrag: true,
+                                  backgroundColor: Colors.transparent,
+                                  context: context,
+                                  builder: (context) => const Wrap(
+                                    children: [
+                                      EditProfileBottomSheet(),
+                                    ],
+                                  ),
+                                );
+                              }),
                       ],
                     ),
                   ],

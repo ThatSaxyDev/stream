@@ -52,7 +52,7 @@ class OtherUserProfileView extends ConsumerWidget {
     return Scaffold(
       backgroundColor: currentTheme.backgroundColor,
       body: TabbedList(
-        tabLength: 3,
+        tabLength: 2,
         sliverTabBar: SliverTabBar(
             elevation: 0,
             // actions: [

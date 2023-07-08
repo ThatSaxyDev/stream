@@ -10,6 +10,8 @@ import 'package:stream/features/profile/views/profile_view.dart';
 import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/app_constants.dart';
 import 'package:stream/utils/app_extensions.dart';
+import 'package:stream/utils/widgets/image_loader.dart';
+import 'package:stream/utils/widgets/image_overlay.dart';
 
 part '../views/base_nav_view.controller.dart';
 
@@ -20,28 +22,34 @@ class BaseNavWrapper extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     int indexFromController = ref.watch(baseNavControllerProvider);
     ThemeData currentTheme = ref.watch(themeNotifierProvider);
-    return Scaffold(
-      backgroundColor: currentTheme.backgroundColor,
-      // pages
-      body: pages[indexFromController],
+    String? imageOverlay = ref.watch(imageOverlayControllerProvider);
+    return Stack(
+      children: [
+        Scaffold(
+          backgroundColor: currentTheme.backgroundColor,
+          // pages
+          body: pages[indexFromController],
 
-      // nav bar
-      bottomNavigationBar: Material(
-        elevation: 5,
-        child: Container(
-          color: currentTheme.backgroundColor,
-          padding: EdgeInsets.only(top: 17.h, left: 17.w, right: 17.w),
-          height: 80.h,
-          width: width(context),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: List.generate(
-              nav.length,
-              (index) => NavBarWidget(nav: nav[index]),
+          // nav bar
+          bottomNavigationBar: Material(
+            elevation: 5,
+            child: Container(
+              color: currentTheme.backgroundColor,
+              padding: EdgeInsets.only(top: 17.h, left: 17.w, right: 17.w),
+              height: 80.h,
+              width: width(context),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: List.generate(
+                  nav.length,
+                  (index) => NavBarWidget(nav: nav[index]),
+                ),
+              ),
             ),
           ),
         ),
-      ),
+        if (imageOverlay != null) ImageOverLay(imageUrl: imageOverlay)
+      ],
     );
   }
 }

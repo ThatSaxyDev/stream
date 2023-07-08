@@ -14,7 +14,7 @@ class Pallete {
   //! from BUNEWS
   static const blackColor = Color.fromRGBO(1, 1, 1, 1); // primary color
   static const greyColor = Color(0xff6A8189); // secondary color
-  static const drawerColor = Color.fromRGBO(18, 18, 18, 1);
+  static const drawerColor = Color(0xff121212);
   static const whiteColor = Colors.white;
   static const brownColor = Color(0xff593C2A);
   static const primaryTeal = Color(0xff057672);
@@ -117,7 +117,8 @@ class Pallete {
       backgroundColor: whiteColor,
     ),
     primaryColor: blueColor,
-    backgroundColor: whiteColor,
+    // backgroundColor: whiteColor,
+    backgroundColor: const Color(0xFFFAFAFA),
     canvasColor: blackColor,
     colorScheme: ColorScheme.fromSwatch(),
   );
