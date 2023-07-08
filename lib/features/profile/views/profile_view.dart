@@ -92,40 +92,44 @@ class ProfileView extends ConsumerWidget {
                           ],
                         ),
 
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            user.name!.txt(
-                              size: 20.sp,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            7.sbH,
-                            user.isVerified! != true
-                                ? '@${user.username!}'
-                                    .replaceAll(' ', '')
-                                    .toLowerCase()
-                                    .txt(
+                        SizedBox(
+                          width: 200.w,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              formatNameString(user.name!).txt(
+                                size: 20.sp,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              7.sbH,
+                              user.isVerified! != true
+                                  ? '@${user.username!}'.txt(
                                       size: 14.sp,
                                       fontWeight: FontWeight.w700,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
                                     )
-                                : Row(
-                                    children: [
-                                      '@${user.username!}'
-                                          .replaceAll(' ', '')
-                                          .toLowerCase()
-                                          .txt(
-                                            size: 14.sp,
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                      2.sbW,
-                                      Icon(
-                                        Icons.whatshot_sharp,
-                                        size: 17.sp,
-                                        color: Colors.blue,
-                                      ),
-                                    ],
-                                  ),
-                          ],
+                                  : Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        '@${user.username!}'.txt(
+                                          size: 14.sp,
+                                          fontWeight: FontWeight.w700,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        2.sbW,
+                                        Icon(
+                                          Icons.whatshot_sharp,
+                                          size: 17.sp,
+                                          color: Colors.blue,
+                                        ),
+                                      ],
+                                    ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -133,15 +137,36 @@ class ProfileView extends ConsumerWidget {
                     //! bio
                     SizedBox(
                       width: width(context),
-                      child: Text(
-                        user.banner!,
-                        maxLines: 2,
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
+                      child: user.banner!.isNotEmpty
+                          ? Text(
+                              user.banner!,
+                              maxLines: 2,
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            )
+                          : 'Add bio +'
+                              .txt(
+                              size: 14.sp,
+                              fontWeight: FontWeight.w400,
+                              color: currentTheme.textTheme.bodyMedium!.color!
+                                  .withOpacity(0.6),
+                            )
+                              .tap(onTap: () {
+                              showModalBottomSheet(
+                                isScrollControlled: true,
+                                enableDrag: true,
+                                backgroundColor: Colors.transparent,
+                                context: context,
+                                builder: (context) => const Wrap(
+                                  children: [
+                                    EditProfileBottomSheet(),
+                                  ],
+                                ),
+                              );
+                            }),
                     ),
                     13.sbH,
                     //!
@@ -196,11 +221,17 @@ class ProfileView extends ConsumerWidget {
                         ),
                         5.sbW,
                         user.link!.isNotEmpty
-                            ? user.link!.txt(
-                                size: 14.sp,
-                                fontWeight: FontWeight.w400,
-                                color: currentTheme.textTheme.bodyMedium!.color!
-                                    .withOpacity(0.6),
+                            ? SizedBox(
+                                width: 150.w,
+                                child: user.link!.txt(
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  size: 14.sp,
+                                  fontWeight: FontWeight.w400,
+                                  color: currentTheme
+                                      .textTheme.bodyMedium!.color!
+                                      .withOpacity(0.6),
+                                ),
                               )
                             : 'Add link'
                                 .txt(
@@ -403,4 +434,15 @@ class ProfileView extends ConsumerWidget {
       ),
     );
   }
+}
+
+String formatNameString(String input) {
+  List<String> words = input.split(' ');
+
+  if (words.length >= 3) {
+    words[2] = '${words[2][0].toUpperCase()}.';
+    words = words.sublist(0, 3);
+  }
+
+  return words.join(' ');
 }

@@ -28,9 +28,7 @@ void moveToPage({
 //! List of pages
 List<Widget> pages = [
   const HomeFeedView(),
-  Center(
-    child: 'search'.txt(),
-  ),
+  const SearchView(),
   Center(
     child: 'notif'.txt(),
   ),

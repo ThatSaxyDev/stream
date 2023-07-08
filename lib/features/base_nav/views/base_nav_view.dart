@@ -7,6 +7,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stream/features/base_nav/widgets/nav_bar_widget.dart';
 import 'package:stream/features/home/views/home_feed_view.dart';
 import 'package:stream/features/profile/views/profile_view.dart';
+import 'package:stream/features/search/views/search_view.dart';
 import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/app_constants.dart';
 import 'package:stream/utils/app_extensions.dart';

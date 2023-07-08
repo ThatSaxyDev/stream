@@ -12,6 +12,7 @@ import 'package:stream/features/posts/widgets/create_post_bottom_sheet.dart';
 import 'package:stream/features/posts/widgets/feed_quote_card.dart';
 import 'package:stream/features/posts/widgets/feed_reply_post_card.dart';
 import 'package:stream/features/profile/controllers/profile_controller.dart';
+import 'package:stream/features/profile/views/profile_view.dart';
 import 'package:stream/features/profile/widgets/edit_profile_bottom_sheet.dart';
 import 'package:stream/models/post_model.dart';
 import 'package:stream/models/user_model.dart';
@@ -79,40 +80,44 @@ class OtherUserProfileView extends ConsumerWidget {
                           backgroundImage: NetworkImage(user!.profilePic!),
                         ),
 
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            user!.name!.txt(
-                              size: 20.sp,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            7.sbH,
-                            user!.isVerified! != true
-                                ? '@${user!.username!}'
-                                    .replaceAll(' ', '')
-                                    .toLowerCase()
-                                    .txt(
+                        SizedBox(
+                          width: 200.w,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              formatNameString(user!.name!).txt(
+                                size: 20.sp,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              7.sbH,
+                              user!.isVerified! != true
+                                  ? '@${user!.username!}'.txt(
                                       size: 14.sp,
                                       fontWeight: FontWeight.w700,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
                                     )
-                                : Row(
-                                    children: [
-                                      '@${user!.username!}'
-                                          .replaceAll(' ', '')
-                                          .toLowerCase()
-                                          .txt(
-                                            size: 14.sp,
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                      2.sbW,
-                                      Icon(
-                                        Icons.whatshot_sharp,
-                                        size: 17.sp,
-                                        color: Colors.blue,
-                                      ),
-                                    ],
-                                  ),
-                          ],
+                                  : Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        '@${user!.username!}'.txt(
+                                          size: 14.sp,
+                                          fontWeight: FontWeight.w700,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        2.sbW,
+                                        Icon(
+                                          Icons.whatshot_sharp,
+                                          size: 17.sp,
+                                          color: Colors.blue,
+                                        ),
+                                      ],
+                                    ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -193,20 +198,29 @@ class OtherUserProfileView extends ConsumerWidget {
                     15.sbH,
 
                     //! follow
-                    TransparentButton(
-                      onTap: () {
-                        ref
-                            .read(userProfileControllerProvider.notifier)
-                            .followUser(userToFollow: user!);
-                      },
-                      color: currentTheme.textTheme.bodyMedium!.color!
-                          .withOpacity(0.5),
-                      text: user!.followers!.contains(ownUser.uid)
-                          ? 'Following'
-                          : user!.following!.contains(ownUser.uid)
-                              ? 'Follow back'
-                              : 'Follow',
-                    ),
+                    !user!.followers!.contains(ownUser.uid)
+                        ? BButton(
+                            onTap: () {
+                              ref
+                                  .read(userProfileControllerProvider.notifier)
+                                  .followUser(userToFollow: user!);
+                            },
+                            color: currentTheme.textTheme.bodyMedium!.color!,
+                            textColor: currentTheme.backgroundColor,
+                            text: user!.following!.contains(ownUser.uid)
+                                ? 'Follow back'
+                                : 'Follow',
+                          )
+                        : TransparentButton(
+                            onTap: () {
+                              ref
+                                  .read(userProfileControllerProvider.notifier)
+                                  .followUser(userToFollow: user!);
+                            },
+                            color: currentTheme.textTheme.bodyMedium!.color!
+                                .withOpacity(0.5),
+                            text: 'Following',
+                          ),
                   ],
                 ),
               ),
