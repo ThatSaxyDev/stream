@@ -48,12 +48,12 @@ class NotificationsModel {
 
   factory NotificationsModel.fromMap(Map<String, dynamic> map) {
     return NotificationsModel(
-      notifId: map['notifId'] != null ? map["notifId"] ?? '' as String : null,
-      actorUid: map['actorUid'] != null ? map["actorUid"] ?? '' as String : null,
-      receiverUid: map['receiverUid'] != null ? map["receiverUid"] ?? '' as String : null,
-      type: map['type'] != null ? map["type"] ?? '' as String : null,
-      createdAt: map['createdAt'] != null ? DateTime.fromMillisecondsSinceEpoch((map["createdAt"]??0) ?? 0 as int) : null,
-      updatedAt: map['updatedAt'] != null ? DateTime.fromMillisecondsSinceEpoch((map["updatedAt"]??0) ?? 0 as int) : null,
+      notifId: map['notifId'] != null ? map["notifId"] ?? '' : null,
+      actorUid: map['actorUid'] != null ? map["actorUid"] ?? '' : null,
+      receiverUid: map['receiverUid'] != null ? map["receiverUid"] ?? '' : null,
+      type: map['type'] != null ? map["type"] ?? '' : null,
+      createdAt: map['createdAt'] != null ? DateTime.fromMillisecondsSinceEpoch((map["createdAt"]??0) ?? 0) : null,
+      updatedAt: map['updatedAt'] != null ? DateTime.fromMillisecondsSinceEpoch((map["updatedAt"]??0) ?? 0) : null,
     );
   }
 

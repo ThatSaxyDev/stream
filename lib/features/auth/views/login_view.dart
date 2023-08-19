@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stream/features/auth/controller/auth_controller.dart';
 import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/app_extensions.dart';

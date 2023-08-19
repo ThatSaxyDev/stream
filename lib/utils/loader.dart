@@ -6,7 +6,6 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import 'package:stream/theme/palette.dart';
-import 'package:stream/utils/app_extensions.dart';
 
 // class Loader extends StatelessWidget {
 //   const Loader({super.key});

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stream/features/auth/controller/auth_controller.dart';
 import 'package:stream/features/home/widgets/post_card.dart';
 import 'package:stream/features/posts/controllers/post_controller.dart';
 import 'package:stream/features/posts/widgets/feed_quote_card.dart';

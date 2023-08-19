@@ -13,14 +13,11 @@ import 'package:stream/features/posts/widgets/feed_quote_card.dart';
 import 'package:stream/features/posts/widgets/feed_reply_post_card.dart';
 import 'package:stream/features/profile/controllers/profile_controller.dart';
 import 'package:stream/features/profile/views/profile_view.dart';
-import 'package:stream/features/profile/widgets/edit_profile_bottom_sheet.dart';
 import 'package:stream/models/post_model.dart';
 import 'package:stream/models/user_model.dart';
-import 'package:stream/shared/app_routes.dart';
 import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/app_constants.dart';
 import 'package:stream/utils/app_extensions.dart';
-import 'package:stream/utils/nav.dart';
 import 'package:stream/utils/widgets/button.dart';
 import 'package:tabbed_sliverlist/tabbed_sliverlist.dart';
 

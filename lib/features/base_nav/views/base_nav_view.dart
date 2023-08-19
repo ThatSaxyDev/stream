@@ -11,7 +11,6 @@ import 'package:stream/features/profile/views/profile_view.dart';
 import 'package:stream/features/search/views/search_view.dart';
 import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/app_constants.dart';
-import 'package:stream/utils/app_extensions.dart';
 import 'package:stream/utils/widgets/image_loader.dart';
 import 'package:stream/utils/widgets/image_overlay.dart';
 

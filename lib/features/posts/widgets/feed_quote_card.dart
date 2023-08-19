@@ -12,7 +12,6 @@ import 'package:stream/features/posts/widgets/quoting_post_card.dart';
 import 'package:stream/features/posts/widgets/reply_post_bottom_sheet.dart';
 import 'package:stream/features/posts/widgets/repost_quote_bottom_sheet.dart';
 import 'package:stream/models/post_model.dart';
-import 'package:stream/models/quote_nodel.dart';
 import 'package:stream/models/user_model.dart';
 import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/app_constants.dart';

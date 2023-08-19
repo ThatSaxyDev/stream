@@ -3,16 +3,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stream/features/auth/controller/auth_controller.dart';
-import 'package:stream/features/search/controllers/search_controller.dart';
-import 'package:stream/features/search/views/search_delegate.dart';
-import 'package:stream/features/search/widgets/search_user_card.dart';
 import 'package:stream/models/user_model.dart';
 import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/app_extensions.dart';
-import 'package:stream/utils/error_text.dart';
-import 'package:stream/utils/loader.dart';
 
 class NotificationsView extends ConsumerWidget {
   const NotificationsView({super.key});
