@@ -129,6 +129,7 @@ extension WidgetExtensions on double {
 
 extension ImageExtension on String {
   Image mage({
+    Color? color,
     required double? h,
     BoxFit? fit,
   }) {
@@ -136,6 +137,7 @@ extension ImageExtension on String {
       this,
       height: h,
       fit: fit,
+      color: color,
     );
   }
 }

@@ -6,7 +6,6 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import 'package:stream/theme/palette.dart';
-import 'package:stream/utils/app_extensions.dart';
 
 // class Loader extends StatelessWidget {
 //   const Loader({super.key});
@@ -46,9 +45,11 @@ class Loader extends ConsumerWidget {
 
 class Loadinggg extends StatefulWidget {
   final double? height;
+  final int? duration;
   const Loadinggg({
     Key? key,
     this.height,
+    this.duration,
   }) : super(key: key);
 
   @override
@@ -64,7 +65,7 @@ class _LoadingggState extends State<Loadinggg>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1000),
+      duration: Duration(milliseconds: widget.duration ?? 1000),
     )..repeat();
   }
 

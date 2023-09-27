@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:routemaster/routemaster.dart';
 import 'package:stream/core/providers/storage_repository_provider.dart';
 import 'package:stream/core/utils.dart';
 import 'package:stream/features/auth/controller/auth_controller.dart';
+import 'package:stream/features/notifications/controllers/notifications_controller.dart';
 import 'package:stream/features/profile/repositories/profile_repository.dart';
 import 'package:stream/models/user_model.dart';
 
@@ -76,7 +76,39 @@ class UserProfileController extends StateNotifier<bool> {
   //! follow user
   void followUser({required UserModel userToFollow}) async {
     UserModel user = _ref.read(userProvider)!;
-    _userProfileRepository.followUser(
+    final res = await _userProfileRepository.followUser(
         userToFollow: userToFollow, ownUser: user);
+
+    res.fold(
+      (l) => null,
+      (r) {
+        if (r == 'followed') {
+          //! send notification
+          _ref.read(notificationsControllerProvider.notifier).sendNotification(
+                actorUid: user.uid!,
+                receiverUid: userToFollow.uid!,
+                type: 'follow',
+                postId: '',
+                postContent: 'followed you',
+                notificationContent: '',
+                postImage: '',
+                notificationImage: user.profilePic!,
+              );
+        }
+        // if (r == 'unliked') {
+        //   //! delete notification
+        //   _ref.read(notificationsControllerProvider.notifier).sendNotification(
+        //         actorUid: user.uid!,
+        //         receiverUid: post.userUid!,
+        //         type: 'like',
+        //         postId: post.id!,
+        //         postContent: post.textContent!,
+        //         notificationContent: '',
+        //         postImage: post.imageUrl!,
+        //         notificationImage: '',
+        //       );
+        // }
+      },
+    );
   }
 }

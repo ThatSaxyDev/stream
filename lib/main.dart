@@ -44,29 +44,33 @@ class _UsetreamAppState extends ConsumerState<UsetreamApp> {
   Widget build(BuildContext context) {
     return ref.watch(authStateChangeProvider).when(
           data: (User? data) => ScreenUtilInit(
-              designSize: const Size(375, 812),
-              minTextAdapt: true,
-              splitScreenMode: false,
-              builder: (context, child) {
-                return Builder(builder: (context) {
+            designSize: const Size(375, 812),
+            minTextAdapt: true,
+            splitScreenMode: false,
+            builder: (context, child) {
+              return Builder(
+                builder: (context) {
                   return MaterialApp.router(
                     title: AppTexts.appName,
                     debugShowCheckedModeBanner: false,
                     theme: ref.watch(themeNotifierProvider),
-                    routerDelegate:
-                        RoutemasterDelegate(routesBuilder: (context) {
-                      if (data != null) {
-                        getData(ref: ref, data: data);
-                        if (userModel != null) {
-                          return loggedInRoute;
+                    routerDelegate: RoutemasterDelegate(
+                      routesBuilder: (context) {
+                        if (data != null) {
+                          getData(ref: ref, data: data);
+                          if (userModel != null) {
+                            return loggedInRoute;
+                          }
                         }
-                      }
-                      return loggedOutRoute;
-                    }),
+                        return loggedOutRoute;
+                      },
+                    ),
                     routeInformationParser: const RoutemasterParser(),
                   );
-                });
-              }),
+                },
+              );
+            },
+          ),
           error: (error, stactrace) => MaterialApp(
               home: Scaffold(body: ErrorText(error: error.toString()))),
           loading: () => const MaterialApp(

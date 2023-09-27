@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, use_build_context_synchronously
 
 import 'dart:io';
 
@@ -36,6 +36,7 @@ class QuotePostBottomSheet extends ConsumerStatefulWidget {
 class _QuotePostBottomSheetState extends ConsumerState<QuotePostBottomSheet> {
   final TextEditingController _textController = TextEditingController();
   final ValueNotifier<bool> isButtonActive = ValueNotifier(false);
+  
   File? image;
 
   //! to add an image

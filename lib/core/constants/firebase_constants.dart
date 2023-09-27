@@ -4,7 +4,7 @@ class FirebaseConstants {
   static const repostsCollection = 'reposts';
   static const commentsCollection = 'comments';
   static const quotesCollection = 'quotes';
-  static const approvalCollection = 'approvals';
+  static const notificationsCollection = 'notifications';
   static const bookmarksCollection = 'bookmarks';
   static const verificationCollection = 'verifications';
 }

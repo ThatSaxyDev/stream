@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,9 +9,11 @@ import 'package:stream/features/home/widgets/post_card.dart';
 import 'package:stream/features/posts/controllers/post_controller.dart';
 import 'package:stream/features/posts/views/widgets/views_post_card.dart';
 import 'package:stream/features/posts/widgets/reply_post_bottom_sheet.dart';
+import 'package:stream/features/posts/widgets/reply_top_card.dart';
 import 'package:stream/models/post_model.dart';
 import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/app_extensions.dart';
+import 'package:stream/utils/error_text.dart';
 import 'package:stream/utils/loader.dart';
 import 'package:stream/utils/widgets/click_button.dart';
 
@@ -38,6 +41,41 @@ class PostView extends ConsumerWidget {
                       parent: BouncingScrollPhysics()),
                   child: Column(
                     children: [
+                      //! check if its a reply
+                      if (postt.replyingPostId! != '')
+                        ref
+                            .watch(getPostByIdProvider(postt.replyingPostId!))
+                            .when(
+                              data: (PostModel postRepliedTo) {
+                                return ReplyTopCard(repliedPost: postRepliedTo);
+                              },
+                              error: (error, stackTrace) {
+                                error.toString().log();
+                                return const ErrorText(
+                                    error: 'An error occurred');
+                              },
+                              loading: () => Loadinggg(
+                                height: 40.h,
+                              ),
+                            ),
+                      // Consumer(
+                      //   builder: (context, ref, child) {
+                      //     PostModel? postRepliedTo;
+                      //     ref
+                      //         .watch(
+                      //             getPostByIdProvider(postt.replyingPostId!))
+                      //         .whenData((value) {
+                      //       postRepliedTo = value;
+                      //     });
+                      //     if (postRepliedTo != null) {
+                      //       return ReplyTopCard(repliedPost: postRepliedTo!);
+                      //     } else {
+                      //       // Timer(const Duration(milliseconds: 100), () {});
+                      //       return const SizedBox.shrink();
+                      //     }
+                      //   },
+                      // ),
+
                       //! post
                       ViewsPostCard(post: postt),
 

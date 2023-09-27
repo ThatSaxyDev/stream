@@ -5,22 +5,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stream/features/auth/controller/auth_controller.dart';
-import 'package:stream/features/base_nav/views/base_nav_view.dart';
 import 'package:stream/features/home/widgets/post_card.dart';
 import 'package:stream/features/posts/controllers/post_controller.dart';
-import 'package:stream/features/posts/widgets/create_post_bottom_sheet.dart';
 import 'package:stream/features/posts/widgets/feed_quote_card.dart';
 import 'package:stream/features/posts/widgets/feed_reply_post_card.dart';
 import 'package:stream/features/profile/controllers/profile_controller.dart';
 import 'package:stream/features/profile/views/profile_view.dart';
-import 'package:stream/features/profile/widgets/edit_profile_bottom_sheet.dart';
 import 'package:stream/models/post_model.dart';
 import 'package:stream/models/user_model.dart';
-import 'package:stream/shared/app_routes.dart';
 import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/app_constants.dart';
 import 'package:stream/utils/app_extensions.dart';
-import 'package:stream/utils/nav.dart';
+import 'package:stream/utils/loader.dart';
 import 'package:stream/utils/widgets/button.dart';
 import 'package:tabbed_sliverlist/tabbed_sliverlist.dart';
 
@@ -252,26 +248,14 @@ class OtherUserProfileView extends ConsumerWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
-                                PhosphorIcons.pen,
-                                size: 60.sp,
-                              ).tap(onTap: () {
-                                showModalBottomSheet(
-                                  isScrollControlled: true,
-                                  enableDrag: true,
-                                  backgroundColor: Colors.transparent,
-                                  context: context,
-                                  builder: (context) => const Wrap(
-                                    children: [
-                                      CreatePostBottomSheet(),
-                                    ],
-                                  ),
-                                );
-                              }),
+                              Loadinggg(
+                                height: 50.h,
+                                duration: 5000,
+                              ),
                             ],
                           ),
                           20.sbH,
-                          'You have no posts'.txt(
+                          'No posts yet'.txt(
                             size: 16.sp,
                             fontWeight: FontWeight.w600,
                           ),
@@ -311,17 +295,14 @@ class OtherUserProfileView extends ConsumerWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
-                                PhosphorIcons.placeholderBold,
-                                size: 60.sp,
-                              ).tap(onTap: () {
-                                moveToPage(
-                                    context: context, ref: ref, index: 0);
-                              }),
+                              Loadinggg(
+                                height: 50.h,
+                                duration: 5000,
+                              ),
                             ],
                           ),
                           20.sbH,
-                          'You have no replies'.txt(
+                          'No replies yet'.txt(
                             size: 16.sp,
                             fontWeight: FontWeight.w600,
                           ),

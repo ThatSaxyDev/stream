@@ -17,6 +17,9 @@ class PostModel {
   final List<dynamic>? bookmarkedBy;
   final List<dynamic>? repliedTo;
   final List<dynamic>? likedBy;
+  final List<dynamic>? likedByNotifIds;
+  final String? repostId;
+  final String? repostingUser;
   const PostModel({
     required this.id,
     this.replyingPostId,
@@ -31,6 +34,9 @@ class PostModel {
     this.bookmarkedBy,
     this.repliedTo,
     this.likedBy,
+    this.likedByNotifIds,
+    this.repostId,
+    this.repostingUser,
   });
 
   PostModel copyWith({
@@ -47,6 +53,9 @@ class PostModel {
     List<dynamic>? bookmarkedBy,
     List<dynamic>? repliedTo,
     List<dynamic>? likedBy,
+    List<dynamic>? likedByNotifIds,
+    String? repostId,
+    String? repostingUser,
   }) {
     return PostModel(
       id: id ?? this.id,
@@ -62,6 +71,9 @@ class PostModel {
       bookmarkedBy: bookmarkedBy ?? this.bookmarkedBy,
       repliedTo: repliedTo ?? this.repliedTo,
       likedBy: likedBy ?? this.likedBy,
+      likedByNotifIds: likedByNotifIds ?? this.likedByNotifIds,
+      repostId: repostId ?? this.repostId,
+      repostingUser: repostingUser ?? this.repostingUser,
     );
   }
 
@@ -80,6 +92,9 @@ class PostModel {
       'bookmarkedBy': bookmarkedBy,
       'repliedTo': repliedTo,
       'likedBy': likedBy,
+      'likedByNotifIds': likedByNotifIds,
+      'repostId': repostId,
+      'repostingUser': repostingUser
     };
   }
 
@@ -100,12 +115,15 @@ class PostModel {
       bookmarkedBy: map['bookmarkedBy'] ?? [],
       repliedTo: map['repliedTo'] ?? [],
       likedBy: map['likedBy'] ?? [],
+      likedByNotifIds: map['likedByNotifIds'] ?? [],
+      repostId: map['repostId'] ?? '',
+      repostingUser: map['repostingUser'] ?? '',
     );
   }
 
   @override
   String toString() {
-    return 'PostModel(id: $id, replyingPostId: $replyingPostId, link: $link, quotingPostId: $quotingPostId, imageUrl: $imageUrl, textContent: $textContent, commentCount: $commentCount, userUid: $userUid, createdAt: $createdAt, repostedBy: $repostedBy, bookmarkedBy: $bookmarkedBy, repliedTo: $repliedTo, likedBy: $likedBy)';
+    return 'PostModel(id: $id, replyingPostId: $replyingPostId, link: $link, quotingPostId: $quotingPostId, imageUrl: $imageUrl, textContent: $textContent, commentCount: $commentCount, userUid: $userUid, createdAt: $createdAt, repostedBy: $repostedBy, bookmarkedBy: $bookmarkedBy, repliedTo: $repliedTo, likedBy: $likedBy, likedByNotifIds: $likedByNotifIds, repostId: $repostId, repostingUser: $repostingUser)';
   }
 
   @override
@@ -124,7 +142,10 @@ class PostModel {
         listEquals(other.repostedBy, repostedBy) &&
         listEquals(other.bookmarkedBy, bookmarkedBy) &&
         listEquals(other.repliedTo, repliedTo) &&
-        listEquals(other.likedBy, likedBy);
+        listEquals(other.likedBy, likedBy) &&
+        listEquals(other.likedByNotifIds, likedByNotifIds) &&
+        other.repostId == repostId &&
+        other.repostingUser == repostingUser;
   }
 
   @override
@@ -141,7 +162,10 @@ class PostModel {
         repostedBy.hashCode ^
         bookmarkedBy.hashCode ^
         repliedTo.hashCode ^
-        likedBy.hashCode;
+        likedBy.hashCode ^
+        likedByNotifIds.hashCode ^
+        repostId.hashCode ^
+        repostingUser.hashCode;
   }
 
   String toJson() => json.encode(toMap());

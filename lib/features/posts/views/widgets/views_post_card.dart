@@ -82,7 +82,7 @@ class ViewsPostCard extends ConsumerWidget {
                             height: 100.h,
                             width: width(context),
                             decoration: BoxDecoration(
-                              color: currentTheme.backgroundColor,
+                              color: currentTheme.colorScheme.background,
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Center(

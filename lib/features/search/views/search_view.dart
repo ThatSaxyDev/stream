@@ -49,8 +49,24 @@ class SearchView extends ConsumerWidget {
       ),
       body: allUsersStream.when(
         data: (List<UserModel> allUsers) {
-          if (allUsers.isEmpty) {
-            return const SizedBox.shrink();
+          if (allUsers.length - 1 == 0) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Loadinggg(
+                    height: 50.h,
+                    duration: 5000,
+                  ),
+                  20.sbH,
+                  'Hmm, seems like you are the\nfirst one on Stream'.txt(
+                    textAlign: TextAlign.center,
+                    size: 16.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ],
+              ),
+            );
           }
 
           return ListView.builder(

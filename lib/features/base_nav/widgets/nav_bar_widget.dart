@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream/features/base_nav/views/base_nav_view.dart';
+import 'package:stream/features/posts/controllers/post_controller.dart';
 import 'package:stream/features/posts/widgets/create_post_bottom_sheet.dart';
 import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/app_extensions.dart';
@@ -45,6 +46,10 @@ class NavBarWidget extends ConsumerWidget {
       ),
     ).tap(
       onTap: () {
+        if (nav.index == 0) {
+          ref.invalidate(userPostProvider);
+        }
+
         if (nav.index < 2) {
           moveToPage(
             context: context,

@@ -8,6 +8,7 @@ import 'package:stream/models/user_model.dart';
 import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/app_extensions.dart';
 import 'package:stream/utils/widgets/button.dart';
+import 'package:stream/utils/widgets/image_loader.dart';
 
 import '../../../utils/app_constants.dart';
 
@@ -38,10 +39,7 @@ class SearchUserCard extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //! profile pic
-              CircleAvatar(
-                radius: 18.w,
-                backgroundImage: NetworkImage(user.profilePic!),
-              ),
+              CircularImageLoader(imageUrl: user.profilePic!),
               15.sbW,
 
               //! name. followers

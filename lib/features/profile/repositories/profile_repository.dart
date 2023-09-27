@@ -33,7 +33,7 @@ class UserProfileRepository {
   }
 
   //! follow user
-  void followUser({
+  FutureEither<String> followUser({
     required UserModel userToFollow,
     required UserModel ownUser,
   }) async {
@@ -44,6 +44,7 @@ class UserProfileRepository {
       _users.doc(ownUser.uid).update({
         'following': FieldValue.arrayRemove([userToFollow.uid]),
       });
+      return right('unfollowed');
     } else {
       _users.doc(userToFollow.uid).update({
         'followers': FieldValue.arrayUnion([ownUser.uid]),
@@ -51,6 +52,7 @@ class UserProfileRepository {
       _users.doc(ownUser.uid).update({
         'following': FieldValue.arrayUnion([userToFollow.uid]),
       });
+       return right('followed');
     }
   }
 }

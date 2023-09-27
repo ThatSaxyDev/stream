@@ -6,6 +6,11 @@ class NotificationsModel {
   final String? actorUid;
   final String? receiverUid;
   final String? type;
+  final String? postId;
+  final String? postContent;
+  final String? postImage;
+  final String? notificationContent;
+  final String? notificationImage;
   final DateTime? createdAt;
   final DateTime? updatedAt;
   const NotificationsModel({
@@ -13,6 +18,11 @@ class NotificationsModel {
     this.actorUid,
     this.receiverUid,
     this.type,
+    this.postId,
+    this.postContent,
+    this.postImage,
+    this.notificationContent,
+    this.notificationImage,
     this.createdAt,
     this.updatedAt,
   });
@@ -22,6 +32,11 @@ class NotificationsModel {
     String? actorUid,
     String? receiverUid,
     String? type,
+    String? postId,
+    String? postContent,
+    String? postImage,
+    String? notificationContent,
+    String? notificationImage,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
@@ -30,6 +45,11 @@ class NotificationsModel {
       actorUid: actorUid ?? this.actorUid,
       receiverUid: receiverUid ?? this.receiverUid,
       type: type ?? this.type,
+      postId: postId ?? this.postId,
+      postContent: postContent ?? this.postContent,
+      postImage: postImage ?? this.postImage,
+      notificationContent: notificationContent ?? this.notificationContent,
+      notificationImage: notificationImage ?? this.notificationImage,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );
@@ -41,6 +61,11 @@ class NotificationsModel {
       'actorUid': actorUid,
       'receiverUid': receiverUid,
       'type': type,
+      'postId': postId,
+      'postImage': postImage,
+      'notificationImage': notificationImage,
+      'postContent': postContent,
+      'notificationContent': notificationContent,
       'createdAt': createdAt?.millisecondsSinceEpoch,
       'updatedAt': updatedAt?.millisecondsSinceEpoch,
     };
@@ -48,22 +73,32 @@ class NotificationsModel {
 
   factory NotificationsModel.fromMap(Map<String, dynamic> map) {
     return NotificationsModel(
-      notifId: map['notifId'] != null ? map["notifId"] ?? '' as String : null,
-      actorUid: map['actorUid'] != null ? map["actorUid"] ?? '' as String : null,
-      receiverUid: map['receiverUid'] != null ? map["receiverUid"] ?? '' as String : null,
-      type: map['type'] != null ? map["type"] ?? '' as String : null,
-      createdAt: map['createdAt'] != null ? DateTime.fromMillisecondsSinceEpoch((map["createdAt"]??0) ?? 0 as int) : null,
-      updatedAt: map['updatedAt'] != null ? DateTime.fromMillisecondsSinceEpoch((map["updatedAt"]??0) ?? 0 as int) : null,
+      notifId: map['notifId'] ?? '',
+      actorUid: map['actorUid'] ?? '',
+      receiverUid: map['receiverUid'] ?? '',
+      type: map['type'] ?? '',
+      postId: map['postId'] ?? '',
+      postContent: map['postContent'] ?? '',
+      postImage: map['postImage'] ?? '',
+      notificationImage: map['notificationImage'] ?? '',
+      notificationContent: map['notificationContent'] ?? '',
+      createdAt: map['createdAt'] != null
+          ? DateTime.fromMillisecondsSinceEpoch((map["createdAt"] ?? 0))
+          : null,
+      updatedAt: map['updatedAt'] != null
+          ? DateTime.fromMillisecondsSinceEpoch((map["updatedAt"] ?? 0))
+          : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory NotificationsModel.fromJson(String source) => NotificationsModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory NotificationsModel.fromJson(String source) =>
+      NotificationsModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'NotificationsModel(notifId: $notifId, actorUid: $actorUid, receiverUid: $receiverUid, type: $type, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'NotificationsModel(notifId: $notifId, actorUid: $actorUid, receiverUid: $receiverUid, type: $type, postId: $postId, postContent: $postContent, postImage: $postImage, notificationContent: $notificationContent, notificationImage: $notificationImage, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -75,6 +110,11 @@ class NotificationsModel {
       other.actorUid == actorUid &&
       other.receiverUid == receiverUid &&
       other.type == type &&
+      other.postId == postId &&
+      other.postContent == postContent &&
+      other.postImage == postImage &&
+      other.notificationContent == notificationContent &&
+      other.notificationImage == notificationImage &&
       other.createdAt == createdAt &&
       other.updatedAt == updatedAt;
   }
@@ -85,6 +125,11 @@ class NotificationsModel {
       actorUid.hashCode ^
       receiverUid.hashCode ^
       type.hashCode ^
+      postId.hashCode ^
+      postContent.hashCode ^
+      postImage.hashCode ^
+      notificationContent.hashCode ^
+      notificationImage.hashCode ^
       createdAt.hashCode ^
       updatedAt.hashCode;
   }

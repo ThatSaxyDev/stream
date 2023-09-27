@@ -18,6 +18,7 @@ import 'package:stream/shared/app_routes.dart';
 import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/app_constants.dart';
 import 'package:stream/utils/app_extensions.dart';
+import 'package:stream/utils/loader.dart';
 import 'package:stream/utils/nav.dart';
 import 'package:tabbed_sliverlist/tabbed_sliverlist.dart';
 
@@ -348,9 +349,9 @@ class ProfileView extends ConsumerWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
-                                PhosphorIcons.placeholderBold,
-                                size: 60.sp,
+                              Loadinggg(
+                                height: 50.h,
+                                duration: 5000,
                               ).tap(onTap: () {
                                 moveToPage(
                                     context: context, ref: ref, index: 0);
@@ -394,9 +395,9 @@ class ProfileView extends ConsumerWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
-                                PhosphorIcons.placeholderBold,
-                                size: 60.sp,
+                              Loadinggg(
+                                height: 50.h,
+                                duration: 5000,
                               ).tap(onTap: () {
                                 moveToPage(
                                     context: context, ref: ref, index: 0);

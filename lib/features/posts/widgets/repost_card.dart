@@ -11,7 +11,6 @@ import 'package:stream/features/posts/controllers/post_controller.dart';
 import 'package:stream/features/posts/widgets/feed_quote_card.dart';
 import 'package:stream/features/posts/widgets/reply_post_bottom_sheet.dart';
 import 'package:stream/models/post_model.dart';
-import 'package:stream/models/repost_model.dart';
 import 'package:stream/models/user_model.dart';
 import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/app_constants.dart';
@@ -21,12 +20,10 @@ import 'package:stream/utils/widgets/image_loader.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class RepostPostCard extends ConsumerWidget {
-  final RepostModel repost;
   final PostModel post;
   const RepostPostCard({
     super.key,
     required this.post,
-    required this.repost,
   });
 
   @override
@@ -36,6 +33,7 @@ class RepostPostCard extends ConsumerWidget {
     ThemeData currentTheme = ref.watch(themeNotifierProvider);
     UserModel? user;
     UserModel? repostingUser;
+    PostModel repostedPost;
 
     ref.watch(getUserProvider(post.userUid!)).whenData((value) => user = value);
     if (user == null) {
@@ -43,11 +41,21 @@ class RepostPostCard extends ConsumerWidget {
     }
 
     ref
-        .watch(getUserProvider(repost.repostedByUser!))
+        .watch(getUserProvider(post.repostingUser!))
         .whenData((value) => repostingUser = value);
     if (repostingUser == null) {
       return const SizedBox.shrink();
     }
+
+    // ref.watch(getPostByIdProvider(post.replyingPostId!)).whenData((value) {
+    //   repliedPost = value;
+    //   ref
+    //       .watch(getUserProvider(repliedPost!.userUid!))
+    //       .whenData((value) => repliedUser = value);
+    //   if (repliedUser == null) {
+    //     return const SizedBox.shrink();
+    //   }
+    // });
 
     return post.quotingPostId!.isNotEmpty
         ? Column(
@@ -118,302 +126,332 @@ class RepostPostCard extends ConsumerWidget {
                   ],
                 ),
                 10.sbH,
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Column(
-                      children: [
-                        CircleAvatar(
-                          radius: 15.w,
-                          backgroundImage: NetworkImage(user!.profilePic!),
-                        ).tap(onTap: () {
-                          if (post.userUid == userr.uid &&
-                              indexFromController != 3) {
-                            moveToPage(
-                              context: context,
-                              ref: ref,
-                              index: 3,
-                            );
-                          } else {
-                            Routemaster.of(context)
-                                .push('/profile/${post.userUid}');
-                          }
-                        }),
-                      ],
-                    ),
-                    10.sbW,
-                    Column(
+                ref.watch(getPostByIdProvider(post.id!)).when(
+                  data: (data) {
+                    return Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
+                        Column(
                           children: [
-                            //! user name
-                            user!.isVerified! != true
-                                ? '@${user!.username!}'.toLowerCase().txt(
-                                      size: 14.sp,
-                                      fontWeight: FontWeight.w600,
-                                    )
-                                : Row(
-                                    children: [
-                                      '@${user!.username!}'.toLowerCase().txt(
+                            CircularImageLoader(
+                              imageUrl: user!.profilePic!,
+                              dimension: 30.w,
+                            ).tap(onTap: () {
+                              if (data.userUid == userr.uid &&
+                                  indexFromController != 3) {
+                                moveToPage(
+                                  context: context,
+                                  ref: ref,
+                                  index: 3,
+                                );
+                              } else {
+                                Routemaster.of(context)
+                                    .push('/profile/${post.userUid}');
+                              }
+                            }),
+                          ],
+                        ),
+                        10.sbW,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: width(context) * 0.8,
+                              child: Row(
+                                children: [
+                                  //! user name
+                                  user!.isVerified! != true
+                                      ? '@${user!.username!}'
+                                          .toLowerCase()
+                                          .txt(
                                             size: 14.sp,
                                             fontWeight: FontWeight.w600,
-                                          ),
-                                      2.sbW,
-                                      Icon(
-                                        Icons.whatshot_sharp,
-                                        size: 17.sp,
-                                        color: Colors.blue,
-                                      ),
-                                    ],
-                                  ),
-                            user!.isVerified! != true
-                                ? (width(context) * 0.36).sbW
-                                : (width(context) * 0.33).sbW,
-                            //! time, menu
-                            timeago
-                                .format(post.createdAt!, locale: 'en_short')
-                                .txt(
-                                  size: 12.sp,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                            7.sbW,
-                            const Icon(PhosphorIcons.dotsThreeBold).tap(
-                              onTap: () {
-                                //! delete post
-                                showModalBottomSheet(
-                                  isScrollControlled: true,
-                                  enableDrag: true,
-                                  backgroundColor: Colors.transparent,
-                                  context: context,
-                                  builder: (context) => Wrap(
-                                    children: [
-                                      Container(
-                                        height: 100.h,
-                                        width: width(context),
-                                        decoration: BoxDecoration(
-                                          color: currentTheme.backgroundColor,
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                        ),
-                                        child: Center(
-                                          child: Container(
-                                            height: 40.h,
-                                            width: 100.w,
-                                            decoration: BoxDecoration(
-                                              color: currentTheme
-                                                  .textTheme.bodyMedium!.color!
-                                                  .withOpacity(0.05),
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                            ),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Icon(
-                                                  Icons.delete,
-                                                  color: Pallete.thickRed,
-                                                  size: 20.sp,
+                                          )
+                                      : Row(
+                                          children: [
+                                            '@${user!.username!}'
+                                                .toLowerCase()
+                                                .txt(
+                                                  size: 14.sp,
+                                                  fontWeight: FontWeight.w600,
                                                 ),
-                                                7.sbW,
-                                                Text(
-                                                  'Delete',
-                                                  style: TextStyle(
-                                                    color: Pallete.thickRed,
-                                                    fontSize: 15.sp,
-                                                    fontWeight: FontWeight.bold,
+                                            2.sbW,
+                                            Icon(
+                                              Icons.whatshot_sharp,
+                                              size: 17.sp,
+                                              color: Colors.blue,
+                                            ),
+                                          ],
+                                        ),
+                                  const Spacer(),
+                                  //! time, menu
+                                  timeago
+                                      .format(post.createdAt!,
+                                          locale: 'en_short')
+                                      .txt(
+                                        size: 12.sp,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                  7.sbW,
+                                   if(post.repostingUser == userr.uid)
+                                  const Icon(PhosphorIcons.dotsThreeBold).tap(
+                                    onTap: () {
+                                      //! delete post
+                                      showModalBottomSheet(
+                                        isScrollControlled: true,
+                                        enableDrag: true,
+                                        backgroundColor: Colors.transparent,
+                                        context: context,
+                                        builder: (context) => Wrap(
+                                          children: [
+                                            Container(
+                                              height: 100.h,
+                                              width: width(context),
+                                              decoration: BoxDecoration(
+                                                color: currentTheme
+                                                    .backgroundColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                              ),
+                                              child: Center(
+                                                child: Container(
+                                                  height: 40.h,
+                                                  width: 100.w,
+                                                  decoration: BoxDecoration(
+                                                    color: currentTheme
+                                                        .textTheme
+                                                        .bodyMedium!
+                                                        .color!
+                                                        .withOpacity(0.05),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                          ).tap(onTap: () {
-                                            goBackk(context);
-                                            // if (Platform.isAndroid) {
-                                            showDialog(
-                                              context: context,
-                                              builder: (context) {
-                                                return AlertDialog(
-                                                  title: const Text(
-                                                      'Delete post?'),
-                                                  content: const Text(
-                                                      'You won\'t be able to restore it'),
-                                                  actions: <Widget>[
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        goBackk(context);
-                                                      },
-                                                      child: 'Cancel'.txt(
-                                                          color: currentTheme
-                                                              .textTheme
-                                                              .bodyMedium!
-                                                              .color),
-                                                    ),
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        ref
-                                                            .read(
-                                                                postControllerProvider
-                                                                    .notifier)
-                                                            .deletePost(
-                                                                post: post,
-                                                                context:
-                                                                    context);
-                                                        goBackk(context);
-                                                      },
-                                                      child: 'Delete'.txt(
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Icon(
+                                                        Icons.delete,
+                                                        color: Pallete.thickRed,
+                                                        size: 20.sp,
+                                                      ),
+                                                      7.sbW,
+                                                      Text(
+                                                        'Delete',
+                                                        style: TextStyle(
                                                           color:
-                                                              Pallete.thickRed),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                            // } else {
-                                            //   showDialog(
-                                            //     context: context,
-                                            //     builder: (context) {
-                                            //       return CupertinoAlertDialog(
-                                            //         title: const Text('Delete post?'),
-                                            //         content: const Text(
-                                            //             'You won\'t be able to restore it'),
-                                            //         actions: <Widget>[
-                                            //           TextButton(
-                                            //             onPressed: () {
-                                            //               goBackk(context);
-                                            //             },
-                                            //             child: const Text('Cancel'),
-                                            //           ),
-                                            //           TextButton(
-                                            //             onPressed: () {
-                                            //               goBackk(context);
-                                            //             },
-                                            //             child: const Text('Delete'),
-                                            //           ),
-                                            //         ],
-                                            //       );
-                                            //     },
-                                            //   );
-                                            // }
-                                          }),
+                                                              Pallete.thickRed,
+                                                          fontSize: 15.sp,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ).tap(onTap: () {
+                                                  goBackk(context);
+                                                  // if (Platform.isAndroid) {
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return AlertDialog(
+                                                        title: const Text(
+                                                            'Delete post?'),
+                                                        content: const Text(
+                                                            'You won\'t be able to restore it'),
+                                                        actions: <Widget>[
+                                                          TextButton(
+                                                            onPressed: () {
+                                                              goBackk(context);
+                                                            },
+                                                            child: 'Cancel'.txt(
+                                                                color: currentTheme
+                                                                    .textTheme
+                                                                    .bodyMedium!
+                                                                    .color),
+                                                          ),
+                                                          TextButton(
+                                                            onPressed: () {
+                                                              ref
+                                                                  .read(postControllerProvider
+                                                                      .notifier)
+                                                                  .deletePost(
+                                                                      post:
+                                                                          post,
+                                                                      context:
+                                                                          context);
+                                                              goBackk(context);
+                                                            },
+                                                            child: 'Delete'.txt(
+                                                                color: Pallete
+                                                                    .thickRed),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  );
+                                                  // } else {
+                                                  //   showDialog(
+                                                  //     context: context,
+                                                  //     builder: (context) {
+                                                  //       return CupertinoAlertDialog(
+                                                  //         title: const Text('Delete post?'),
+                                                  //         content: const Text(
+                                                  //             'You won\'t be able to restore it'),
+                                                  //         actions: <Widget>[
+                                                  //           TextButton(
+                                                  //             onPressed: () {
+                                                  //               goBackk(context);
+                                                  //             },
+                                                  //             child: const Text('Cancel'),
+                                                  //           ),
+                                                  //           TextButton(
+                                                  //             onPressed: () {
+                                                  //               goBackk(context);
+                                                  //             },
+                                                  //             child: const Text('Delete'),
+                                                  //           ),
+                                                  //         ],
+                                                  //       );
+                                                  //     },
+                                                  //   );
+                                                  // }
+                                                }),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                    ],
+                                      );
+                                    },
+                                  )
+                                ],
+                              ),
+                            ),
+
+                            //! content
+                            if (post.textContent!.isNotEmpty) ...[
+                              2.sbH,
+                              SizedBox(
+                                width: width(context) * 0.8,
+                                child: SelectableText(
+                                  post.textContent!,
+                                  style: TextStyle(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                            ],
+
+                            //! image
+                            if (post.imageUrl!.isNotEmpty) ...[
+                              10.sbH,
+                              ImageLoader(
+                                height: 250.h,
+                                width: 200.w,
+                                imageUrl: post.imageUrl!,
+                              ),
+                            ],
+                            // 20.sbH,
+
+                            SizedBox(
+                              width: width(context) * 0.75,
+                              child: Row(
+                                children: [
+                                  //! repost
+                                  IconButton(
+                                    padding: EdgeInsets.zero,
+                                    splashColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onPressed: () {
+                                      ref
+                                          .read(postControllerProvider.notifier)
+                                          .rePost(context: context, post: post);
+                                    },
+                                    icon: Icon(
+                                      PhosphorIcons.repeat,
+                                      color:
+                                          data.repostedBy!.contains(userr.uid)
+                                              ? Pallete.activegreen
+                                              : currentTheme
+                                                  .textTheme.bodyMedium!.color,
+                                    ),
                                   ),
-                                );
-                              },
+                                  if (data.repostedBy!.isNotEmpty)
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 5.w),
+                                      child: data.repostedBy!.length
+                                          .toString()
+                                          .txt(),
+                                    ),
+
+                                  //! like
+                                  IconButton(
+                                    padding: EdgeInsets.zero,
+                                    splashColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onPressed: () {
+                                      ref
+                                          .read(postControllerProvider.notifier)
+                                          .likePost(post: post);
+                                    },
+                                    icon: data.likedBy!.contains(userr.uid)
+                                        ? const Icon(
+                                            PhosphorIcons.heartFill,
+                                            color: Pallete.thickRed,
+                                          )
+                                        : const Icon(PhosphorIcons.heart),
+                                  ),
+                                  if (data.likedBy!.isNotEmpty)
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 5.w),
+                                      child:
+                                          data.likedBy!.length.toString().txt(),
+                                    ),
+
+                                  //! reply
+                                  IconButton(
+                                    padding: EdgeInsets.zero,
+                                    splashColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onPressed: () {
+                                      showModalBottomSheet(
+                                        isScrollControlled: true,
+                                        enableDrag: false,
+                                        backgroundColor: Colors.transparent,
+                                        context: context,
+                                        builder: (context) => Wrap(
+                                          children: [
+                                            ReplyPostBottomSheet(post: post),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                    icon:
+                                        const Icon(PhosphorIcons.chatCentered),
+                                  ),
+                                  if (data.repliedTo!.isNotEmpty)
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 5.w),
+                                      child: data.repliedTo!.length
+                                          .toString()
+                                          .txt(),
+                                    ),
+                                ],
+                              ),
                             )
                           ],
                         ),
-
-                        //! content
-                        if (post.textContent!.isNotEmpty) ...[
-                          2.sbH,
-                          SizedBox(
-                            width: width(context) * 0.8,
-                            child: SelectableText(
-                              post.textContent!,
-                              style: TextStyle(
-                                  fontSize: 14.sp, fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                        ],
-
-                        //! image
-                        if (post.imageUrl!.isNotEmpty) ...[
-                          10.sbH,
-                          ImageLoader(
-                            height: 250.h,
-                            width: 200.w,
-                            imageUrl: post.imageUrl!,
-                          ),
-                        ],
-                        // 20.sbH,
-
-                        SizedBox(
-                          width: width(context) * 0.75,
-                          child: Row(
-                            children: [
-                              //! repost
-                              IconButton(
-                                padding: EdgeInsets.zero,
-                                splashColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onPressed: () {
-                                  ref
-                                      .read(postControllerProvider.notifier)
-                                      .rePost(context: context, post: post);
-                                },
-                                icon: Icon(
-                                  PhosphorIcons.repeat,
-                                  color: post.repostedBy!.contains(userr.uid)
-                                      ? Pallete.activegreen
-                                      : currentTheme
-                                          .textTheme.bodyMedium!.color,
-                                ),
-                              ),
-                              if (post.repostedBy!.isNotEmpty)
-                                Padding(
-                                  padding: EdgeInsets.only(right: 5.w),
-                                  child:
-                                      post.repostedBy!.length.toString().txt(),
-                                ),
-
-                              //! like
-                              IconButton(
-                                padding: EdgeInsets.zero,
-                                splashColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onPressed: () {
-                                  ref
-                                      .read(postControllerProvider.notifier)
-                                      .likePost(post: post);
-                                },
-                                icon: post.likedBy!.contains(userr.uid)
-                                    ? const Icon(
-                                        PhosphorIcons.heartFill,
-                                        color: Pallete.thickRed,
-                                      )
-                                    : const Icon(PhosphorIcons.heart),
-                              ),
-                              if (post.likedBy!.isNotEmpty)
-                                Padding(
-                                  padding: EdgeInsets.only(right: 5.w),
-                                  child: post.likedBy!.length.toString().txt(),
-                                ),
-
-                              //! reply
-                              IconButton(
-                                padding: EdgeInsets.zero,
-                                splashColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onPressed: () {
-                                  showModalBottomSheet(
-                                    isScrollControlled: true,
-                                    enableDrag: false,
-                                    backgroundColor: Colors.transparent,
-                                    context: context,
-                                    builder: (context) => Wrap(
-                                      children: [
-                                        ReplyPostBottomSheet(post: post),
-                                      ],
-                                    ),
-                                  );
-                                },
-                                icon: const Icon(PhosphorIcons.chatCentered),
-                              ),
-                              if (post.repliedTo!.isNotEmpty)
-                                Padding(
-                                  padding: EdgeInsets.only(right: 5.w),
-                                  child:
-                                      post.repliedTo!.length.toString().txt(),
-                                ),
-                            ],
-                          ),
-                        )
                       ],
-                    ),
-                  ],
+                    );
+                  },
+                  error: (error, stackTrace) {
+                    return const SizedBox.shrink();
+                  },
+                  loading: () {
+                    return const SizedBox.shrink();
+                  },
                 ),
               ],
             ),

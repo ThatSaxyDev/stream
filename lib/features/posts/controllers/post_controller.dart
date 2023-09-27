@@ -7,10 +7,10 @@ import 'package:fpdart/fpdart.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:stream/core/providers/storage_repository_provider.dart';
 import 'package:stream/features/auth/controller/auth_controller.dart';
+import 'package:stream/features/notifications/controllers/notifications_controller.dart';
 import 'package:stream/features/posts/repositories/post_repository.dart';
 import 'package:stream/models/post_model.dart';
 import 'package:stream/models/quote_nodel.dart';
-import 'package:stream/models/repost_model.dart';
 import 'package:stream/models/user_model.dart';
 import 'package:stream/utils/failure.dart';
 import 'package:stream/utils/nav.dart';
@@ -180,7 +180,6 @@ class PostController extends StateNotifier<bool> {
     res.fold(
       (l) => showSnackBar(context: context, text: l.message),
       (r) {
-        // showSnackBar(context: context, text: 'Posted Successfully!');
         Routemaster.of(context).pop();
       },
     );
@@ -239,6 +238,17 @@ class PostController extends StateNotifier<bool> {
     res.fold(
       (l) => showSnackBar(context: context, text: l.message),
       (r) {
+        //! send notification
+        _ref.read(notificationsControllerProvider.notifier).sendNotification(
+              actorUid: user.uid!,
+              receiverUid: repliedPost.userUid!,
+              type: 'reply',
+              postId: postId,
+              postContent: repliedPost.textContent!,
+              notificationContent: textContent,
+              postImage: repliedPost.imageUrl!,
+              notificationImage: photo,
+            );
         Routemaster.of(context).pop();
       },
     );
@@ -298,14 +308,14 @@ class PostController extends StateNotifier<bool> {
   }
 
   //! get reposts from user only
-  Stream<List<RepostModel>> fetchRepostsPostsFromUser() {
+  Stream<List<PostModel>> fetchRepostsPostsFromUser() {
     UserModel user = _ref.read(userProvider)!;
 
     return _postRepository.fetchRepostsPostsFromUser(user: user);
   }
 
   //! get reposts from user and following
-  Stream<List<RepostModel>> fetchRepostsPostsFromFollowingAndUser() {
+  Stream<List<PostModel>> fetchRepostsPostsFromFollowingAndUser() {
     UserModel user = _ref.read(userProvider)!;
 
     return _postRepository.fetchRepostsPostsFromFollowingAndUser(user: user);
@@ -314,6 +324,38 @@ class PostController extends StateNotifier<bool> {
   //! like a post
   void likePost({required PostModel post}) async {
     UserModel user = _ref.read(userProvider)!;
-    _postRepository.likePost(post: post, user: user);
+    final res = await _postRepository.likePost(post: post, user: user);
+
+    res.fold(
+      (l) => null,
+      (r) {
+        if (r == 'liked') {
+          //! send notification
+          _ref.read(notificationsControllerProvider.notifier).sendNotification(
+                actorUid: user.uid!,
+                receiverUid: post.userUid!,
+                type: 'like',
+                postId: post.id!,
+                postContent: post.textContent!,
+                notificationContent: '',
+                postImage: post.imageUrl!,
+                notificationImage: '',
+              );
+        }
+        // if (r == 'unliked') {
+        //   //! delete notification
+        //   _ref.read(notificationsControllerProvider.notifier).sendNotification(
+        //         actorUid: user.uid!,
+        //         receiverUid: post.userUid!,
+        //         type: 'like',
+        //         postId: post.id!,
+        //         postContent: post.textContent!,
+        //         notificationContent: '',
+        //         postImage: post.imageUrl!,
+        //         notificationImage: '',
+        //       );
+        // }
+      },
+    );
   }
 }

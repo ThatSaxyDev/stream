@@ -54,7 +54,6 @@ dependencies:
   carousel_slider: ^4.2.1
   pinput: ^2.2.31
   image_picker: ^0.8.7+5
-  glass: ^1.0.1+1
   flutter_secure_storage: ^8.0.0
   path_provider: ^2.0.15
   substring_highlight: ^1.0.33

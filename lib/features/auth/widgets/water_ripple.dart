@@ -17,7 +17,7 @@ class _WaterRippleState extends ConsumerState<WaterRipple>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 1000),
     );
   }
 
@@ -50,7 +50,7 @@ class _WaterRippleState extends ConsumerState<WaterRipple>
           width: 200,
           height: 200,
           color: Colors.blue,
-          child: Center(
+          child: const Center(
             child: Text(
               'Ripple',
               style: TextStyle(

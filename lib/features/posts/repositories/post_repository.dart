@@ -6,7 +6,6 @@ import 'package:stream/core/providers/firebase_provider.dart';
 import 'package:stream/core/type_defs.dart';
 import 'package:stream/models/post_model.dart';
 import 'package:stream/models/quote_nodel.dart';
-import 'package:stream/models/repost_model.dart';
 import 'package:stream/models/user_model.dart';
 import 'package:stream/utils/failure.dart';
 import 'package:uuid/uuid.dart';
@@ -64,26 +63,26 @@ class PostRepository {
     required UserModel user,
   }) async {
     String repostId = const Uuid().v1();
-    final repostModel = RepostModel(
-      id: repostId,
-      repostedByUser: user.uid,
-      postId: post.id,
+    PostModel repost = post.copyWith(
+      repostId: repostId,
+      repostingUser: user.uid,
       createdAt: DateTime.now(),
     );
     try {
       if (post.repostedBy!.contains(user.uid)) {
+        _posts.doc(post.id).update({
+          'repostedBy': FieldValue.arrayRemove([user.uid]),
+        });
         final querySnapshot =
-            await _reposts.where('postId', isEqualTo: post.id).get();
+            await _posts.where('repostingUser', isEqualTo: user.uid).get();
         final documents = querySnapshot.docs;
         if (documents.isNotEmpty) {
           final repostId = documents[0].id;
-          await _reposts.doc(repostId).delete();
+          await _posts.doc(repostId).delete();
         }
-        return right(_posts.doc(post.id).update({
-          'repostedBy': FieldValue.arrayRemove([user.uid]),
-        }));
+        return right(null);
       } else {
-        await _reposts.doc(repostId).set(repostModel.toMap());
+        await _posts.doc(repostId).set(repost.toMap());
         return right(_posts.doc(post.id).update({
           'repostedBy': FieldValue.arrayUnion([user.uid]),
         }));
@@ -218,48 +217,56 @@ class PostRepository {
   }
 
   //! get reposts from following and user
-  Stream<List<RepostModel>> fetchRepostsPostsFromFollowingAndUser({
+  Stream<List<PostModel>> fetchRepostsPostsFromFollowingAndUser({
     required UserModel user,
   }) {
     return _reposts
         .orderBy('createdAt', descending: true)
-        .where('repostedByUser', whereIn: [...user.following!, user.uid])
+        .where('repostingUser', whereIn: [...user.following!, user.uid])
         .snapshots()
         .map((event) => event.docs
             .map(
-              (e) => RepostModel.fromMap(e.data() as Map<String, dynamic>),
+              (e) => PostModel.fromMap(e.data() as Map<String, dynamic>),
             )
             .toList());
   }
 
   //! get reposts from user
-  Stream<List<RepostModel>> fetchRepostsPostsFromUser({
+  Stream<List<PostModel>> fetchRepostsPostsFromUser({
     required UserModel user,
   }) {
     return _reposts
         .orderBy('createdAt', descending: true)
-        .where('repostedByUser', isEqualTo: user.uid)
+        .where('repostingUser', isEqualTo: user.uid)
         .snapshots()
         .map((event) => event.docs
             .map(
-              (e) => RepostModel.fromMap(e.data() as Map<String, dynamic>),
+              (e) => PostModel.fromMap(e.data() as Map<String, dynamic>),
             )
             .toList());
   }
 
   // like a post
-  void likePost({
+  FutureEither<String> likePost({
     required PostModel post,
     required UserModel user,
   }) async {
-    if (post.likedBy!.contains(user.uid)) {
-      _posts.doc(post.id).update({
-        'likedBy': FieldValue.arrayRemove([user.uid]),
-      });
-    } else {
-      _posts.doc(post.id).update({
-        'likedBy': FieldValue.arrayUnion([user.uid]),
-      });
+    try {
+      if (post.likedBy!.contains(user.uid)) {
+        _posts.doc(post.id).update({
+          'likedBy': FieldValue.arrayRemove([user.uid]),
+        });
+        return right('unliked');
+      } else {
+        _posts.doc(post.id).update({
+          'likedBy': FieldValue.arrayUnion([user.uid]),
+        });
+        return right('liked');
+      }
+    } on FirebaseException catch (e) {
+      throw e.message!;
+    } catch (e) {
+      return left(Failure(e.toString()));
     }
   }
 }

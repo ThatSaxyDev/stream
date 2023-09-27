@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stream/features/auth/controller/auth_controller.dart';
 import 'package:stream/features/home/widgets/post_card.dart';
 import 'package:stream/features/posts/controllers/post_controller.dart';
 import 'package:stream/features/posts/widgets/feed_quote_card.dart';
 import 'package:stream/features/posts/widgets/feed_reply_post_card.dart';
 import 'package:stream/features/posts/widgets/repost_card.dart';
 import 'package:stream/models/post_model.dart';
-import 'package:stream/models/repost_model.dart';
 import 'package:stream/theme/palette.dart';
 import 'package:stream/utils/app_constants.dart';
 import 'package:stream/utils/app_extensions.dart';
+import 'package:stream/utils/loader.dart';
 
 class HomeFeedView extends ConsumerWidget {
   const HomeFeedView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<RepostModel>? reposts;
+    List<PostModel>? reposts;
     AsyncValue<List<PostModel>> userPostsStream = ref.watch(userPostProvider);
-    AsyncValue<List<RepostModel>> rePostsStream =
+    AsyncValue<List<PostModel>> rePostsStream =
         ref.watch(fetchRepostsFromFollowingAndUserProvider);
     rePostsStream.when(
       data: (data) {
@@ -48,22 +47,21 @@ class HomeFeedView extends ConsumerWidget {
             ).tap(onTap: () {}),
             10.sbH,
 
-            if (reposts != null)
-              ...List.generate(reposts!.length, (index) {
-                PostModel? post;
-                ref
-                    .watch(getPostByIdProvider(reposts![index].postId!))
-                    .whenData((value) => post = value);
+            // if (reposts != null)
+            //   ...List.generate(reposts!.length, (index) {
+            //     PostModel? post;
+            //     ref
+            //         .watch(getPostByIdProvider(reposts![index].id!))
+            //         .whenData((value) => post = value);
 
-                if (post != null) {
-                  return RepostPostCard(
-                    repost: reposts![index],
-                    post: post!,
-                  );
-                } else {
-                  return const SizedBox.shrink();
-                }
-              }),
+            //     if (post != null) {
+            //       return RepostPostCard(
+            //         post: post!,
+            //       );
+            //     } else {
+            //       return const SizedBox.shrink();
+            //     }
+            //   }),
 
             userPostsStream.when(
               data: (List<PostModel> posts) {
@@ -71,10 +69,30 @@ class HomeFeedView extends ConsumerWidget {
                 if (posts.isEmpty) {
                   return Column(
                     children: [
-                      250.sbH,
-                      'There are no posts'.txt(
-                        size: 14.sp,
+                      200.sbH,
+                      Loadinggg(
+                        height: 50.h,
+                        duration: 5000,
+                      ),
+                      20.sbH,
+                      'Welcome To Stream'.txt(
+                        size: 16.sp,
                         fontWeight: FontWeight.bold,
+                      ),
+                      15.sbH,
+                      'You know the drill'.txt(
+                        size: 20.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      200.sbH,
+                      Padding(
+                        padding:  EdgeInsets.only(left: 40.w),
+                        child: Transform(
+                            alignment: Alignment.center,
+                            transform: Matrix4.identity()..scale(-1.0, -1.0, 1.0)..rotateZ(-0.9),
+                            child: 'arr'.png.mage(
+                                h: 50.h,
+                                color: currentTheme.textTheme.bodyMedium!.color)),
                       ),
                     ],
                   );
@@ -89,6 +107,8 @@ class HomeFeedView extends ConsumerWidget {
                         return FeedReplyPostCard(post: post);
                       } else if (post.quotingPostId!.isNotEmpty) {
                         return FeedQuotePostCard(post: post);
+                      } else if (post.repostingUser!.isNotEmpty) {
+                        return RepostPostCard(post: post);
                       }
                       return PostCard(post: post);
                     },

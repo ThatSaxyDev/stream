@@ -3,7 +3,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:stream/features/auth/controller/auth_controller.dart';
 import 'package:stream/features/base_nav/views/base_nav_view.dart';
@@ -47,9 +46,9 @@ class QuotingPostCard extends ConsumerWidget {
             children: [
               Row(
                 children: [
-                  CircleAvatar(
-                    radius: 7.w,
-                    backgroundImage: NetworkImage(user!.profilePic!),
+                   CircularImageLoader(
+                    imageUrl: user!.profilePic!,
+                    dimension: 14.w,
                   ).tap(onTap: () {
                     if (post.userUid == userr!.uid &&
                         indexFromController != 3) {

@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:stream/features/auth/repository/auth_repository.dart';
 import 'package:stream/models/user_model.dart';
 import 'package:stream/utils/failure.dart';
-import 'package:stream/utils/nav.dart';
 import 'package:stream/utils/snack_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
