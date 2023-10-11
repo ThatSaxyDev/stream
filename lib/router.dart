@@ -3,7 +3,6 @@ import 'package:routemaster/routemaster.dart';
 import 'package:stream/features/auth/views/login_view.dart';
 import 'package:stream/features/base_nav/views/base_nav_view.dart';
 import 'package:stream/features/posts/views/post_view.dart';
-import 'package:stream/features/profile/views/other_user_profile_view.dart';
 import 'package:stream/features/settings/views/settings_view.dart';
 import 'package:stream/shared/app_routes.dart';
 
@@ -17,11 +16,6 @@ final loggedInRoute = RouteMap(
         ),
     AppRoutes.settings: (_) => const MaterialPage(
           child: SettingsView(),
-        ),
-    '/profile/:userId': (routeData) => MaterialPage(
-          child: OtherUserProfileView(
-            userId: routeData.pathParameters['userId']!,
-          ),
         ),
     '/post/:postId': (routeData) => MaterialPage(
           child: PostView(

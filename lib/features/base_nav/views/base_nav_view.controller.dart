@@ -28,18 +28,12 @@ void moveToPage({
 //! List of pages
 List<Widget> pages = [
   const HomeFeedView(),
-  const SearchView(),
-  const NotificationsView(),
-  const ProfileView(),
 ];
 
 //! nav widget enums
 enum Nav {
   home(PhosphorIcons.houseSimple, PhosphorIcons.houseSimpleFill),
-  search(PhosphorIcons.magnifyingGlass, PhosphorIcons.magnifyingGlass),
-  stream(PhosphorIcons.pen, PhosphorIcons.pen),
-  notification(PhosphorIcons.notification, PhosphorIcons.notificationFill),
-  profile(PhosphorIcons.user, PhosphorIcons.userFill);
+  stream(PhosphorIcons.pen, PhosphorIcons.pen);
 
   const Nav(
     this.icon,
@@ -51,8 +45,5 @@ enum Nav {
 
 List<Nav> nav = [
   Nav.home,
-  Nav.search,
   Nav.stream,
-  Nav.notification,
-  Nav.profile,
 ];

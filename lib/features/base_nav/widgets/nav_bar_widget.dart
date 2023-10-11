@@ -29,11 +29,11 @@ class NavBarWidget extends ConsumerWidget {
         children: [
           //! ICON
           Icon(
-            switch (indexFromController == nav.index && nav.index != 2) {
+            switch (indexFromController == nav.index) {
               true => nav.selectedIcon,
               false => nav.icon,
             },
-            color: switch (indexFromController == nav.index && nav.index != 2) {
+            color: switch (indexFromController == nav.index) {
               true => currentTheme.textTheme.bodyMedium!.color,
               false =>
                 currentTheme.textTheme.bodyMedium!.color!.withOpacity(0.4),
@@ -48,16 +48,12 @@ class NavBarWidget extends ConsumerWidget {
       onTap: () {
         if (nav.index == 0) {
           ref.invalidate(userPostProvider);
-        }
-
-        if (nav.index < 2) {
           moveToPage(
             context: context,
             ref: ref,
             index: nav.index,
           );
-        }
-        if (nav.index == 2) {
+        } else {
           showModalBottomSheet(
             isScrollControlled: true,
             enableDrag: true,
@@ -68,13 +64,6 @@ class NavBarWidget extends ConsumerWidget {
                 CreatePostBottomSheet(),
               ],
             ),
-          );
-        }
-        if (nav.index > 2) {
-          moveToPage(
-            context: context,
-            ref: ref,
-            index: nav.index - 1,
           );
         }
       },

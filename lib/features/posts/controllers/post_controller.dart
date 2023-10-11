@@ -7,7 +7,6 @@ import 'package:fpdart/fpdart.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:stream/core/providers/storage_repository_provider.dart';
 import 'package:stream/features/auth/controller/auth_controller.dart';
-import 'package:stream/features/notifications/controllers/notifications_controller.dart';
 import 'package:stream/features/posts/repositories/post_repository.dart';
 import 'package:stream/models/post_model.dart';
 import 'package:stream/models/quote_nodel.dart';
@@ -239,16 +238,6 @@ class PostController extends StateNotifier<bool> {
       (l) => showSnackBar(context: context, text: l.message),
       (r) {
         //! send notification
-        _ref.read(notificationsControllerProvider.notifier).sendNotification(
-              actorUid: user.uid!,
-              receiverUid: repliedPost.userUid!,
-              type: 'reply',
-              postId: postId,
-              postContent: repliedPost.textContent!,
-              notificationContent: textContent,
-              postImage: repliedPost.imageUrl!,
-              notificationImage: photo,
-            );
         Routemaster.of(context).pop();
       },
     );
@@ -328,34 +317,7 @@ class PostController extends StateNotifier<bool> {
 
     res.fold(
       (l) => null,
-      (r) {
-        if (r == 'liked') {
-          //! send notification
-          _ref.read(notificationsControllerProvider.notifier).sendNotification(
-                actorUid: user.uid!,
-                receiverUid: post.userUid!,
-                type: 'like',
-                postId: post.id!,
-                postContent: post.textContent!,
-                notificationContent: '',
-                postImage: post.imageUrl!,
-                notificationImage: '',
-              );
-        }
-        // if (r == 'unliked') {
-        //   //! delete notification
-        //   _ref.read(notificationsControllerProvider.notifier).sendNotification(
-        //         actorUid: user.uid!,
-        //         receiverUid: post.userUid!,
-        //         type: 'like',
-        //         postId: post.id!,
-        //         postContent: post.textContent!,
-        //         notificationContent: '',
-        //         postImage: post.imageUrl!,
-        //         notificationImage: '',
-        //       );
-        // }
-      },
+      (r) {},
     );
   }
 }
