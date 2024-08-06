@@ -65,7 +65,7 @@ class LikeNotificationsCard extends ConsumerWidget {
                         radius: 10.w,
                         backgroundColor: Pallete.thickRed,
                         child: Icon(
-                          PhosphorIcons.heartFill,
+                          PhosphorIconsFill.heart,
                           color: Pallete.whiteColor,
                           size: 10.sp,
                         ),

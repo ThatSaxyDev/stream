@@ -47,10 +47,10 @@ class Loadinggg extends StatefulWidget {
   final double? height;
   final int? duration;
   const Loadinggg({
-    Key? key,
+    super.key,
     this.height,
     this.duration,
-  }) : super(key: key);
+  });
 
   @override
   State<Loadinggg> createState() => _LoadingggState();
@@ -84,7 +84,7 @@ class _LoadingggState extends State<Loadinggg>
           child: RotationTransition(
             turns: _animationController,
             child: Icon(
-              PhosphorIcons.placeholder,
+              PhosphorIconsRegular.stopCircle,
               size: widget.height ?? 30.h,
             ),
           ),
@@ -98,10 +98,10 @@ class Rezult extends StatefulWidget {
   final Widget rezult;
   final double dimension;
   const Rezult({
-    Key? key,
+    super.key,
     required this.rezult,
     required this.dimension,
-  }) : super(key: key);
+  });
 
   @override
   State<Rezult> createState() => _RezultState();

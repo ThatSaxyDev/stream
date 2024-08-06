@@ -67,7 +67,7 @@ class RepostPostCard extends ConsumerWidget {
                 child: Row(
                   children: [
                     Icon(
-                      PhosphorIcons.repeat,
+                      PhosphorIconsRegular.repeat,
                       color: currentTheme.textTheme.bodyMedium!.color!
                           .withOpacity(0.4),
                       size: 18.sp,
@@ -108,7 +108,7 @@ class RepostPostCard extends ConsumerWidget {
                 Row(
                   children: [
                     Icon(
-                      PhosphorIcons.repeat,
+                      PhosphorIconsRegular.repeat,
                       color: currentTheme.textTheme.bodyMedium!.color!
                           .withOpacity(0.4),
                       size: 18.sp,
@@ -194,7 +194,7 @@ class RepostPostCard extends ConsumerWidget {
                                       ),
                                   7.sbW,
                                    if(post.repostingUser == userr.uid)
-                                  const Icon(PhosphorIcons.dotsThreeBold).tap(
+                                  const Icon(PhosphorIconsBold.dotsThree).tap(
                                     onTap: () {
                                       //! delete post
                                       showModalBottomSheet(
@@ -209,7 +209,7 @@ class RepostPostCard extends ConsumerWidget {
                                               width: width(context),
                                               decoration: BoxDecoration(
                                                 color: currentTheme
-                                                    .backgroundColor,
+                                                    .scaffoldBackgroundColor,
                                                 borderRadius:
                                                     BorderRadius.circular(20),
                                               ),
@@ -370,7 +370,7 @@ class RepostPostCard extends ConsumerWidget {
                                           .rePost(context: context, post: post);
                                     },
                                     icon: Icon(
-                                      PhosphorIcons.repeat,
+                                      PhosphorIconsRegular.repeat,
                                       color:
                                           data.repostedBy!.contains(userr.uid)
                                               ? Pallete.activegreen
@@ -398,10 +398,10 @@ class RepostPostCard extends ConsumerWidget {
                                     },
                                     icon: data.likedBy!.contains(userr.uid)
                                         ? const Icon(
-                                            PhosphorIcons.heartFill,
+                                            PhosphorIconsFill.heart,
                                             color: Pallete.thickRed,
                                           )
-                                        : const Icon(PhosphorIcons.heart),
+                                        : const Icon(PhosphorIconsRegular.heart),
                                   ),
                                   if (data.likedBy!.isNotEmpty)
                                     Padding(
@@ -429,7 +429,7 @@ class RepostPostCard extends ConsumerWidget {
                                       );
                                     },
                                     icon:
-                                        const Icon(PhosphorIcons.chatCentered),
+                                        const Icon(PhosphorIconsRegular.chatCentered),
                                   ),
                                   if (data.repliedTo!.isNotEmpty)
                                     Padding(

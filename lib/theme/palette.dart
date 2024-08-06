@@ -83,7 +83,8 @@ class Pallete {
     textTheme: ThemeData.dark().textTheme.apply(
           fontFamily: AppTexts.appFont,
         ),
-    scaffoldBackgroundColor: blackColor,
+    // scaffoldBackgroundColor: blackColor,
+    scaffoldBackgroundColor: drawerColor,
     cardColor: greyColor,
     appBarTheme: const AppBarTheme(
       backgroundColor: drawerColor,
@@ -95,8 +96,8 @@ class Pallete {
       backgroundColor: drawerColor,
     ),
     primaryColor: blueColor,
-    backgroundColor:
-        drawerColor, // will be used as alternative background color
+    // backgroundColor:
+    //     drawerColor, // will be used as alternative background color
     canvasColor: greyColor, colorScheme: ColorScheme.fromSwatch(),
   );
 
@@ -118,7 +119,7 @@ class Pallete {
     ),
     primaryColor: blueColor,
     // backgroundColor: whiteColor,
-    backgroundColor: const Color(0xFFFAFAFA),
+    // backgroundColor: const Color(0xFFFAFAFA),
     canvasColor: blackColor,
     colorScheme: ColorScheme.fromSwatch(),
   );

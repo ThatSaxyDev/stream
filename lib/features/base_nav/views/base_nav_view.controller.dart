@@ -35,11 +35,13 @@ List<Widget> pages = [
 
 //! nav widget enums
 enum Nav {
-  home(PhosphorIcons.houseSimple, PhosphorIcons.houseSimpleFill),
-  search(PhosphorIcons.magnifyingGlass, PhosphorIcons.magnifyingGlass),
-  stream(PhosphorIcons.pen, PhosphorIcons.pen),
-  notification(PhosphorIcons.notification, PhosphorIcons.notificationFill),
-  profile(PhosphorIcons.user, PhosphorIcons.userFill);
+  home(PhosphorIconsRegular.houseSimple, PhosphorIconsFill.houseSimple),
+  search(
+      PhosphorIconsRegular.magnifyingGlass, PhosphorIconsFill.magnifyingGlass),
+  stream(PhosphorIconsRegular.pen, PhosphorIconsRegular.pen),
+  notification(
+      PhosphorIconsRegular.notification, PhosphorIconsFill.notification),
+  profile(PhosphorIconsRegular.user, PhosphorIconsFill.user);
 
   const Nav(
     this.icon,

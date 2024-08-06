@@ -68,7 +68,7 @@ class ViewsPostCard extends ConsumerWidget {
                       fontWeight: FontWeight.w400,
                     ),
                 7.sbW,
-                const Icon(PhosphorIcons.dotsThreeBold).tap(
+                const Icon(PhosphorIconsBold.dotsThree).tap(
                   onTap: () {
                     //! delete post
                     showModalBottomSheet(
@@ -82,7 +82,7 @@ class ViewsPostCard extends ConsumerWidget {
                             height: 100.h,
                             width: width(context),
                             decoration: BoxDecoration(
-                              color: currentTheme.colorScheme.background,
+                              color: currentTheme.colorScheme.surface,
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Center(
@@ -130,8 +130,8 @@ class ViewsPostCard extends ConsumerWidget {
                                             goBackk(context);
                                           },
                                           child: 'Cancel'.txt(
-                                              color: currentTheme.textTheme
-                                                  .bodyMedium!.color),
+                                              color: currentTheme
+                                                  .textTheme.bodyMedium!.color),
                                         ),
                                         TextButton(
                                           onPressed: () {
@@ -170,8 +170,7 @@ class ViewsPostCard extends ConsumerWidget {
               width: width(context) * 0.8,
               child: SelectableText(
                 post.textContent!,
-                style:
-                    TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
               ),
             ).tap(onTap: () {
               Routemaster.of(context).push('/post/${post.id}');
@@ -214,7 +213,7 @@ class ViewsPostCard extends ConsumerWidget {
                     );
                   },
                   icon: Icon(
-                    PhosphorIcons.repeat,
+                    PhosphorIconsRegular.repeat,
                     color: post.repostedBy!.contains(ownUser!.uid)
                         ? Pallete.activegreen
                         : currentTheme.textTheme.bodyMedium!.color,
@@ -238,10 +237,10 @@ class ViewsPostCard extends ConsumerWidget {
                   },
                   icon: post.likedBy!.contains(ownUser.uid)
                       ? const Icon(
-                          PhosphorIcons.heartFill,
+                          PhosphorIconsFill.heart,
                           color: Pallete.thickRed,
                         )
-                      : const Icon(PhosphorIcons.heart),
+                      : const Icon(PhosphorIconsRegular.heart),
                 ),
                 // if (post.likedBy!.isNotEmpty)
                 //   Padding(
@@ -267,7 +266,7 @@ class ViewsPostCard extends ConsumerWidget {
                       ),
                     );
                   },
-                  icon: const Icon(PhosphorIcons.chatCentered),
+                  icon: const Icon(PhosphorIconsRegular.chatCentered),
                 ),
                 // if (post.repliedTo!.isNotEmpty)
                 //   Padding(

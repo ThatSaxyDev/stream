@@ -176,7 +176,7 @@ class FeedReplyPostCard extends ConsumerWidget {
                                 );
                               },
                               icon: Icon(
-                                PhosphorIcons.repeat,
+                                PhosphorIconsRegular.repeat,
                                 color: repliedPost!.repostedBy!
                                         .contains(userr!.uid)
                                     ? Pallete.activegreen
@@ -203,10 +203,10 @@ class FeedReplyPostCard extends ConsumerWidget {
                               },
                               icon: repliedPost!.likedBy!.contains(userr.uid)
                                   ? const Icon(
-                                      PhosphorIcons.heartFill,
+                                      PhosphorIconsFill.heart,
                                       color: Pallete.thickRed,
                                     )
-                                  : const Icon(PhosphorIcons.heart),
+                                  : const Icon(PhosphorIconsRegular.heart),
                             ),
                             if (repliedPost!.likedBy!.isNotEmpty)
                               Padding(
@@ -234,7 +234,8 @@ class FeedReplyPostCard extends ConsumerWidget {
                                   ),
                                 );
                               },
-                              icon: const Icon(PhosphorIcons.chatCentered),
+                              icon:
+                                  const Icon(PhosphorIconsRegular.chatCentered),
                             ),
                             if (repliedPost!.repliedTo!.isNotEmpty)
                               Padding(
@@ -263,7 +264,7 @@ class FeedReplyPostCard extends ConsumerWidget {
                           fontWeight: FontWeight.w400,
                         ),
                     7.sbW,
-                    const Icon(PhosphorIcons.dotsThreeBold).tap(
+                    const Icon(PhosphorIconsBold.dotsThree).tap(
                       onTap: () {
                         if (repliedPost!.userUid == userr.uid &&
                             indexFromController != 3) {
@@ -279,7 +280,7 @@ class FeedReplyPostCard extends ConsumerWidget {
                                   height: 100.h,
                                   width: width(context),
                                   decoration: BoxDecoration(
-                                    color: currentTheme.backgroundColor,
+                                    color: currentTheme.scaffoldBackgroundColor,
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   child: Center(
@@ -483,7 +484,7 @@ class FeedReplyPostCard extends ConsumerWidget {
                                 );
                               },
                               icon: Icon(
-                                PhosphorIcons.repeat,
+                                PhosphorIconsRegular.repeat,
                                 color: post.repostedBy!.contains(userr.uid)
                                     ? Pallete.activegreen
                                     : currentTheme.textTheme.bodyMedium!.color,
@@ -507,10 +508,10 @@ class FeedReplyPostCard extends ConsumerWidget {
                               },
                               icon: post.likedBy!.contains(userr.uid)
                                   ? const Icon(
-                                      PhosphorIcons.heartFill,
+                                      PhosphorIconsFill.heart,
                                       color: Pallete.thickRed,
                                     )
-                                  : const Icon(PhosphorIcons.heart),
+                                  : const Icon(PhosphorIconsRegular.heart),
                             ),
                             if (post.likedBy!.isNotEmpty)
                               Padding(
@@ -536,7 +537,8 @@ class FeedReplyPostCard extends ConsumerWidget {
                                   ),
                                 );
                               },
-                              icon: const Icon(PhosphorIcons.chatCentered),
+                              icon:
+                                  const Icon(PhosphorIconsRegular.chatCentered),
                             ),
                             if (post.repliedTo!.isNotEmpty)
                               Padding(
@@ -561,7 +563,7 @@ class FeedReplyPostCard extends ConsumerWidget {
                           fontWeight: FontWeight.w400,
                         ),
                     7.sbW,
-                    const Icon(PhosphorIcons.dotsThreeBold).tap(
+                    const Icon(PhosphorIconsBold.dotsThree).tap(
                       onTap: () {
                         //! delete post
                         showModalBottomSheet(
@@ -575,7 +577,7 @@ class FeedReplyPostCard extends ConsumerWidget {
                                 height: 100.h,
                                 width: width(context),
                                 decoration: BoxDecoration(
-                                  color: currentTheme.backgroundColor,
+                                  color: currentTheme.scaffoldBackgroundColor,
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: Center(

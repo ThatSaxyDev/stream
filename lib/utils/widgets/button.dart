@@ -22,7 +22,7 @@ class BButton extends StatelessWidget {
   final bool isText;
   final Color? textColor;
   const BButton({
-    Key? key,
+    super.key,
     this.height,
     this.width,
     this.radius,
@@ -32,7 +32,7 @@ class BButton extends StatelessWidget {
     this.text,
     this.isText = true,
     this.textColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +81,7 @@ class TransparentButton extends ConsumerWidget {
   final Color? backgroundColor;
   final Color? textColor;
   const TransparentButton({
-    Key? key,
+    super.key,
     this.height,
     this.width,
     this.radius,
@@ -92,7 +92,7 @@ class TransparentButton extends ConsumerWidget {
     this.isText = true,
     this.backgroundColor,
     this.textColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -138,9 +138,9 @@ class TransparentButton extends ConsumerWidget {
 class GButton extends ConsumerWidget {
   final bool? isFromLogin;
   const GButton({
-    Key? key,
+    super.key,
     this.isFromLogin,
-  }) : super(key: key);
+  });
 
   void signInWithGoogle(
       {required BuildContext context, required WidgetRef ref}) {
@@ -176,9 +176,9 @@ class GButton extends ConsumerWidget {
 class AppleButton extends ConsumerWidget {
   final bool? isFromLogin;
   const AppleButton({
-    Key? key,
+    super.key,
     this.isFromLogin,
-  }) : super(key: key);
+  });
 
   void signInWithGoogle(
       {required BuildContext context, required WidgetRef ref}) {
@@ -223,14 +223,14 @@ class TTransparentButton extends StatelessWidget {
   final Color color;
   final Widget child;
   const TTransparentButton({
-    Key? key,
+    super.key,
     this.height,
     this.width,
     this.padding,
     required this.onTap,
     required this.color,
     required this.child,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

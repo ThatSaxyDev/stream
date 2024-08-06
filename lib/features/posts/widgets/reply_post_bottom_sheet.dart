@@ -108,7 +108,7 @@ class _ReplyPostBottomSheetState extends ConsumerState<ReplyPostBottomSheet> {
       height: height(context) * 0.9,
       width: width(context),
       decoration: BoxDecoration(
-        color: currentTheme.backgroundColor,
+        color: currentTheme.scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Padding(
@@ -231,7 +231,7 @@ class _ReplyPostBottomSheetState extends ConsumerState<ReplyPostBottomSheet> {
                                 ? Padding(
                                     padding: EdgeInsets.only(right: 8.w),
                                     child:
-                                        const Icon(PhosphorIcons.paperclipBold),
+                                        const Icon(PhosphorIconsBold.paperclip),
                                   ).tap(
                                     onTap: () => takePhoto(ImageSource.gallery),
                                   )
@@ -259,13 +259,15 @@ class _ReplyPostBottomSheetState extends ConsumerState<ReplyPostBottomSheet> {
 
                                       //! remove image
                                       IconButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              image = null;
-                                              isButtonActive.value = false;
-                                            });
-                                          },
-                                          icon: const Icon(PhosphorIcons.x)),
+                                        onPressed: () {
+                                          setState(() {
+                                            image = null;
+                                            isButtonActive.value = false;
+                                          });
+                                        },
+                                        icon:
+                                            const Icon(PhosphorIconsRegular.x),
+                                      ),
                                     ],
                                   ),
                           ],

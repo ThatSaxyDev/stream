@@ -19,7 +19,7 @@ class LoginView extends ConsumerWidget {
     final isLoading = ref.watch(authControllerProvider);
     final currentTheme = ref.watch(themeNotifierProvider);
     return Scaffold(
-      backgroundColor: currentTheme.backgroundColor,
+      backgroundColor: currentTheme.scaffoldBackgroundColor,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 30.w),
         child: isLoading

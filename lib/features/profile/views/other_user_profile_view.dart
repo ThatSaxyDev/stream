@@ -47,7 +47,7 @@ class OtherUserProfileView extends ConsumerWidget {
     }
 
     return Scaffold(
-      backgroundColor: currentTheme.backgroundColor,
+      backgroundColor: currentTheme.scaffoldBackgroundColor,
       body: TabbedList(
         tabLength: 2,
         sliverTabBar: SliverTabBar(
@@ -179,7 +179,7 @@ class OtherUserProfileView extends ConsumerWidget {
                               ),
                         10.sbW,
                         Icon(
-                          PhosphorIcons.link,
+                          PhosphorIconsRegular.link,
                           size: 14.sp,
                         ),
                         5.sbW,
@@ -202,7 +202,7 @@ class OtherUserProfileView extends ConsumerWidget {
                                   .followUser(userToFollow: user!);
                             },
                             color: currentTheme.textTheme.bodyMedium!.color!,
-                            textColor: currentTheme.backgroundColor,
+                            textColor: currentTheme.scaffoldBackgroundColor,
                             text: user!.following!.contains(ownUser.uid)
                                 ? 'Follow back'
                                 : 'Follow',

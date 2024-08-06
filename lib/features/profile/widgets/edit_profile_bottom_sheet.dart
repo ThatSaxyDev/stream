@@ -101,7 +101,7 @@ class _EditProfileBottomSheetState
       height: height(context) * 0.9,
       width: width(context),
       decoration: BoxDecoration(
-        color: currentTheme.backgroundColor,
+        color: currentTheme.scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Padding(
@@ -179,7 +179,7 @@ class _EditProfileBottomSheetState
                                 backgroundColor: Colors.black.withOpacity(0.4),
                               ),
                               const Icon(
-                                PhosphorIcons.penBold,
+                                PhosphorIconsBold.pen,
                                 color: Pallete.whiteColor,
                               ).alignCenter(),
                             ],
@@ -350,6 +350,10 @@ class _EditProfileBottomSheetState
                                         .textTheme.bodyMedium!.color!,
                                     controller: _bioController,
                                     decoration: InputDecoration(
+                                      counterStyle: TextStyle(
+                                        color: currentTheme
+                                            .textTheme.bodyMedium!.color,
+                                      ),
                                       hintText:
                                           'bio: ${user.banner!}'.toLowerCase(),
                                       hintStyle: TextStyle(
@@ -381,7 +385,7 @@ class _EditProfileBottomSheetState
                                             _bioController.clear();
                                           },
                                           icon: const Icon(
-                                              PhosphorIcons.checkBold),
+                                              PhosphorIconsBold.check),
                                         );
                                       } else {
                                         return const SizedBox.shrink();

@@ -90,7 +90,7 @@ class _CreatePostBottomSheetState extends ConsumerState<CreatePostBottomSheet> {
       height: height(context) * 0.9,
       width: width(context),
       decoration: BoxDecoration(
-        color: currentTheme.backgroundColor,
+        color: currentTheme.scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Padding(
@@ -197,7 +197,7 @@ class _CreatePostBottomSheetState extends ConsumerState<CreatePostBottomSheet> {
                     image == null
                         ? Padding(
                             padding: EdgeInsets.only(right: 8.w),
-                            child: const Icon(PhosphorIcons.paperclipBold),
+                            child: const Icon(PhosphorIconsBold.paperclip),
                           ).tap(
                             onTap: () => takePhoto(ImageSource.gallery),
                           )
@@ -228,7 +228,7 @@ class _CreatePostBottomSheetState extends ConsumerState<CreatePostBottomSheet> {
                                       isButtonActive.value = false;
                                     });
                                   },
-                                  icon: const Icon(PhosphorIcons.x)),
+                                  icon: const Icon(PhosphorIconsRegular.x)),
                             ],
                           ),
                   ],

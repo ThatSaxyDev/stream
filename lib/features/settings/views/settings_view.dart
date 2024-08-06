@@ -20,10 +20,10 @@ class SettingsView extends ConsumerWidget {
     UserModel user = ref.watch(userProvider)!;
 
     return Scaffold(
-      backgroundColor: currentTheme.backgroundColor,
+      backgroundColor: currentTheme.scaffoldBackgroundColor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: currentTheme.backgroundColor,
+        backgroundColor: currentTheme.scaffoldBackgroundColor,
         title: 'Settings'.txt(
           size: 16.sp,
           fontWeight: FontWeight.w600,
@@ -37,10 +37,13 @@ class SettingsView extends ConsumerWidget {
             //! dark theme
             ListTile(
               leading: Icon(
-                PhosphorIcons.moonFill,
+                PhosphorIconsFill.moon,
                 color: currentTheme.textTheme.bodyMedium!.color,
               ),
-              title: 'Dark theme'.txt(size: 16.sp),
+              title: 'Dark theme'.txt(
+                size: 16.sp,
+                color: currentTheme.textTheme.bodyMedium!.color,
+              ),
               trailing: Switch.adaptive(
                 value: ref.watch(themeNotifierProvider.notifier).mode ==
                     ThemeMode.dark,
@@ -57,7 +60,7 @@ class SettingsView extends ConsumerWidget {
                 ref.read(authControllerProvider.notifier).logOut();
               },
               leading: const Icon(
-                PhosphorIcons.signOutBold,
+                PhosphorIconsBold.signOut,
                 color: Pallete.thickRed,
               ),
               title: 'Log out'.txt(size: 16.sp, color: Pallete.thickRed),

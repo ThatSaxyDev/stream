@@ -23,9 +23,9 @@ class SearchView extends ConsumerWidget {
     ThemeData currentTheme = ref.watch(themeNotifierProvider);
     AsyncValue<List<UserModel>> allUsersStream = ref.watch(allUsersProvider);
     return Scaffold(
-      backgroundColor: currentTheme.backgroundColor,
+      backgroundColor: currentTheme.scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: currentTheme.backgroundColor,
+        backgroundColor: currentTheme.scaffoldBackgroundColor,
         foregroundColor: currentTheme.textTheme.bodyMedium!.color,
         elevation: 0,
         centerTitle: false,
@@ -43,7 +43,7 @@ class SearchView extends ConsumerWidget {
                 delegate: SearchUserDelegate(ref),
               );
             },
-            icon: const Icon(PhosphorIcons.magnifyingGlass),
+            icon: const Icon(PhosphorIconsRegular.magnifyingGlass),
           ),
         ],
       ),

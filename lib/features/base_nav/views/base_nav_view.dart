@@ -27,7 +27,7 @@ class BaseNavWrapper extends ConsumerWidget {
     return Stack(
       children: [
         Scaffold(
-          backgroundColor: currentTheme.backgroundColor,
+          backgroundColor: currentTheme.scaffoldBackgroundColor,
           // pages
           body: pages[indexFromController],
 
@@ -35,7 +35,7 @@ class BaseNavWrapper extends ConsumerWidget {
           bottomNavigationBar: Material(
             elevation: 5,
             child: Container(
-              color: currentTheme.backgroundColor,
+              color: currentTheme.scaffoldBackgroundColor,
               padding: EdgeInsets.only(top: 17.h, left: 17.w, right: 17.w),
               height: 80.h,
               width: width(context),

@@ -40,7 +40,7 @@ class ProfileView extends ConsumerWidget {
     userLikedPostsStream.whenData((value) => userLikedPosts = value);
 
     return Scaffold(
-      backgroundColor: currentTheme.backgroundColor,
+      backgroundColor: currentTheme.scaffoldBackgroundColor,
       body: TabbedList(
         tabLength: 3,
         sliverTabBar: SliverTabBar(
@@ -51,7 +51,7 @@ class ProfileView extends ConsumerWidget {
                 splashColor: Colors.transparent,
                 onPressed: () =>
                     goTo(context: context, route: AppRoutes.settings),
-                icon: const Icon(PhosphorIcons.listDashes),
+                icon: const Icon(PhosphorIconsRegular.listDashes),
               ),
             ],
             flexibleSpace: Container(
@@ -88,7 +88,7 @@ class ProfileView extends ConsumerWidget {
                               },
                               highlightColor: Colors.transparent,
                               splashColor: Colors.transparent,
-                              icon: const Icon(PhosphorIcons.eraser),
+                              icon: const Icon(PhosphorIconsRegular.eraser),
                             )
                           ],
                         ),
@@ -217,7 +217,7 @@ class ProfileView extends ConsumerWidget {
                               ),
                         10.sbW,
                         Icon(
-                          PhosphorIcons.link,
+                          PhosphorIconsRegular.link,
                           size: 14.sp,
                         ),
                         5.sbW,
@@ -264,6 +264,9 @@ class ProfileView extends ConsumerWidget {
             tabBar: TabBar(
               indicatorColor: currentTheme.textTheme.bodyMedium!.color,
               labelColor: currentTheme.textTheme.bodyMedium!.color,
+              unselectedLabelColor:
+                  currentTheme.textTheme.bodyMedium!.color!.withOpacity(0.5),
+                  dividerColor: currentTheme.textTheme.bodyMedium!.color!.withOpacity(0.2),
               tabs: const [
                 Tab(
                   text: 'Stream',
@@ -291,7 +294,7 @@ class ProfileView extends ConsumerWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
-                                PhosphorIcons.pen,
+                                PhosphorIconsRegular.pen,
                                 size: 60.sp,
                               ).tap(onTap: () {
                                 showModalBottomSheet(

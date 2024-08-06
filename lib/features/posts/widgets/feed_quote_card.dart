@@ -63,7 +63,7 @@ class FeedQuotePostCard extends ConsumerWidget {
               width: width(context),
               padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 13.h),
               decoration: BoxDecoration(
-                color: currentTheme.backgroundColor,
+                color: currentTheme.scaffoldBackgroundColor,
                 border: Border(
                   bottom: BorderSide(
                     width: 1,
@@ -74,7 +74,7 @@ class FeedQuotePostCard extends ConsumerWidget {
               ),
               child: Stack(
                 children: [
-                   CircularImageLoader(
+                  CircularImageLoader(
                     imageUrl: quotingUser!.profilePic!,
                     dimension: 30.w,
                   ).tap(onTap: () {
@@ -137,7 +137,7 @@ class FeedQuotePostCard extends ConsumerWidget {
                                   fontWeight: FontWeight.w400,
                                 ),
                             7.sbW,
-                            const Icon(PhosphorIcons.dotsThreeBold).tap(
+                            const Icon(PhosphorIconsBold.dotsThree).tap(
                               onTap: () {
                                 if (post.userUid == userr!.uid &&
                                     indexFromController != 3) {
@@ -153,7 +153,8 @@ class FeedQuotePostCard extends ConsumerWidget {
                                           height: 100.h,
                                           width: width(context),
                                           decoration: BoxDecoration(
-                                            color: currentTheme.backgroundColor,
+                                            color: currentTheme
+                                                .scaffoldBackgroundColor,
                                             borderRadius:
                                                 BorderRadius.circular(20),
                                           ),
@@ -301,7 +302,7 @@ class FeedQuotePostCard extends ConsumerWidget {
                                   );
                                 },
                                 icon: Icon(
-                                  PhosphorIcons.repeat,
+                                  PhosphorIconsRegular.repeat,
                                   color: post.repostedBy!.contains(userr!.uid)
                                       ? Pallete.activegreen
                                       : currentTheme
@@ -327,10 +328,10 @@ class FeedQuotePostCard extends ConsumerWidget {
                                 },
                                 icon: post.likedBy!.contains(userr.uid)
                                     ? const Icon(
-                                        PhosphorIcons.heartFill,
+                                        PhosphorIconsFill.heart,
                                         color: Pallete.thickRed,
                                       )
-                                    : const Icon(PhosphorIcons.heart),
+                                    : const Icon(PhosphorIconsRegular.heart),
                               ),
                               if (post.likedBy!.isNotEmpty)
                                 Padding(
@@ -356,7 +357,8 @@ class FeedQuotePostCard extends ConsumerWidget {
                                     ),
                                   );
                                 },
-                                icon: const Icon(PhosphorIcons.chatCentered),
+                                icon: const Icon(
+                                    PhosphorIconsRegular.chatCentered),
                               ),
                               if (post.repliedTo!.isNotEmpty)
                                 Padding(

@@ -65,7 +65,7 @@ class ReplyNotificationsCard extends ConsumerWidget {
                         radius: 10.w,
                         backgroundColor: Pallete.blueColor,
                         child: Icon(
-                          PhosphorIcons.arrowBendDoubleUpLeftBold,
+                          PhosphorIconsBold.arrowBendDoubleUpLeft,
                           color: Pallete.whiteColor,
                           size: 10.sp,
                         ),

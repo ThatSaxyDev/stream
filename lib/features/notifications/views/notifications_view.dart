@@ -25,9 +25,9 @@ class NotificationsView extends ConsumerWidget {
     AsyncValue<List<NotificationsModel>> notificationsStream =
         ref.watch(getNotificationsProvider);
     return Scaffold(
-      backgroundColor: currentTheme.backgroundColor,
+      backgroundColor: currentTheme.scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: currentTheme.backgroundColor,
+        backgroundColor: currentTheme.scaffoldBackgroundColor,
         foregroundColor: currentTheme.textTheme.bodyMedium!.color,
         elevation: 0,
         centerTitle: false,

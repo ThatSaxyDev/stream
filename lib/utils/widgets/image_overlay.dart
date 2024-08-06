@@ -15,9 +15,9 @@ import 'package:stream/utils/widgets/image_loader.dart';
 class ImageOverLay extends ConsumerWidget {
   final String imageUrl;
   const ImageOverLay({
-    Key? key,
+    super.key,
     required this.imageUrl,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -51,7 +51,7 @@ class ImageOverLay extends ConsumerWidget {
                           .removeImageFromOverlay();
                     },
                     icon: Icon(
-                      PhosphorIcons.x,
+                      PhosphorIconsRegular.x,
                       color: Pallete.whiteColor,
                       size: 35.sp,
                     ),

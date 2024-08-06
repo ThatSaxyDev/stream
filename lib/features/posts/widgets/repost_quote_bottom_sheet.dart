@@ -31,7 +31,7 @@ class RepostQuoteBottomSheet extends ConsumerWidget {
         height: 100.h,
         width: width(context),
         decoration: BoxDecoration(
-          color: currentTheme.backgroundColor,
+          color: currentTheme.scaffoldBackgroundColor,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Center(
@@ -52,12 +52,12 @@ class RepostQuoteBottomSheet extends ConsumerWidget {
                 children: [
                   post.repostedBy!.contains(userr!.uid)
                       ? Icon(
-                          PhosphorIcons.x,
+                          PhosphorIconsRegular.x,
                           color: Pallete.thickRed,
                           size: 18.sp,
                         )
                       : Icon(
-                          PhosphorIcons.repeat,
+                          PhosphorIconsRegular.repeat,
                           color: currentTheme.textTheme.bodyMedium!.color!,
                           size: 18.sp,
                         ),
@@ -95,7 +95,7 @@ class RepostQuoteBottomSheet extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
-                    PhosphorIcons.quotes,
+                    PhosphorIconsRegular.quotes,
                     color: currentTheme.textTheme.bodyMedium!.color!,
                     size: 20.sp,
                   ),

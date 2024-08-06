@@ -1,6 +1,5 @@
 // ignore_for_file: deprecated_member_use
 
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,7 +25,7 @@ class PostView extends ConsumerWidget {
     ThemeData currentTheme = ref.watch(themeNotifierProvider);
     final postStream = ref.watch(getPostByIdProvider(postId));
     return Scaffold(
-      backgroundColor: currentTheme.backgroundColor,
+      backgroundColor: currentTheme.scaffoldBackgroundColor,
       appBar: AppBar(
         elevation: 0,
         title: 'Stream'.txt(size: 16.sp, fontWeight: FontWeight.w500),
@@ -121,7 +120,7 @@ class PostView extends ConsumerWidget {
                       },
                       height: 50.h,
                       width: 60.w,
-                      child: const Icon(PhosphorIcons.chatCenteredBold),
+                      child: const Icon(PhosphorIconsBold.chatCentered),
                     ))
               ],
             ),

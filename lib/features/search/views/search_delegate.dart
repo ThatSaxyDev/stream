@@ -22,7 +22,7 @@ class SearchUserDelegate extends SearchDelegate {
           query = '';
         },
         icon: Icon(
-          PhosphorIcons.x,
+          PhosphorIconsRegular.x,
           color: currentTheme.textTheme.bodyMedium!.color,
         ),
       ),

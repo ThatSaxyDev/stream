@@ -36,7 +36,7 @@ class QuotePostBottomSheet extends ConsumerStatefulWidget {
 class _QuotePostBottomSheetState extends ConsumerState<QuotePostBottomSheet> {
   final TextEditingController _textController = TextEditingController();
   final ValueNotifier<bool> isButtonActive = ValueNotifier(false);
-  
+
   File? image;
 
   //! to add an image
@@ -109,7 +109,7 @@ class _QuotePostBottomSheetState extends ConsumerState<QuotePostBottomSheet> {
       height: height(context) * 0.9,
       width: width(context),
       decoration: BoxDecoration(
-        color: currentTheme.backgroundColor,
+        color: currentTheme.scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Padding(
@@ -229,7 +229,7 @@ class _QuotePostBottomSheetState extends ConsumerState<QuotePostBottomSheet> {
                                 ? Padding(
                                     padding: EdgeInsets.only(right: 8.w),
                                     child:
-                                        const Icon(PhosphorIcons.paperclipBold),
+                                        const Icon(PhosphorIconsBold.paperclip),
                                   ).tap(
                                     onTap: () => takePhoto(ImageSource.gallery),
                                   )
@@ -263,7 +263,8 @@ class _QuotePostBottomSheetState extends ConsumerState<QuotePostBottomSheet> {
                                             isButtonActive.value = false;
                                           });
                                         },
-                                        icon: const Icon(PhosphorIcons.x),
+                                        icon:
+                                            const Icon(PhosphorIconsRegular.x),
                                       ),
                                     ],
                                   ),
