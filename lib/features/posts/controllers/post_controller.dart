@@ -187,7 +187,7 @@ class PostController extends StateNotifier<bool> {
 
   //! get post by id
   Stream<PostModel> getPostById({required String postID}) {
-    return _postRepository.getPostById(postID: postID);
+    return _postRepository.getPostById(postId: postID);
   }
 
   // reply post

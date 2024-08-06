@@ -137,8 +137,8 @@ class PostRepository {
   }
 
   //! get a post by ID
-  Stream<PostModel> getPostById({required String postID}) {
-    return _posts.doc(postID).snapshots().map(
+  Stream<PostModel> getPostById({required String postId}) {
+    return _posts.doc(postId).snapshots().map(
         (event) => PostModel.fromMap(event.data() as Map<String, dynamic>));
   }
 
