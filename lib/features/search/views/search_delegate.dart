@@ -14,6 +14,23 @@ class SearchUserDelegate extends SearchDelegate {
   final WidgetRef ref;
   SearchUserDelegate(this.ref);
   @override
+  ThemeData appBarTheme(BuildContext context) {
+    ThemeData currentTheme = ref.watch(themeNotifierProvider);
+    // TODO: implement appBarTheme
+    return super.appBarTheme(context).copyWith(
+          appBarTheme: AppBarTheme(
+            backgroundColor: currentTheme.scaffoldBackgroundColor,
+            foregroundColor: currentTheme.textTheme.bodyMedium!.color,
+          ),
+          inputDecorationTheme: InputDecorationTheme(
+              border: InputBorder.none,
+              hintStyle: TextStyle(
+                color: currentTheme.textTheme.bodyMedium!.color,
+              )),
+        );
+  }
+
+  @override
   List<Widget>? buildActions(BuildContext context) {
     ThemeData currentTheme = ref.watch(themeNotifierProvider);
     return [
@@ -45,10 +62,8 @@ class SearchUserDelegate extends SearchDelegate {
     return ref.watch(searchUsersProvider(query)).when(
           data: (List<UserModel> allUsers) {
             if (allUsers.isEmpty) {
-              return Container(
-                height: 30,
-                width: 30,
-                color: Colors.red,
+              return const Center(
+                child: Text('No users found'),
               );
             }
 
