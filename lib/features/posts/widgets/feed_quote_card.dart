@@ -267,15 +267,16 @@ class FeedQuotePostCard extends ConsumerWidget {
                         ],
                         15.sbH,
                         //! post
-                        Padding(
-                          padding: EdgeInsets.only(right: 40.w),
-                          child: QuotingPostCard(
-                            post: quotedPost!,
-                          ).tap(onTap: () {
-                            Routemaster.of(context)
-                                .push('/post/${quotedPost!.id}');
-                          }),
-                        ),
+                        if (quotedPost != null)
+                          Padding(
+                            padding: EdgeInsets.only(right: 40.w),
+                            child: QuotingPostCard(
+                              post: quotedPost!,
+                            ).tap(onTap: () {
+                              Routemaster.of(context)
+                                  .push('/post/${quotedPost!.id}');
+                            }),
+                          ),
 
                         SizedBox(
                           width: width(context) * 0.75,

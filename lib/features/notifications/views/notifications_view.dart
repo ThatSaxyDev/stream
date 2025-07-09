@@ -38,7 +38,11 @@ class NotificationsView extends ConsumerWidget {
       ),
       body: notificationsStream.when(
         data: (List<NotificationsModel> notifications) {
-          if (notifications.isEmpty) {
+          List<NotificationsModel> filteredNotifications =
+              notifications.where((notification) {
+            return notification.actorUid != ownUser!.uid;
+          }).toList();
+          if (filteredNotifications.isEmpty) {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -61,9 +65,9 @@ class NotificationsView extends ConsumerWidget {
             physics: const AlwaysScrollableScrollPhysics(
                 parent: BouncingScrollPhysics()),
             padding: EdgeInsets.zero,
-            itemCount: notifications.length,
+            itemCount: filteredNotifications.length,
             itemBuilder: (context, index) {
-              NotificationsModel notification = notifications[index];
+              NotificationsModel notification = filteredNotifications[index];
 
               if (notification.actorUid == ownUser!.uid) {
                 return const SizedBox.shrink();

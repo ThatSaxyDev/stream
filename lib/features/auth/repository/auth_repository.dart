@@ -47,12 +47,12 @@ class AuthRepository {
             .addScope('https://www.googleapis.com/auth/contacts.readonly');
         userCredential = await _auth.signInWithPopup(googleAuthProvider);
       } else {
-        final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+        final GoogleSignInAccount? googleUser = await _googleSignIn.attemptLightweightAuthentication();
 
-        final googleAuth = await googleUser?.authentication;
+        final googleAuth = googleUser?.authentication;
 
         final credential = GoogleAuthProvider.credential(
-          accessToken: googleAuth?.accessToken,
+          accessToken: googleAuth?.idToken,
           idToken: googleAuth?.idToken,
         );
 

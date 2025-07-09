@@ -19,7 +19,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.0.2 <4.0.0"
+  sdk: ^3.8.0
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -43,7 +43,7 @@ dependencies:
   flutter_svg: ^2.0.2
   routemaster: ^1.0.1
   uuid: ^4.3.3
-  file_picker: ^8.0.5
+  file_picker: ^10.2.0
   phosphor_flutter: ^2.0.1
   url_launcher: ^6.1.10
   loading_animation_widget: ^1.2.0+3
@@ -51,7 +51,7 @@ dependencies:
   dotted_line: ^3.1.0
   cached_network_image: ^3.2.3
   liquid_pull_to_refresh: ^3.0.1
-  carousel_slider: ^4.2.1
+  carousel_slider: ^5.1.1
   pinput: ^5.0.0
   image_picker: ^1.0.7
   flutter_secure_storage: ^9.0.0
@@ -59,8 +59,8 @@ dependencies:
   substring_highlight: ^1.0.33
   local_hero: ^0.3.0
   dropdown_button2: ^2.3.9
-  intl: ^0.19.0
-  google_sign_in: ^6.2.1
+  intl: ^0.20.2
+  google_sign_in: ^7.1.0
   any_link_preview: ^3.0.1
   readmore: ^3.0.0
   timeago: ^3.3.0
@@ -70,11 +70,11 @@ dependencies:
   firebase_auth: ^5.1.0
   tabbed_sliverlist: ^0.1.0
   neon: ^0.1.0
-  custom_refresh_indicator: ^3.0.0
+  custom_refresh_indicator: ^4.0.1
   async: ^2.11.0
 
 dev_dependencies:
-  flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: ^0.14.4
   riverpod_lint: ^2.3.10
   custom_lint:
   flutter_native_splash: ^2.2.16
@@ -86,7 +86,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^4.0.0
+  flutter_lints: ^6.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

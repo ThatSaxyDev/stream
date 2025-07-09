@@ -14,9 +14,9 @@ StateNotifierProvider<NotificationsController, bool>
 });
 
 //! provider for user notifications
-final getNotificationsProvider = StreamProvider.autoDispose((ref) {
+final getNotificationsProvider = StreamProvider((ref) {
   final notificationsController =
       ref.watch(notificationsControllerProvider.notifier);
- 
+
   return notificationsController.getUserNotifications();
 });

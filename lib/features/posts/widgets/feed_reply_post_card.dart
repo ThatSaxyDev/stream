@@ -52,6 +52,9 @@ class FeedReplyPostCard extends ConsumerWidget {
       }
     });
 
+    if (repliedUser == null || replyingUser == null) {
+      return const SizedBox.shrink();
+    }
     return Column(
       children: [
         //! post replied to above

@@ -12,9 +12,9 @@ import 'package:stream/utils/app_extensions.dart';
 class NavBarWidget extends ConsumerWidget {
   final Nav nav;
   const NavBarWidget({
-    Key? key,
+    super.key,
     required this.nav,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
